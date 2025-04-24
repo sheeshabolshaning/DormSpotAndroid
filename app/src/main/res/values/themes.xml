@@ -1,0 +1,41 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.DormSpot" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Disable dark mode -->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
+        <!-- Colors for components -->
+        <item name="colorPrimary">@color/white</item> <!-- Button text color -->
+        <item name="colorOnPrimary">@color/black</item> <!-- Text on primary (used for button text) -->
+
+        <item name="colorPrimaryVariant">@color/mint</item> <!-- Optional accent -->
+
+        <item name="colorSecondary">@color/dormspot_bg</item> <!-- Background color for components -->
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="android:colorBackground">@color/dormspot_bg</item>
+
+        <item name="colorOnBackground">@color/white</item> <!-- Text color on background -->
+
+        <item name="colorSurface">@color/dormspot_bg</item> <!-- Background for surfaces like cards -->
+        <item name="colorOnSurface">@color/white</item> <!-- Text color on surface -->
+
+        <item name="android:windowBackground">@color/dormspot_bg</item> <!-- Window background color -->
+        <item name="android:statusBarColor">@color/dormspot_bg</item>
+
+        <!-- Button style -->
+        <item name="colorButtonNormal">@color/fb_button_bg</item> <!-- Facebook button color -->
+        <item name="colorControlNormal">@color/white</item> <!-- Icon and text color -->
+        <item name="colorControlHighlight">@color/mint</item> <!-- Ripple or active effect -->
+
+        <!-- Error color -->
+        <item name="colorError">@color/logo_primary_text</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="Base.Theme.DormSpot" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+</resources>

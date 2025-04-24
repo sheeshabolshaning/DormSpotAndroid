@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">DormSpot</string>
+    <string name="logo_desc">Dormspot logo</string>
+
+
+        <string name="sign_up_facebook">Sign Up with Facebook</string>
+        <string name="sign_up_google">Sign Up with Google</string>
+        <string name="sign_up_email">Sign up with email</string>
+        <string name="already_have_account">I already have an account</string>
+        <string name="remember_me">Remember Me</string>
+        <string name="forgot_password">Forgot password?</string>
+
+        <string name="sign_in_facebook">Sign In with Facebook</string>
+
+        <string name="email_username">Email/Username</string>
+        <string name="password">Password</string>
+        <string name="sign_in">Sign In</string>
+        <string name="dont_have_account">Don\'t have an account? Create one</string>
+
+
+
+
+
+
+</resources>
