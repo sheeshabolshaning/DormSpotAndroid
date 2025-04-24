@@ -1,0 +1,21 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OnLaunch.SplashActivity"
+    android:background="@color/dormspot_bg">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@string/logo_desc"
+        android:maxWidth="50dp"
+        android:maxHeight="50dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/dormspot" />
+
+</FrameLayout>
