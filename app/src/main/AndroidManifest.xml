@@ -30,6 +30,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.example.dormspot.OnLaunch.RegisterActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            ></activity>
+
     </application>
 
 </manifest>

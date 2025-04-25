@@ -17,10 +17,12 @@
         <string name="sign_in">Sign In</string>
         <string name="dont_have_account">Don\'t have an account? Create one</string>
         <string name="back_button">back button</string>
-
-
-
-
-
+        <string name="firstName">First name</string>
+        <string name="lastName">Last name</string>
+        <string name="inputUsername">Create Username</string>
+        <string name="inputEmail">Email</string>
+        <string name="inputPhoneNumber">Phone Number</string>
+        <string name="inputPassword">Password</string>
+        <string name="inputConfirmPassword">Confirm Password</string>
 
 </resources>
