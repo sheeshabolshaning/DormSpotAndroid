@@ -31,7 +31,20 @@
 
         <!-- Error color -->
         <item name="colorError">@color/logo_primary_text</item>
+        <item name="textInputStyle">@style/CustomTextInputStyle</item>
+
     </style>
+
+    <style name="CustomTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">#6290C3</item>
+        <item name="boxCornerRadiusTopStart">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="android:textColorHint">#F1FFE7</item>
+        <item name="hintTextColor">#F1FFE7</item>
+    </style>
+
 
     <!-- Base application theme. -->
     <style name="Base.Theme.DormSpot" parent="Theme.Material3.DayNight.NoActionBar">
