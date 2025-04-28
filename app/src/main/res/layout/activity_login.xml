@@ -45,16 +45,19 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/rounded_button"
         android:backgroundTint="#1877F2"
+        android:drawableLeft="@drawable/facebook"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:text="@string/sign_in_facebook"
-        android:textStyle="bold"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:drawableStart="@drawable/facebook"
-        android:paddingStart="10dp"
-        android:drawablePadding="10dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoImage" />
+
 
     <!-- Google Button (Second) -->
     <Button
@@ -62,18 +65,21 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#FFFFFF"
         android:background="@drawable/rounded_button"
+        android:backgroundTint="#FFFFFF"
+        android:drawableLeft="@drawable/google"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:text="@string/sign_up_google"
-        android:textStyle="bold"
         android:textAllCaps="false"
         android:textColor="#000000"
-        android:drawableStart="@drawable/google"
-        android:paddingStart="10dp"
-        android:drawablePadding="10dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnFacebook" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/orDivider"
         android:layout_width="350dp"
@@ -119,38 +125,62 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Email/Username Button -->
-    <Button
-        android:id="@+id/btnUsername"
+    <!-- Email/Username TextField -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/CustomTextInputStyle"
+        android:id="@+id/usernameInputLayout"
         android:layout_width="350dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="#6290C3"
-        android:text="@string/email_username"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:textColor="#F1FFE7"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:boxBackgroundColor="#6290C3"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxBackgroundMode="filled"
+        app:hintEnabled="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnGoogle" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnGoogle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_username"
+            android:textColorHint="#9E9E9E"
+            android:textColor="#F1FFE7"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Password Button -->
-    <Button
-        android:id="@+id/btnPassword"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/CustomTextInputStyle"
+        android:id="@+id/passwordInputLayout"
         android:layout_width="350dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="#6290C3"
-        android:text="@string/password"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:textColor="#F1FFE7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnUsername" />
+        app:boxBackgroundColor="#6290C3"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
 
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:boxBackgroundMode="filled"
+        app:hintEnabled="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usernameInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:textColorHint="#9E9E9E"
+            android:textColor="#F1FFE7"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
     <!-- Remember Me Checkbox -->
 
     <LinearLayout
@@ -163,7 +193,7 @@
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:weightSum="1"
-        app:layout_constraintTop_toBottomOf="@id/btnPassword"
+        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 

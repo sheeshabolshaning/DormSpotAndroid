@@ -34,6 +34,10 @@
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             ></activity>
 
+        <activity android:name="com.example.dormspot.OnLaunch.LoginActivity"
+            android:theme="@style/Theme.DormSpot"
+            ></activity>
+
     </application>
 
 </manifest>

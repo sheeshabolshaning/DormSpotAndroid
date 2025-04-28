@@ -33,14 +33,19 @@
 
     <Button
         android:id="@+id/btnGetStarted"
-        android:layout_width="173dp"
-        android:layout_height="48dp"
+        android:layout_width="180dp"
+        android:layout_height="51dp"
         android:background="@drawable/rounded_button"
         android:backgroundTint="#FFFFFF"
+        android:drawableStart="@drawable/ic_right"
+        android:drawablePadding="10dp"
+        android:gravity="center"
         android:text="@string/getStarted"
         android:textAllCaps="false"
         android:textColor="@color/dormspot_bg"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="203dp"
-        tools:layout_editor_absoluteY="613dp" />
+        tools:layout_editor_absoluteY="610dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
