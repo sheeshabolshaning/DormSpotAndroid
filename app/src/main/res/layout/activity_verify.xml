@@ -38,53 +38,31 @@
         tools:layout_editor_absoluteY="99dp"
         tools:ignore="MissingConstraints" />
 
+    <!-- Auto layout, variables, and unit scale are not yet supported -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="341dp"
         android:layout_height="55dp"
         android:layout_marginEnd="52dp"
         android:text="@string/messageVerify"
+        android:textColor="@color/light_blue"
         android:textSize="22dp"
         android:textStyle="bold"
-        android:textColor="@color/light_blue"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="215dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="205dp" />
 
-    <!-- Auto layout, variables, and unit scale are not yet supported -->
     <EditText
-        android:inputType="number"
         android:id="@+id/field1"
         android:layout_width="66.61dp"
         android:layout_height="59.3dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/rectangle_1"
+        android:inputType="number"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="283dp" />
-
-    <EditText
-        android:id="@+id/field2"
-        android:layout_width="66.61dp"
-        android:layout_height="59.3dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/rectangle_1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="94dp"
-        tools:layout_editor_absoluteY="283dp" />
-
-    <EditText
-        android:id="@+id/field3"
-        android:layout_width="66.61dp"
-        android:layout_height="59.3dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/rectangle_1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="283dp" />
+        tools:layout_editor_absoluteY="260dp" />
 
     <EditText
         android:id="@+id/field4"
@@ -95,19 +73,29 @@
         android:background="@drawable/rectangle_1"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="248dp"
-        tools:layout_editor_absoluteY="283dp" />
+        tools:layout_editor_absoluteY="260dp" />
 
-    <TextView
-        android:id="@+id/messageResend"
-        android:layout_width="199dp"
-        android:layout_height="26dp"
-        android:text="@string/sendACode"
-        android:textColor="@color/light_blue"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="353dp"
-        tools:ignore="MissingConstraints" />
+    <EditText
+        android:id="@+id/field3"
+        android:layout_width="66.61dp"
+        android:layout_height="59.3dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle_1"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="172dp"
+        tools:layout_editor_absoluteY="260dp" />
+
+    <EditText
+        android:id="@+id/field2"
+        android:layout_width="66.61dp"
+        android:layout_height="59.3dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle_1"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="260dp" />
 
     <TextView
         android:id="@+id/resend"
@@ -117,21 +105,33 @@
         android:textColor="@color/dormspot_bg"
         android:textSize="18dp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="222dp"
-        tools:layout_editor_absoluteY="353dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="223dp"
+        tools:layout_editor_absoluteY="327dp" />
+
+    <TextView
+        android:id="@+id/messageResend"
+        android:layout_width="199dp"
+        android:layout_height="26dp"
+        android:text="@string/sendACode"
+        android:textColor="@color/light_blue"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="327dp" />
 
     <Button
         android:id="@+id/btnSignIn"
         android:layout_width="223dp"
         android:layout_height="48dp"
         android:background="@drawable/rounded_button"
-        android:backgroundColor="@color/dormspot_bg"
+        android:backgroundColor="#1A1B41"
         android:text="@string/verifybutton"
         android:textAllCaps="false"
         android:textColor="#FFFFF"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="94dp"
-        tools:layout_editor_absoluteY="438dp" />
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="388dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,5 +29,7 @@
         <string name="sendACode">Didn\'t receive the code?</string>
         <string name="resend">Resend</string>
         <string name="verifybutton">Verify</string>
+        <string name="welcomeMessage">Let\'s find your spot, Welcome to,</string>
+        <string name="getStarted">Get Started</string>   z
 
 </resources>
