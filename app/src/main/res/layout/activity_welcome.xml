@@ -6,46 +6,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Logo Image -->
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="273dp"
         android:layout_height="166dp"
+        android:layout_marginTop="52dp"
         android:fontFamily="@font/wafflesoft"
         android:text="@string/welcomeMessage"
         android:textColor="@color/mint"
         android:textSize="40sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="53dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="257dp"
         android:layout_height="284dp"
-        android:layout_marginTop="232dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/dormspot"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintTop_toBottomOf="@id/textView3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"/>
 
     <Button
         android:id="@+id/btnGetStarted"
         android:layout_width="180dp"
         android:layout_height="51dp"
+        android:layout_marginTop="92dp"
         android:background="@drawable/rounded_button"
         android:backgroundTint="#FFFFFF"
-        android:drawableStart="@drawable/ic_right"
         android:drawablePadding="10dp"
         android:gravity="center"
         android:text="@string/getStarted"
         android:textAllCaps="false"
         android:textColor="@color/dormspot_bg"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="203dp"
-        tools:layout_editor_absoluteY="610dp" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.874"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
