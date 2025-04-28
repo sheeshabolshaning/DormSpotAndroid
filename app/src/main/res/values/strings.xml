@@ -24,5 +24,9 @@
         <string name="inputPhoneNumber">Phone Number</string>
         <string name="inputPassword">Password</string>
         <string name="inputConfirmPassword">Confirm Password</string>
+        <string name="verify">Verify your Account</string>
+        <string name="messageVerify">Please enter the code we\'ve sent to your email</string>
+        <string name="sendACode">Didn\'t receive the code?</string>
+        <string name="resend">Resend</string>
 
 </resources>
