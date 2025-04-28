@@ -1,0 +1,16 @@
+Assignments & Divisions
+
+-- CODE --
+Class Divisions (Refer to Layout)
+
+Shanelle - LOGIN 
+- splash, signup, login, register, verify, welcome, user mode
+
+Keith - USER MODE
+- home, booking, seller profile, user profile, notifications, chats page, chat layout
+
+Denver & Hans - LANDLORD MODE
+- (base on the layout)
+
+Shanelle & Keith - Database
+- Firebase, Facebook & Google Login
