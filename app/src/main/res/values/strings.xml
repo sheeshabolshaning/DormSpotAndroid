@@ -28,5 +28,6 @@
         <string name="messageVerify">Please enter the code we\'ve sent to your email</string>
         <string name="sendACode">Didn\'t receive the code?</string>
         <string name="resend">Resend</string>
+        <string name="verifybutton">Verify</string>
 
 </resources>

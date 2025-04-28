@@ -118,6 +118,20 @@
         android:textSize="18dp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="222dp"
-        tools:layout_editor_absoluteY="353dp" />
+        tools:layout_editor_absoluteY="353dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="223dp"
+        android:layout_height="48dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundColor="@color/dormspot_bg"
+        android:text="@string/verifybutton"
+        android:textAllCaps="false"
+        android:textColor="#FFFFF"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="438dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
