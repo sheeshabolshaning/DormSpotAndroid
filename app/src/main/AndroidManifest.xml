@@ -28,14 +28,18 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.dormspot.OnLaunch.RegisterActivity"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            ></activity>
+        <activity
+            android:name="com.example.dormspot.OnLaunch.RegisterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <activity android:name="com.example.dormspot.OnLaunch.LoginActivity"
-            android:theme="@style/Theme.DormSpot"
-            ></activity>
+        <activity
+            android:name="com.example.dormspot.OnLaunch.LoginActivity"
+            android:theme="@style/Theme.DormSpot" />
 
+        <!-- Add the VerifyActivity here -->
+        <activity
+            android:name="com.example.dormspot.OnLaunch.VerifyActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
