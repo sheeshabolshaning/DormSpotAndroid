@@ -1,5 +1,6 @@
 package com.example.dormspot.OnLaunch;
 
+import android.widget.ImageButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Handle back button click
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // Close LoginActivity and go back to the previous screen
+            }
+        });
 
         // TextView listener for "Don't have an account?"
         TextView textView = findViewById(R.id.textDontHaveAccount);
