@@ -61,7 +61,7 @@
             android:inputType="textPersonName"
             android:textAllCaps="false"
             android:textColor="#F1FFE7"
-            android:textColorHint="#F1FFE7"
+            android:textColorHint="@color/white"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
