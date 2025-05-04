@@ -87,6 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a valid 11-digit phone number", Toast.LENGTH_SHORT).show();
             return;
         }
+
         // Create user in Firebase Auth
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
@@ -103,9 +104,17 @@ public class RegisterActivity extends AppCompatActivity {
 
                         db.collection("users").document(userId).set(userMap)
                                 .addOnSuccessListener(aVoid -> {
-                                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(this, VerifyActivity.class));
-                                    finish();
+                                    // Send verification email
+                                    auth.getCurrentUser().sendEmailVerification()
+                                            .addOnCompleteListener(verifyTask -> {
+                                                if (verifyTask.isSuccessful()) {
+                                                    Toast.makeText(this, "Verification email sent. Please check your inbox.", Toast.LENGTH_LONG).show();
+                                                    startActivity(new Intent(this, VerifyActivity.class));
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(this, "Failed to send verification email: " + verifyTask.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                                }
+                                            });
                                 })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(this, "Failed to save user info: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -115,6 +124,5 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
 }
