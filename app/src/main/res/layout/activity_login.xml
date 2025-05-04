@@ -209,7 +209,6 @@
             android:focusable="true"
             android:gravity="end"
             android:minHeight="48dp"
-            android:onClick="onForgotPasswordClicked"
             android:text="@string/forgot_password"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />

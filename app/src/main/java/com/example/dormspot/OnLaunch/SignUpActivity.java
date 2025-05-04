@@ -36,11 +36,14 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        // Email button listener
-        btnEmail.setOnClickListener(new View.OnClickListener() {
+        // Handle the "Sign Up with Email" button click
+        Button signUpEmailButton = findViewById(R.id.btnEmail);  // Reference the button by its ID
+        signUpEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SignUpActivity.this, "Email sign-up clicked", Toast.LENGTH_SHORT).show();
+                // Navigate to RegisterActivity
+                Intent intent = new Intent(SignUpActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
