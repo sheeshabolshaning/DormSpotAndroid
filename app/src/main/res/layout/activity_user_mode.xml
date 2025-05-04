@@ -56,7 +56,7 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:src="@drawable/ic_search_home" app:tint="#B2EBF2" />
+                    android:src="@drawable/ic_search_home" app:tint="#C2E7DA" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -84,7 +84,7 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:src="@drawable/ic_person_home" app:tint="#AED581" />
+                    android:src="@drawable/ic_person_home" app:tint="#C2E7DA" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
