@@ -29,9 +29,6 @@
         <item name="colorControlNormal">@color/white</item> <!-- Icon and text color -->
         <item name="colorControlHighlight">@color/mint</item> <!-- Ripple or active effect -->
 
-        <!-- Error color -->
-        <item name="colorError">@color/logo_primary_text</item>
-        <item name="textInputStyle">@style/CustomTextInputStyle</item>
 
     </style>
 
@@ -51,7 +48,6 @@
         <item name="android:textSize">32sp</item>
         <item name="android:letterSpacing">0.01</item>
         <item name="android:textColor">#F1FFE7</item>
-        <item name=""> </item>
     </style>
 
 
