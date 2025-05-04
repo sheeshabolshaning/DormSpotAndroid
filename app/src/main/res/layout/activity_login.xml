@@ -217,7 +217,11 @@
             android:gravity="end"
             android:text="@string/forgot_password"
             android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onForgotPasswordClicked" />
+
     </LinearLayout>
 
     <Button

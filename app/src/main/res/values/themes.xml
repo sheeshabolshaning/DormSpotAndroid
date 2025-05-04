@@ -47,6 +47,12 @@
         <item name="boxCornerRadiusBottomEnd">12dp</item>
     </style>
 
+    <style name="dorm_spot">
+        <item name="android:textSize">32sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textColor">#F1FFE7</item>
+        <item name=""> </item>
+    </style>
 
 
     <!-- Base application theme. -->

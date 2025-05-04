@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1084059092567",
+    "project_id": "dormspot-91ece",
+    "storage_bucket": "dormspot-91ece.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084059092567:android:938aa56e4ac5d00861c512",
+        "android_client_info": {
+          "package_name": "com.example.dormspot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8Rwl3efJ5ci9q1O4LNEpN-jAJu_riKkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
