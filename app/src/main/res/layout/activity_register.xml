@@ -39,16 +39,13 @@
     <!-- First Name Input Box -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputFirstNameLayout"
-        android:layout_width="166dp"
+        android:layout_width="172dp"
         android:layout_height="48dp"
+        android:background="@drawable/textfields_register"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="0dp"
         app:boxBackgroundColor="#6290C3"
-        app:boxBackgroundMode="filled"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
+        app:boxBackgroundMode="none"
         app:layout_constraintEnd_toStartOf="@id/inputLastNameLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoImage">
@@ -56,14 +53,16 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputFirstName"
             android:layout_width="match_parent"
+            android:layout_margin="10dp"
             android:layout_height="match_parent"
-            android:background="#EBEBEB"
+            android:background="@drawable/textfields_register"
             android:hint="@string/firstName"
             android:inputType="textPersonName"
             android:textAllCaps="false"
             android:textColor="#F1FFE7"
             android:textColorHint="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/wafflesoft"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Last Name Input Box -->
@@ -71,14 +70,11 @@
         android:id="@+id/inputLastNameLayout"
         android:layout_width="172dp"
         android:layout_height="48dp"
+        android:background="@drawable/textfields_register"
         android:layout_marginStart="0dp"
         android:layout_marginTop="52dp"
         app:boxBackgroundColor="#6290C3"
-        app:boxBackgroundMode="filled"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
+        app:boxBackgroundMode="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/inputFirstNameLayout"
         app:layout_constraintTop_toBottomOf="@id/logoImage">
@@ -87,12 +83,15 @@
             android:id="@+id/inputLastName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/textfields_register"
             android:hint="@string/lastName"
             android:inputType="textPersonName"
             android:textAllCaps="false"
             android:textColor="#F1FFE7"
             android:textColorHint="#F1FFE7"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/wafflesoft"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Username Input Box -->
@@ -101,12 +100,8 @@
         android:layout_width="365dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
-        app:boxBackgroundColor="#6290C3"
-        app:boxBackgroundMode="filled"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
+        android:background="@drawable/textfields_register"
+        app:boxBackgroundMode="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inputLastNameLayout">
@@ -115,12 +110,15 @@
             android:id="@+id/inputUsername"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/textfields_register"
             android:hint="@string/inputUsername"
             android:inputType="textPersonName"
             android:textAllCaps="false"
             android:textColor="#F1FFE7"
-            android:textColorHint="#F1FFE7"
-            android:textStyle="bold" />
+            android:textColorHint="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/wafflesoft"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Email Input Box -->
@@ -129,12 +127,8 @@
         android:layout_width="365dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
-        app:boxBackgroundColor="#6290C3"
-        app:boxBackgroundMode="filled"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
+        android:background="@drawable/textfields_register"
+        app:boxBackgroundMode="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inputUsernameLayout">
@@ -143,12 +137,15 @@
             android:id="@+id/inputEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/textfields_register"
             android:hint="@string/inputEmail"
             android:inputType="textEmailAddress"
             android:textAllCaps="false"
             android:textColor="#F1FFE7"
             android:textColorHint="#F1FFE7"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/wafflesoft"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Phone Number Input Box -->
@@ -157,12 +154,8 @@
         android:layout_width="365dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
-        app:boxBackgroundColor="#6290C3"
-        app:boxBackgroundMode="filled"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
+        android:background="@drawable/textfields_register"
+        app:boxBackgroundMode="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inputEmailLayout">
@@ -171,12 +164,15 @@
             android:id="@+id/inputPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/textfields_register"
             android:hint="@string/inputPhoneNumber"
             android:inputType="phone"
             android:textAllCaps="false"
             android:textColor="#F1FFE7"
             android:textColorHint="#F1FFE7"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/wafflesoft"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Password Input Box -->
@@ -185,12 +181,8 @@
         android:layout_width="365dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
-        app:boxBackgroundColor="#6290C3"
-        app:boxBackgroundMode="filled"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
+        android:background="@drawable/textfields_register"
+        app:boxBackgroundMode="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inputPhoneNumberLayout"
@@ -200,12 +192,15 @@
             android:id="@+id/inputPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:hint="@string/inputPassword"
+            android:background="@drawable/textfields_register"
             android:inputType="textPassword"
             android:textAllCaps="false"
             android:textColor="#F1FFE7"
             android:textColorHint="#F1FFE7"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/wafflesoft"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Confirm Password Input Box -->
@@ -214,12 +209,8 @@
         android:layout_width="365dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
-        app:boxBackgroundColor="#6290C3"
-        app:boxBackgroundMode="filled"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
+        android:background="@drawable/textfields_register"
+        app:boxBackgroundMode="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inputPasswordLayout">
@@ -228,25 +219,29 @@
             android:id="@+id/inputConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:hint="@string/inputConfirmPassword"
+            android:background="@drawable/textfields_register"
             android:inputType="textPassword"
             android:textAllCaps="false"
             android:textColor="#F1FFE7"
             android:textColorHint="#F1FFE7"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/wafflesoft"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
+        android:layout_width="306dp"
+        android:layout_height="48dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/rounded_button_10"
         android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/wafflesoft"
         android:text="Sign Up"
-        android:textStyle="bold"
         android:textAllCaps="false"
         android:textColor="#1A1B41"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inputConfirmPasswordLayout" />

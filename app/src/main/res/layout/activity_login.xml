@@ -127,12 +127,11 @@
 
     <!-- Email/Username TextField -->
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/CustomTextInputStyle"
         android:id="@+id/usernameInputLayout"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_width="343dp"
+        android:layout_height="41dp"
         android:layout_marginTop="50dp"
-        app:boxBackgroundColor="#6290C3"
+        app:boxBackground="@drawable/textfields_register"
         app:boxCornerRadiusTopStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
@@ -145,26 +144,23 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:background="@drawable/textfields_register"
+            android:layout_width="343dp"
+            android:layout_height="41dp"
             android:hint="@string/email_username"
             android:textColorHint="#9E9E9E"
             android:textColor="#F1FFE7"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:fontFamily="@font/wafflesoft"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Password Button -->
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/CustomTextInputStyle"
         android:id="@+id/passwordInputLayout"
-        android:layout_width="350dp"
+        android:background="@drawable/textfields_register"
+        android:layout_width="343dp"
+        android:layout_height="41dp"
         app:boxBackgroundColor="#6290C3"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusBottomEnd="12dp"
-
-        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:boxBackgroundMode="filled"
         app:hintEnabled="true"
@@ -173,13 +169,16 @@
         app:layout_constraintTop_toBottomOf="@id/usernameInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:background="@drawable/textfields_register"
             android:id="@+id/editTextPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="343dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="10dp"
             android:hint="@string/password"
             android:textColorHint="#9E9E9E"
             android:textColor="#F1FFE7"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:fontFamily="@font/wafflesoft"/>
     </com.google.android.material.textfield.TextInputLayout>
     <!-- Remember Me Checkbox -->
 
