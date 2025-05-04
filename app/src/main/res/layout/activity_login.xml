@@ -53,7 +53,7 @@
         android:text="@string/sign_in_facebook"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"
+        android:fontFamily="@font/neuebold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoImage" />
@@ -74,8 +74,8 @@
         android:paddingEnd="20dp"
         android:text="@string/sign_up_google"
         android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textStyle="bold"
+        android:textColor="#303030"
+        android:fontFamily="@font/neuebold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnFacebook" />
@@ -199,6 +199,7 @@
 
         <CheckBox
             android:id="@+id/checkboxRememberMe"
+            android:fontFamily="@font/neuebold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -232,6 +233,7 @@
         android:background="@drawable/rounded_button"
         android:backgroundTint="#FFFFFF"
         android:text="@string/sign_in"
+        android:fontFamily="@font/wafflesoft"
         android:textStyle="bold"
         android:textAllCaps="false"
         android:textColor="#1A1B41"
@@ -247,6 +249,7 @@
         android:layout_marginTop="40dp"
         android:text="@string/dont_have_account"
         android:textColor="#FFFFFF"
+        android:fontFamily="@font/neuebold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
