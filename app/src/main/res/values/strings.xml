@@ -30,6 +30,8 @@
         <string name="resend">Resend</string>
         <string name="verifybutton">Verify</string>
         <string name="welcomeMessage">Let\'s find your spot, Welcome to,</string>
-        <string name="getStarted">Get Started</string>   z
+        <string name="getStarted">Get Started</string>
+        <string name="highly_rated">Highly Rated</string>
+        <string name="dorm_spot"> DORM SPOT </string>
 
 </resources>

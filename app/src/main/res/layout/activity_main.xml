@@ -5,15 +5,143 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivitySpottr.Home">
+
+
+    <View
+        android:id="@+id/titlebar"
+        android:layout_width="397dp"
+        android:layout_height="75dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="0dp"
+        android:background="@drawable/rounded_titlebar"
+        android:padding="0dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/dorm_spot"
+        android:layout_width="229dp"
+        android:layout_height="46dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="90dp"
+        android:fontFamily="@font/wafflesoft"
+        android:gravity="center_horizontal|center_vertical"
+        android:lineSpacingExtra="-20sp"
+        android:text="@string/dorm_spot"
+        android:textAppearance="@style/dorm_spot"
+        app:layout_constraintBottom_toTopOf="@+id/recent"
+        app:layout_constraintTop_toBottomOf="@+id/titlebar"
+        app:layout_constraintVertical_bias="0.439"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="91dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="66dp"
+        android:layout_height="58dp"
+        android:src="@drawable/logo"
+        android:visibility="visible"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="25dp" />
+
+    <Button
+        android:id="@+id/recent"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/recent"
+        android:text="Recents"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="94dp" />
+
+    <Button
+        android:id="@+id/rectangle_3"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/near"
+        android:text="NEAR ME"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="94dp" />
+
+    <Button
+        android:id="@+id/rectangle_4"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/recent"
+        android:text="@string/highly_rated"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="276dp"
+        tools:layout_editor_absoluteY="94dp" />
+
+    <ScrollView
+        android:layout_width="410dp"
+        android:layout_height="655dp"
+        tools:ignore="ExtraText,MissingConstraints,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="150dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">  <!-- This centers the child horizontally -->
+
+            <ImageView
+                android:layout_width="350dp"
+                android:layout_height="370dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/ciudad"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/house" />
+
+            <ImageView
+                android:layout_width="350dp"
+                android:layout_height="370dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/phase3"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/phase3h" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:id="@+id/botbar"
+        android:layout_width="362dp"
+        android:layout_height="47dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="1600dp"
+        android:background="@drawable/botbar"
+        app:layout_constraintBottom_toTopOf="@+id/titlebar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="MissingConstraints" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

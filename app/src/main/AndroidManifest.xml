@@ -39,7 +39,8 @@
         <!-- Add the VerifyActivity here -->
         <activity
             android:name="com.example.dormspot.OnLaunch.VerifyActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>
