@@ -22,19 +22,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);  // Always call this first!
 
-
-        // Setup for other buttons (Google, Email) here...
-        Button btnFacebook= findViewById(R.id.btnFacebook);
-        Button btnGoogle = findViewById(R.id.btnGoogle);
         Button btnEmail = findViewById(R.id.btnEmail);
 
-        // Google button listener
-        btnGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(SignUpActivity.this, "Google sign-up clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         // Handle the "Sign Up with Email" button click
         Button signUpEmailButton = findViewById(R.id.btnEmail);  // Reference the button by its ID
