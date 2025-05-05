@@ -94,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
+                        Exception e = task.getException();
+                        e.printStackTrace();
                         // Login failed
                         Toast.makeText(LoginActivity.this, "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show();
                     }
