@@ -17,48 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Facebook Button -->
-    <Button
-        android:id="@+id/btnFacebook"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:paddingStart="10dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#1877F2"
-        android:background="@drawable/rounded_button"
-        android:text="@string/sign_up_facebook"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:fontFamily="@font/roboto"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:drawableStart="@drawable/facebook"
-        android:gravity="center|start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logoImage" />
-
-    <!-- Google Button -->
-    <Button
-        android:id="@+id/btnGoogle"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#FFFFFF"
-        android:paddingStart="10dp"
-        android:background="@drawable/rounded_button"
-        android:text="@string/sign_up_google"
-        android:textStyle="bold"
-        android:fontFamily="@font/roboto"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="#303030"
-        android:drawableStart="@drawable/google"
-        android:gravity="center|start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnFacebook" />
-
     <!-- Email Button -->
     <Button
         android:id="@+id/btnEmail"
@@ -74,7 +32,7 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnGoogle" />
+        app:layout_constraintTop_toBottomOf="@id/logoImage" />
 
     <!-- TextView for "I already have an account" -->
     <TextView

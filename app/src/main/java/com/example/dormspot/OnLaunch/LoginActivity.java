@@ -38,8 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
-        btnFacebook = findViewById(R.id.btnFacebook);
-        btnGoogle = findViewById(R.id.btnGoogle);
         textDontHaveAccount = findViewById(R.id.textDontHaveAccount);
         textForgotPassword = findViewById(R.id.textForgotPassword);
         checkboxRememberMe = findViewById(R.id.checkboxRememberMe);
@@ -53,15 +51,6 @@ public class LoginActivity extends AppCompatActivity {
         // Navigate to RegisterActivity when the "Don't have an account?" text is clicked
         textDontHaveAccount.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
-        // Facebook button click
-        btnFacebook.setOnClickListener(v -> {
-            // Handle Facebook login here
-        });
-
-        // Google button click
-        btnGoogle.setOnClickListener(v -> {
-            // Handle Google login here
-        });
 
         // Sign in button logic
         btnSignIn.setOnClickListener(v -> {
