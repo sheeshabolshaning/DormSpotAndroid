@@ -46,33 +46,5 @@
             android:exported="false"
             tools:ignore="Instantiatable" />
 
-        <!--listing-->
-        <activity android:name="com.example.dormspot.MainAcitivitySpottee.listing"
-            android:exported="true">
-        <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-
-    </intent-filter>
-    </activity>
-
-        <!--<activity android:name="com.example.dormspot.MainAcitivitySpottee.listing" /> -->
-        <activity android:name="com.example.dormspot.MainAcitivitySpottee.listing2" />
-        <activity android:name="com.example.dormspot.MainAcitivitySpottee.listing3" />
-
-
-
-
-        <!-- statistic -->
-        <activity android:name="com.example.dormspot.MainAcitivitySpottee.statistic"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
-
     </application>
 </manifest>
