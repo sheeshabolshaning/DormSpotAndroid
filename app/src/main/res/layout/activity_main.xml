@@ -70,7 +70,7 @@
         android:layout_height="48dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/near"
+        android:background="@drawable/nearp"
         android:text="Near Me"
         android:textAllCaps="false"
         android:textColor="#F1FFE7"
