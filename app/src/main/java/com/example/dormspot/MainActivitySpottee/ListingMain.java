@@ -44,6 +44,7 @@ public class ListingMain extends AppCompatActivity {
         setupTabNavigation();
     }
 
+<<<<<<< HEAD
     @Override
     protected void onResume() {
         super.onResume();
@@ -72,6 +73,8 @@ public class ListingMain extends AppCompatActivity {
         recyclerView.setAdapter(listingAdapter);
     }
 
+=======
+>>>>>>> parent of 4b25e77 (final addlisting function working)
     private void fetchListingsFromFirestore() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("listings")
