@@ -69,6 +69,12 @@ public class ListingMain extends AppCompatActivity {
         reviewsButton.setOnClickListener(v -> selectButton(reviewsButton));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchListingsFromFirestore(); // Refresh listings when returning from add activity
+    }
+
     private void fetchListingsFromFirestore() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("listings")
