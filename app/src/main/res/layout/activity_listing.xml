@@ -61,37 +61,37 @@
             android:orientation="horizontal">
 
             <Button
-                style="@style/TabButton"
-                android:layout_width="110dp"
+                android:id="@+id/my_listings"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button2"
-                android:backgroundTint="#3C396A"
+                android:background="@drawable/button_selector"
                 android:text="My listings"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAllCaps="false"/>
 
             <Button
-                style="@style/TabButton"
-                android:layout_width="110dp"
+                android:id="@+id/statistic"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button2"
-                android:backgroundTint="#618EC0"
-                android:text="statistic"
+                android:background="@drawable/button_selector"
+                android:text="Statistic"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAllCaps="false"/>
 
             <Button
-                style="@style/TabButton"
-                android:layout_width="110dp"
+                android:id="@+id/reviews"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button2"
-                android:backgroundTint="#618EC0"
+                android:background="@drawable/button_selector"
                 android:text="Reviews"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAllCaps="false"/>
         </LinearLayout>
 
         <ScrollView

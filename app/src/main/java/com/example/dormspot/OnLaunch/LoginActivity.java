@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.dormspot.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -85,10 +86,31 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null && user.isEmailVerified()) {
-                            // Proceed to welcome screen
-                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
-                            finish();
+                            String uid = user.getUid();
+
+                            // Fetch userMode from Firestore
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            db.collection("users").document(uid).get()
+                                    .addOnSuccessListener(documentSnapshot -> {
+                                        if (documentSnapshot.exists()) {
+                                            String userMode = documentSnapshot.getString("userMode");
+                                            if ("spottr".equals(userMode)) {
+                                                startActivity(new Intent(LoginActivity.this, com.example.dormspot.MainActivitySpottr.Home.class));
+                                            } else if ("spotee".equals(userMode)) {
+                                                startActivity(new Intent(LoginActivity.this, com.example.dormspot.MainActivitySpottee.listing.class));
+                                            } else {
+                                                // No userMode set yet, fallback to WelcomeActivity
+                                                startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+                                            }
+                                            finish();
+                                        } else {
+                                            Toast.makeText(this, "User data not found.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
+                                    });
+
                         } else {
                             Toast.makeText(LoginActivity.this, "Please verify your email first.", Toast.LENGTH_LONG).show();
                             mAuth.signOut(); // Sign out unverified user
@@ -98,4 +120,5 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }

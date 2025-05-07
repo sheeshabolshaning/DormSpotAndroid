@@ -14,9 +14,7 @@ import com.example.dormspot.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class UserModeActivity extends AppCompatActivity {
 
@@ -34,6 +32,38 @@ public class UserModeActivity extends AppCompatActivity {
         cardViewSpotee = findViewById(R.id.cardViewSpotee);
         buttonGetStarted = findViewById(R.id.buttonGetStarted);
 
+        // Check if the user already has a userMode set
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            db.collection("users").document(uid).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String existingUserMode = documentSnapshot.getString("userMode");
+                            if (existingUserMode != null) {
+                                // If userMode already exists, navigate to the appropriate activity
+                                navigateToNextActivity(existingUserMode);
+                            } else {
+                                // If userMode is not set, allow them to choose
+                                setUpUserModeSelection();
+                            }
+                        } else {
+                            // If no document exists for the user, allow them to choose
+                            setUpUserModeSelection();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Failed to retrieve user data", Toast.LENGTH_SHORT).show();
+                    });
+        }
+    }
+
+    /**
+     * Sets up the UI and listeners to allow user mode selection.
+     */
+    private void setUpUserModeSelection() {
         // Handle Spottr selection
         cardViewSpottr.setOnClickListener(v -> {
             selectedUserMode = "spottr";
@@ -55,31 +85,43 @@ public class UserModeActivity extends AppCompatActivity {
                 return;
             }
 
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user != null) {
-                String uid = user.getUid();
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-                Map<String, Object> data = new HashMap<>();
-                data.put("userMode", selectedUserMode);
-
-                db.collection("users").document(uid)
-                        .set(data) // Use set() to create or overwrite the document
-                        .addOnSuccessListener(unused -> {
-                            Toast.makeText(this, "User mode saved", Toast.LENGTH_SHORT).show();
-                            Intent intent = "spottr".equals(selectedUserMode)
-                                    ? new Intent(this, Home.class)
-                                    : new Intent(this, listing.class);
-                            startActivity(intent);
-                            finish();
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(this, "Failed to save user mode", Toast.LENGTH_SHORT).show();
-                        });
-            } else {
-                Toast.makeText(this, "No user is signed in", Toast.LENGTH_SHORT).show();
-            }
+            // Save selected mode to Firestore
+            saveUserModeToFirestore(selectedUserMode);
         });
+    }
+
+    /**
+     * Saves the selected user mode to Firestore.
+     * @param userMode The selected user mode.
+     */
+    private void saveUserModeToFirestore(String userMode) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            db.collection("users").document(uid)
+                    .update("userMode", userMode)
+                    .addOnSuccessListener(unused -> {
+                        Toast.makeText(this, "User mode saved", Toast.LENGTH_SHORT).show();
+                        navigateToNextActivity(userMode);
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Failed to save user mode", Toast.LENGTH_SHORT).show();
+                    });
+        }
+    }
+
+    /**
+     * Navigates the user to the appropriate activity based on the selected user mode.
+     * @param userMode The user mode (either "spottr" or "spotee").
+     */
+    private void navigateToNextActivity(String userMode) {
+        Intent intent = "spottr".equals(userMode)
+                ? new Intent(this, Home.class)
+                : new Intent(this, listing.class);
+        startActivity(intent);
+        finish(); // Close this activity after navigating
     }
 
     /**
@@ -90,3 +132,4 @@ public class UserModeActivity extends AppCompatActivity {
         unselected.setCardBackgroundColor(getResources().getColor(R.color.dormspot_bg, null));
     }
 }
+ 
