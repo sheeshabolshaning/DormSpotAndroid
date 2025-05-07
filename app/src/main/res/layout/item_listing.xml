@@ -59,15 +59,6 @@
                 android:textSize="12sp"
                 android:fontFamily="@font/roboto"/>
 
-            <TextView
-                android:id="@+id/textView_dormLandlord"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Landlord: John Doe"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:fontFamily="@font/roboto"/>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

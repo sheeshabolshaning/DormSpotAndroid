@@ -1,6 +1,5 @@
 package com.example.dormspot.MainActivitySpottee;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -36,7 +35,6 @@ public class listing1 extends AppCompatActivity {
         myListingsButton = findViewById(R.id.my_listings);
         statisticButton = findViewById(R.id.statistic);
         reviewsButton = findViewById(R.id.reviews);
-        myListingsButton.setSelected(true);
 
         // RecyclerView setup
         recyclerView = findViewById(R.id.recyclerViewListings);
@@ -50,9 +48,12 @@ public class listing1 extends AppCompatActivity {
         // Fetch listings from Firestore
         fetchListingsFromFirestore();
 
+        // Set default button selection on launch
+        selectButton(myListingsButton);
+
         // Button click listeners
         myListingsButton.setOnClickListener(v -> {
-            selectButton(myListingsButton);
+            selectButton(myListingsButton); // Set "My Listings" as selected
             Intent intent = new Intent(listing1.this, listing2.class);
             startActivity(intent);
         });
@@ -88,10 +89,27 @@ public class listing1 extends AppCompatActivity {
     }
 
     private void selectButton(Button selectedButton) {
-        // Unselect other buttons
+        // Reset all buttons to default
+        resetButtons();
+
+        // Highlight the selected button
+        selectedButton.setSelected(true); // Set button as selected
+        selectedButton.setBackgroundResource(R.drawable.button_selector); // Update selector background
+        selectedButton.setTextColor(getResources().getColor(R.color.white)); // Set text color to white (or your preferred color)
+    }
+
+    private void resetButtons() {
+        // Reset the background and text color for all buttons
         myListingsButton.setSelected(false);
         statisticButton.setSelected(false);
         reviewsButton.setSelected(false);
-        selectedButton.setSelected(true);
+
+        myListingsButton.setBackgroundResource(R.drawable.button_selector); // Ensure this is the default background
+        statisticButton.setBackgroundResource(R.drawable.button_selector);
+        reviewsButton.setBackgroundResource(R.drawable.button_selector);
+
+        myListingsButton.setTextColor(getResources().getColor(R.color.white)); // Reset text color
+        statisticButton.setTextColor(getResources().getColor(R.color.white));
+        reviewsButton.setTextColor(getResources().getColor(R.color.white));
     }
 }
