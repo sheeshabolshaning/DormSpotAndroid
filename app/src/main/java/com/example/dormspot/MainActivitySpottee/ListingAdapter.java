@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;  // Use ImageView instead of Button
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +41,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
 
     public static class ListingViewHolder extends RecyclerView.ViewHolder {
         TextView dormName, dormCapacity, dormPrice, dormStatus, dormLandlord;
-        ImageView dormImage, editButton;  // Use ImageView for editButton
+        ImageView dormImage, editButton;
 
         public ListingViewHolder(View itemView) {
             super(itemView);
@@ -51,28 +51,37 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             dormStatus = itemView.findViewById(R.id.textView_dormStatus);
             dormLandlord = itemView.findViewById(R.id.textView_dormLandlord);
             dormImage = itemView.findViewById(R.id.imageView_dorm);
-            editButton = itemView.findViewById(R.id.button_edit_listing);  // It's an ImageView, not a Button
+            editButton = itemView.findViewById(R.id.button_edit_listing);  // ImageView for edit
         }
 
         public void bind(Listing listing) {
             dormName.setText(listing.getDormName());
             dormCapacity.setText("Capacity: " + listing.getCapacity());
-            dormPrice.setText("₱" + String.format("%.2f", listing.getPrice()) + "/month");
+            dormPrice.setText(formatPrice(listing.getPrice()));
             dormStatus.setText("Status: " + listing.getStatus());
             dormLandlord.setText("Landlord: " + listing.getLandlord());
 
-            // Load image using Glide
-            Glide.with(itemView.getContext())
-                    .load(listing.getImageUrl())
-                    .placeholder(R.drawable.placeholder) // Add a drawable in your res/drawable folder
-                    .into(dormImage);
+            loadDormImage(listing.getImageUrl());
 
-            // Handle Edit Button click (which is actually an ImageView)
+            // Set edit button click listener
             editButton.setOnClickListener(v -> {
                 Intent intent = new Intent(itemView.getContext(), listing2.class);
-                intent.putExtra("listingId", listing.getId()); // Pass the ID of the listing
+                intent.putExtra("listingId", listing.getId()); // Pass the listing ID to listing2 activity
                 itemView.getContext().startActivity(intent);
             });
+        }
+
+        // Helper method for price formatting
+        private String formatPrice(double price) {
+            return "₱" + String.format("%.2f", price) + "/month";
+        }
+
+        // Helper method to load image using Glide
+        private void loadDormImage(String imageUrl) {
+            Glide.with(itemView.getContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.placeholder) // Use your placeholder image
+                    .into(dormImage);
         }
     }
 }
