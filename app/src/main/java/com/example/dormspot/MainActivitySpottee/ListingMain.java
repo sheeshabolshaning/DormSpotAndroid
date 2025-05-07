@@ -35,6 +35,7 @@ public class ListingMain extends AppCompatActivity {
         myListingsButton = findViewById(R.id.my_listings);
         statisticButton = findViewById(R.id.statistic);
         reviewsButton = findViewById(R.id.reviews);
+        addListingButton = findViewById(R.id.addlisting);
 
         addListingButton.setOnClickListener(v -> {
             Toast.makeText(this, "Add clicked", Toast.LENGTH_SHORT).show();
@@ -66,6 +67,12 @@ public class ListingMain extends AppCompatActivity {
 
         statisticButton.setOnClickListener(v -> selectButton(statisticButton));
         reviewsButton.setOnClickListener(v -> selectButton(reviewsButton));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchListingsFromFirestore(); // Refresh listings when returning from add activity
     }
 
     private void fetchListingsFromFirestore() {

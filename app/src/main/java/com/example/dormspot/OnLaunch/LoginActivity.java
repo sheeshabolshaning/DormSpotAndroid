@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
+                        Toast.makeText(LoginActivity.this, "Login success", Toast.LENGTH_SHORT).show();
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null && user.isEmailVerified()) {
                             String uid = user.getUid();

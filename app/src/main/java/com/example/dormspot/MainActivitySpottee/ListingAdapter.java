@@ -1,18 +1,20 @@
 package com.example.dormspot.MainActivitySpottee;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.dormspot.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -51,7 +53,6 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
         });
     }
 
-
     @Override
     public int getItemCount() {
         return listingList.size();
@@ -59,10 +60,11 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
 
     public static class ListingViewHolder extends RecyclerView.ViewHolder {
         TextView dormName, dormCapacity, dormPrice, dormStatus;
-        TextView location, inclusions, description;
+        EditText locationEdit, inclusionsEdit, descriptionEdit;
         ImageView dormImage, editButton, imageView1, imageView2;
         LinearLayout expandableLayout;
         Button submitButton;
+        boolean isEditing = false;
 
         public ListingViewHolder(View itemView) {
             super(itemView);
@@ -73,10 +75,11 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             dormImage = itemView.findViewById(R.id.imageView_dorm);
             editButton = itemView.findViewById(R.id.button_edit_listing);
 
-            // Expandable views
-            location = itemView.findViewById(R.id.textView_location);
-            inclusions = itemView.findViewById(R.id.textView_inclusions);
-            description = itemView.findViewById(R.id.textView_description);
+            // Editable fields
+            locationEdit = itemView.findViewById(R.id.editText_location);
+            inclusionsEdit = itemView.findViewById(R.id.editText_inclusions);
+            descriptionEdit = itemView.findViewById(R.id.editText_description);
+
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
             imageView1 = itemView.findViewById(R.id.imageView_room1);
             imageView2 = itemView.findViewById(R.id.imageView_room2);
@@ -104,27 +107,48 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
                 }
             }
 
-            // Load thumbnail
+            // Load image
             loadDormImage(listing.getImageUrl(), dormImage);
-
-            // Expanded content
-            location.setText("Location: " + listing.getLocation());
-            inclusions.setText("Inclusions: " + listing.getInclusions());
-            description.setText("Description: " + listing.getDescription());
-
             loadDormImage(listing.getImageUrl(), imageView1);
-            imageView2.setImageResource(R.drawable.placeholder); // Optional: replace if dynamic
+            imageView2.setImageResource(R.drawable.placeholder);
 
-            // Submit button (currently just a placeholder)
-            submitButton.setOnClickListener(v -> {
-                // Future feature: booking or contact action
+            // Fill editable content
+            locationEdit.setText(listing.getLocation());
+            inclusionsEdit.setText(listing.getInclusions());
+            descriptionEdit.setText(listing.getDescription());
+
+            // Default state: not editable
+            locationEdit.setEnabled(false);
+            inclusionsEdit.setEnabled(false);
+            descriptionEdit.setEnabled(false);
+            submitButton.setVisibility(View.GONE);
+
+            editButton.setOnClickListener(v -> {
+                isEditing = !isEditing;
+                locationEdit.setEnabled(isEditing);
+                inclusionsEdit.setEnabled(isEditing);
+                descriptionEdit.setEnabled(isEditing);
+                submitButton.setVisibility(isEditing ? View.VISIBLE : View.GONE);
             });
 
-            // Edit button action
-            editButton.setOnClickListener(v -> {
-                Intent intent = new Intent(itemView.getContext(), ListingDetailsActivity.class);
-                intent.putExtra("listingId", listing.getId());
-                itemView.getContext().startActivity(intent);
+            submitButton.setOnClickListener(v -> {
+                listing.setLocation(locationEdit.getText().toString());
+                listing.setInclusions(inclusionsEdit.getText().toString());
+                listing.setDescription(descriptionEdit.getText().toString());
+
+                FirebaseFirestore.getInstance().collection("listings")
+                        .document(listing.getId())
+                        .update("location", listing.getLocation(),
+                                "inclusions", listing.getInclusions(),
+                                "description", listing.getDescription())
+                        .addOnSuccessListener(aVoid -> Toast.makeText(itemView.getContext(), "Listing updated", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e -> Toast.makeText(itemView.getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+
+                isEditing = false;
+                locationEdit.setEnabled(false);
+                inclusionsEdit.setEnabled(false);
+                descriptionEdit.setEnabled(false);
+                submitButton.setVisibility(View.GONE);
             });
         }
 
