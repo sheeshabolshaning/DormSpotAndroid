@@ -2,7 +2,7 @@ package com.example.dormspot.MainActivitySpottee;
 
 public class Listing {
     private String dormName;
-    private int capacity;
+    private String capacity;
     private double price;
     private String landlord;
     private String status;
@@ -14,7 +14,7 @@ public class Listing {
         // Required empty constructor for Firestore
     }
 
-    public Listing(String dormName, int capacity, double price, String landlord, String status, String imageUrl, int Id) {
+    public Listing(String dormName, String capacity, double price, String landlord, String status, String imageUrl, int Id) {
         this.dormName = dormName;
         this.capacity = capacity;
         this.price = price;
@@ -26,7 +26,7 @@ public class Listing {
 
     // Getters
     public String getDormName() { return dormName; }
-    public int getCapacity() { return capacity; }
+    public String getCapacity() { return capacity; }
     public double getPrice() { return price; }
     public String getLandlord() { return landlord; }
     public String getStatus() { return status; }
