@@ -46,5 +46,10 @@
             android:exported="false"
             tools:ignore="Instantiatable" />
 
+        <activity android:name=".OnLaunch.WelcomeActivity" />
+        <activity android:name=".OnLaunch.UserModeActivity" />
+        <activity android:name=".MainActivitySpottr.Home" />
+
+
     </application>
 </manifest>

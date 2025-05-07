@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F3FDE8"
-    tools:context="com.example.dormspot.MainAcitivitySpottee.reviews">
+    tools:context="com.example.dormspot.MainActivitySpottee.reviews">
 
     <!-- Header -->
     <LinearLayout
@@ -215,7 +215,7 @@
 
                         <RatingBar
                             style="?android:attr/ratingBarStyleSmall"
-                            app:progressTint="@color/star_yellow"
+                            android:progressTint="@color/star_yellow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"

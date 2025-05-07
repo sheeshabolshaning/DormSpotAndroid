@@ -5,6 +5,7 @@
     <color name="fb_button_bg">#1877F2</color> <!-- Facebook blue -->
     <color name="mint">#C2E7DA</color> <!-- "Sign up with email" button -->
     <color name="light_blue">#6290C3</color>
+    <color name="star_yellow">#EBF291</color>
 
     <!-- 🔹 Add these based on logo design and UI -->
     <color name="logo_primary_text">#EBF291</color> <!-- "DORM SPOT" text -->

@@ -1,9 +1,8 @@
-package com.example.dormspot.MainAcitivitySpottee;
+package com.example.dormspot.MainActivitySpottee;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;

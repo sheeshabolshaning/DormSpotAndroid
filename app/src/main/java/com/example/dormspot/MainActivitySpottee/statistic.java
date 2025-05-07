@@ -1,4 +1,4 @@
-package com.example.dormspot.MainAcitivitySpottee;
+package com.example.dormspot.MainActivitySpottee;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
