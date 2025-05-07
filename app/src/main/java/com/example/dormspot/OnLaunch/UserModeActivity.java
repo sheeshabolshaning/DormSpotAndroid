@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dormspot.MainActivitySpottr.Home;
-import com.example.dormspot.MainActivitySpottee.listing1;
+import com.example.dormspot.MainActivitySpottee.ListingMain;
 import com.example.dormspot.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -118,7 +118,7 @@ public class UserModeActivity extends AppCompatActivity {
     private void navigateToNextActivity(String userMode) {
         Intent intent = "spottr".equals(userMode)
                 ? new Intent(this, Home.class)
-                : new Intent(this, listing1.class);
+                : new Intent(this, ListingMain.class);
         startActivity(intent);
         finish(); // Close this activity after navigating
     }

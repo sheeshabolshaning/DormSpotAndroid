@@ -8,7 +8,7 @@
     android:background="#EEF8E5"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".MainActivitySpottee.listing1">
+    tools:context=".MainActivitySpottee.ListingMain">
 
     <!-- Top App Bar -->
     <LinearLayout
@@ -107,10 +107,11 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/rounded_button"
-        android:backgroundTint="#54518C"
+        android:backgroundTint="@color/light_blue"
         android:text="Add new listing"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
+        android:textStyle="italic"
         android:fontFamily="@font/neuebold" />
 
     <!-- Bottom Navigation -->

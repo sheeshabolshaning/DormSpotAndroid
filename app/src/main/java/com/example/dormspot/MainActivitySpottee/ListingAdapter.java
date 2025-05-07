@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +17,7 @@ import com.example.dormspot.R;
 import java.util.List;
 
 public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingViewHolder> {
-
+    private int expandedPosition = -1;
     private List<Listing> listingList;
 
     public ListingAdapter(List<Listing> listingList) {
@@ -24,17 +26,31 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
 
     @Override
     public ListingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Inflate the item view for each listing
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listing, parent, false);
         return new ListingViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ListingViewHolder holder, int position) {
-        // Bind data to the views in the ViewHolder
         Listing listing = listingList.get(position);
         holder.bind(listing);
+
+        boolean isExpanded = position == expandedPosition;
+
+        if (isExpanded) {
+            holder.expandableLayout.setVisibility(View.VISIBLE);
+            holder.expandableLayout.setAlpha(0f);
+            holder.expandableLayout.animate().alpha(1f).setDuration(300).start();
+        } else {
+            holder.expandableLayout.setVisibility(View.GONE);
+        }
+
+        holder.itemView.setOnClickListener(v -> {
+            expandedPosition = isExpanded ? -1 : position;
+            notifyDataSetChanged();
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -43,7 +59,10 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
 
     public static class ListingViewHolder extends RecyclerView.ViewHolder {
         TextView dormName, dormCapacity, dormPrice, dormStatus;
-        ImageView dormImage, editButton;
+        TextView location, inclusions, description;
+        ImageView dormImage, editButton, imageView1, imageView2;
+        LinearLayout expandableLayout;
+        Button submitButton;
 
         public ListingViewHolder(View itemView) {
             super(itemView);
@@ -52,53 +71,72 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             dormPrice = itemView.findViewById(R.id.textView_dormPrice);
             dormStatus = itemView.findViewById(R.id.textView_dormStatus);
             dormImage = itemView.findViewById(R.id.imageView_dorm);
-            editButton = itemView.findViewById(R.id.button_edit_listing);  // ImageView for edit
+            editButton = itemView.findViewById(R.id.button_edit_listing);
+
+            // Expandable views
+            location = itemView.findViewById(R.id.textView_location);
+            inclusions = itemView.findViewById(R.id.textView_inclusions);
+            description = itemView.findViewById(R.id.textView_description);
+            expandableLayout = itemView.findViewById(R.id.expandableLayout);
+            imageView1 = itemView.findViewById(R.id.imageView_room1);
+            imageView2 = itemView.findViewById(R.id.imageView_room2);
+            submitButton = itemView.findViewById(R.id.button_submit);
         }
 
         public void bind(Listing listing) {
-            // Set dorm name, capacity, price, and status, with null safety
             dormName.setText(listing.getDormName() != null ? listing.getDormName() : "No Name Available");
             dormCapacity.setText("Capacity: " + (listing.getCapacity() != 0 ? listing.getCapacity() : "N/A"));
-            dormPrice.setText(formatPrice(listing.getPrice() != 0 ? listing.getPrice() : 0));
+            dormPrice.setText(formatPrice(listing.getPrice()));
             dormStatus.setText("Status: " + (listing.getStatus() != null ? listing.getStatus() : "Unknown"));
 
-            // Change text color based on the dorm status
+            // Status color
             if (listing.getStatus() != null) {
                 switch (listing.getStatus().toLowerCase()) {
                     case "occupied":
-                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.red)); // Red color
+                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.red));
                         break;
                     case "unoccupied":
-                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.green)); // Green color
+                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.green));
                         break;
                     default:
-                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.black)); // Default color (black or any other color)
+                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.black));
                         break;
                 }
             }
 
-            // Load dorm image using Glide
-            loadDormImage(listing.getImageUrl());
+            // Load thumbnail
+            loadDormImage(listing.getImageUrl(), dormImage);
 
-            // Set edit button click listener to navigate to listing2 activity
+            // Expanded content
+            location.setText("Location: " + listing.getLocation());
+            inclusions.setText("Inclusions: " + listing.getInclusions());
+            description.setText("Description: " + listing.getDescription());
+
+            loadDormImage(listing.getImageUrl(), imageView1);
+            imageView2.setImageResource(R.drawable.placeholder); // Optional: replace if dynamic
+
+            // Submit button (currently just a placeholder)
+            submitButton.setOnClickListener(v -> {
+                // Future feature: booking or contact action
+            });
+
+            // Edit button action
             editButton.setOnClickListener(v -> {
-                Intent intent = new Intent(itemView.getContext(), listing2.class);
-                intent.putExtra("listingId", listing.getId()); // Pass the listing ID to listing2 activity
+                Intent intent = new Intent(itemView.getContext(), ListingDetailsActivity.class);
+                intent.putExtra("listingId", listing.getId());
                 itemView.getContext().startActivity(intent);
             });
         }
 
-        // Helper method to format the price
         private String formatPrice(double price) {
             return "₱" + String.format("%.2f", price) + "/month";
         }
 
-        // Helper method to load the dorm image using Glide
-        private void loadDormImage(String imageUrl) {
+        private void loadDormImage(String imageUrl, ImageView target) {
             Glide.with(itemView.getContext())
                     .load(imageUrl)
-                    .placeholder(R.drawable.placeholder) // Use your placeholder image
-                    .into(dormImage);
+                    .placeholder(R.drawable.placeholder)
+                    .into(target);
         }
     }
 }

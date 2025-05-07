@@ -2,7 +2,6 @@ package com.example.dormspot.MainActivitySpottee;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -17,8 +16,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class listing1 extends AppCompatActivity {
+public class ListingMain extends AppCompatActivity {
 
+    private Button addListingButton;
     private Button myListingsButton;
     private Button statisticButton;
     private Button reviewsButton;
@@ -35,6 +35,12 @@ public class listing1 extends AppCompatActivity {
         myListingsButton = findViewById(R.id.my_listings);
         statisticButton = findViewById(R.id.statistic);
         reviewsButton = findViewById(R.id.reviews);
+
+        addListingButton.setOnClickListener(v -> {
+            Toast.makeText(this, "Add clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ListingMain.this, ListingAddActivity.class);
+            startActivity(intent);
+        });
 
         // RecyclerView setup
         recyclerView = findViewById(R.id.recyclerViewListings);
@@ -54,7 +60,7 @@ public class listing1 extends AppCompatActivity {
         // Button click listeners
         myListingsButton.setOnClickListener(v -> {
             selectButton(myListingsButton); // Set "My Listings" as selected
-            Intent intent = new Intent(listing1.this, listing2.class);
+            Intent intent = new Intent(ListingMain.this, ListingDetailsActivity.class);
             startActivity(intent);
         });
 
@@ -68,7 +74,7 @@ public class listing1 extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (queryDocumentSnapshots.isEmpty()) {
-                        Toast.makeText(listing1.this, "No listings found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListingMain.this, "No listings found", Toast.LENGTH_SHORT).show();
                     } else {
                         // Clear the list before adding new data
                         listingList.clear();
@@ -83,7 +89,7 @@ public class listing1 extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> {
                     // Handle the error (log it or show a toast)
-                    Toast.makeText(listing1.this, "Error fetching listings: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListingMain.this, "Error fetching listings: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace(); // Log error
                 });
     }
