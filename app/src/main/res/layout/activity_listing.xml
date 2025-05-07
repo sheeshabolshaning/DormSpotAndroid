@@ -59,6 +59,7 @@
             android:id="@+id/my_listings"
             android:layout_width="118dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/button_selector"
             android:text="My listings"
             android:textColor="@color/white"
@@ -70,12 +71,13 @@
             android:id="@+id/statistic"
             android:layout_width="118dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_selector"
-            android:text="Statistic"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textAllCaps="false"/>
+            android:layout_marginEnd="4dp"
+        android:background="@drawable/button_selector"
+        android:text="Statistic"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/reviews"

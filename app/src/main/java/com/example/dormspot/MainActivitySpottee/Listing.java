@@ -4,7 +4,6 @@ public class Listing {
     private String dormName;
     private int capacity;
     private double price;
-    private String landlord;
     private String status;
     private String imageUrl;
 
@@ -14,11 +13,10 @@ public class Listing {
 
     }
 
-    public Listing(String dormName, int capacity, double price, String landlord, String status, String imageUrl, int Id) {
+    public Listing(String dormName, int capacity, double price, String status, String imageUrl, int Id) {
         this.dormName = dormName;
         this.capacity = capacity;
         this.price = price;
-        this.landlord = landlord;
         this.status = status;
         this.imageUrl = imageUrl;
         this.Id=Id;
@@ -28,7 +26,6 @@ public class Listing {
     public String getDormName() { return dormName; }
     public int getCapacity() { return capacity; }
     public double getPrice() { return price; }
-    public String getLandlord() { return landlord; }
     public String getStatus() { return status; }
     public String getImageUrl() { return imageUrl; }
 
