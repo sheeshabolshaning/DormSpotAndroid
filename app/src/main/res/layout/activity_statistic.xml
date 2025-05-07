@@ -39,7 +39,8 @@
                 android:textSize="20sp"
                 android:paddingStart="12dp"
                 android:textStyle="bold"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                android:fontFamily="@font/wafflesoft"/>
 
             <ImageView
                 android:layout_width="24dp"
@@ -65,7 +66,8 @@
                 android:backgroundTint="#618EC0"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:fontFamily="@font/neuebold"/>
 
             <Button
                 style="@style/TabButton"
@@ -76,7 +78,8 @@
                 android:text="Statistic"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:fontFamily="@font/neuebold"/>
 
             <Button
                 style="@style/TabButton"
@@ -87,7 +90,8 @@
                 android:text="Reviews"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:fontFamily="@font/neuebold"/>
         </LinearLayout>
 
         <ScrollView
@@ -117,7 +121,8 @@
                         android:text="Eagle Crest Phase 3 Solo Room"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/neuebold"/>
 
 
                     <LinearLayout
@@ -138,7 +143,8 @@
                             android:layout_height="wrap_content"
                             android:text="  Capacity: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView3"
@@ -146,7 +152,8 @@
                             android:layout_height="wrap_content"
                             android:text="1"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -166,7 +173,8 @@
                             android:layout_height="wrap_content"
                             android:text="  Saves by Users: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView55"
@@ -174,7 +182,8 @@
                             android:layout_height="wrap_content"
                             android:text="5"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -194,7 +203,8 @@
                             android:layout_height="wrap_content"
                             android:text="  Inquires: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView5"
@@ -202,7 +212,8 @@
                             android:layout_height="wrap_content"
                             android:text="4"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -217,6 +228,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:layout_marginEnd="131dp"
+                            android:fontFamily="@font/roboto"
                             android:text="unoccupied"
                             android:textColor="#FF4B4B"
                             android:textStyle="italic|bold" />
@@ -226,7 +238,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_button2"
                             android:text="View listing"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:fontFamily="@font/neuebold"
+                            android:textAllCaps="false"/>
 
                         <ImageView
                             app:tint="#FFFFFF"
@@ -256,7 +270,8 @@
                         android:text="Ciudad Grande Phase 2 Bachelors Pad"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/neuebold"/>
 
                     <LinearLayout
                         android:layout_width="355dp"
@@ -269,7 +284,8 @@
                             android:layout_height="wrap_content"
                             android:text="Rented from "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView9"
@@ -277,7 +293,8 @@
                             android:layout_height="wrap_content"
                             android:text="Jan 23, 2024 - Mar 23, 2024"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -291,7 +308,8 @@
                             android:layout_height="wrap_content"
                             android:text="Occupant: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView11"
@@ -299,7 +317,8 @@
                             android:layout_height="wrap_content"
                             android:text="1/1"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -313,7 +332,8 @@
                             android:layout_height="wrap_content"
                             android:text="Revenue: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView14"
@@ -321,7 +341,8 @@
                             android:layout_height="wrap_content"
                             android:text="₱30,000"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -338,14 +359,17 @@
                             android:layout_marginEnd="145dp"
                             android:text="Occupied"
                             android:textColor="#52FD15"
-                            android:textStyle="italic|bold" />
+                            android:textStyle="italic|bold"
+                            android:fontFamily="@font/roboto"/>
 
                         <Button
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_button2"
                             android:text="View listing"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:fontFamily="@font/neuebold"
+                            android:textAllCaps="false"/>
 
                         <ImageView
                             app:tint="#FFFFFF"
@@ -374,7 +398,8 @@
                         android:text="Eagle Crest Phase 1 Bedspacer"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/neuebold"/>
 
                     <LinearLayout
                         android:layout_width="355dp"
@@ -387,7 +412,8 @@
                             android:layout_height="wrap_content"
                             android:text="Rented from: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView18.8"
@@ -395,7 +421,8 @@
                             android:layout_height="wrap_content"
                             android:text="Jan 23, 2024 - Mar 23, 2024"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -409,7 +436,8 @@
                             android:layout_height="wrap_content"
                             android:text="Occupant: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView17"
@@ -417,7 +445,8 @@
                             android:layout_height="wrap_content"
                             android:text="3/4"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -456,14 +485,17 @@
                             android:layout_marginEnd="145dp"
                             android:text="Occupied"
                             android:textColor="#52FD15"
-                            android:textStyle="italic|bold" />
+                            android:textStyle="italic|bold"
+                            android:fontFamily="@font/roboto"/>
 
                         <Button
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_button2"
                             android:text="View listing"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:fontFamily="@font/neuebold"
+                            android:textAllCaps="false"/>
 
                         <ImageView
                             app:tint="#FFFFFF"

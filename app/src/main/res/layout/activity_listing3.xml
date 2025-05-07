@@ -39,7 +39,8 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                android:fontFamily="@font/wafflesoft"/>
 
             <ImageView
                 android:layout_width="24dp"
@@ -65,7 +66,8 @@
                 android:text="My listing"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/neuebold"/>
 
             <Button
                 style="@style/TabButton"
@@ -76,7 +78,8 @@
                 android:text="Statistic"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/neuebold"/>
 
             <Button
                 style="@style/TabButton"
@@ -87,7 +90,8 @@
                 android:text="Reviews"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/neuebold"/>
         </LinearLayout>
 
         <ScrollView
@@ -117,7 +121,8 @@
                         android:text="Cuidad Grande Phase 2 Bedroom and Office Unit"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/neuebold"/>
 
                     <LinearLayout
                         android:layout_width="355dp"
@@ -130,7 +135,8 @@
                             android:layout_height="wrap_content"
                             android:text="Capacity: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView4"
@@ -138,7 +144,8 @@
                             android:layout_height="wrap_content"
                             android:text="2"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -152,7 +159,8 @@
                             android:layout_height="wrap_content"
                             android:text="Price: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView6"
@@ -160,7 +168,8 @@
                             android:layout_height="wrap_content"
                             android:text="₱12,000"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -177,7 +186,8 @@
                             android:layout_marginEnd="125dp"
                             android:text="Approved"
                             android:textColor="#52FD15"
-                            android:textStyle="italic|bold" />
+                            android:textStyle="italic|bold"
+                            android:fontFamily="@font/roboto"/>
 
                         <Button
                             android:id="@+id/button_post_listing"
@@ -185,7 +195,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_button2"
                             android:text="Post listing"
-                            android:textColor="#FFFFFF"/>
+                            android:textColor="#FFFFFF"
+                            android:fontFamily="@font/neuebold"
+                            android:textAllCaps="false"/>
 
                         <ImageView
                             android:layout_width="30dp"
@@ -207,7 +219,8 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/rounded_card"
                     android:orientation="vertical"
-                    android:padding="12dp">
+                    android:padding="12dp"
+                    android:fontFamily="@font/neuebold">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -221,7 +234,8 @@
                             android:layout_height="wrap_content"
                             android:text="Title: "
                             android:textColor="#FFFFFF"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/locationView"
@@ -229,7 +243,8 @@
                             android:layout_height="wrap_content"
                             android:text="Location: "
                             android:textColor="#FFFFFF"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/capacityView"
@@ -237,7 +252,8 @@
                             android:layout_height="wrap_content"
                             android:text="Capacity: "
                             android:textColor="#FFFFFF"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/priceView"
@@ -245,7 +261,8 @@
                             android:layout_height="wrap_content"
                             android:text="Price: "
                             android:textColor="#FFFFFF"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/inclusionView"
@@ -253,7 +270,8 @@
                             android:layout_height="wrap_content"
                             android:text="Inclusion: "
                             android:textColor="#FFFFFF"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/descriptionView"
@@ -261,7 +279,8 @@
                             android:layout_height="wrap_content"
                             android:text="Description: "
                             android:textColor="#FFFFFF"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/neuebold"/>
                     </LinearLayout>
 
 
@@ -279,7 +298,8 @@
                             android:layout_marginEnd="170dp"
                             android:text="Pending"
                             android:textColor="#FD8515"
-                            android:textStyle="italic|bold" />
+                            android:textStyle="italic|bold"
+                            android:fontFamily="@font/roboto"/>
 
                         <Button
                             android:id="@+id/button_view_listing"
@@ -287,7 +307,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_button2"
                             android:text="View listing"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:fontFamily="@font/neuebold"
+                            android:textAllCaps="false"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -317,7 +339,8 @@
                         android:layout_marginTop="4dp"
                         android:text="Listing rejected Rejection Reason: Overpricing"
                         android:textColor="#CCCCCC"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:fontFamily="@font/roboto"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -333,7 +356,8 @@
                             android:layout_marginEnd="165dp"
                             android:text="Rejected"
                             android:textColor="#E84235"
-                            android:textStyle="italic|bold" />
+                            android:textStyle="italic|bold"
+                            android:fontFamily="@font/roboto"/>
 
                         <Button
                             android:id="@+id/button_remove_listing"
@@ -341,7 +365,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_button2"
                             android:text="Remove"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:fontFamily="@font/neuebold"
+                            android:textAllCaps="false"/>
 
                     </LinearLayout>
                 </LinearLayout>
