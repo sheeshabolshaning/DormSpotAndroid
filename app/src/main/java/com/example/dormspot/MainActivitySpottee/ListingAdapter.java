@@ -24,14 +24,12 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
 
     @Override
     public ListingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Inflate the item view for each listing
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listing, parent, false);
         return new ListingViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ListingViewHolder holder, int position) {
-        // Bind data to the views in the ViewHolder
         Listing listing = listingList.get(position);
         holder.bind(listing);
     }
@@ -42,7 +40,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
     }
 
     public static class ListingViewHolder extends RecyclerView.ViewHolder {
-        TextView dormName, dormCapacity, dormPrice, dormStatus;
+        TextView dormName, dormCapacity, dormPrice, dormStatus, dormLandlord;
         ImageView dormImage, editButton;
 
         public ListingViewHolder(View itemView) {
@@ -56,44 +54,21 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
         }
 
         public void bind(Listing listing) {
-            // Set dorm name, capacity, price, and status, with null safety
-            dormName.setText(listing.getDormName() != null ? listing.getDormName() : "No Name Available");
-            dormCapacity.setText("Capacity: " + (listing.getCapacity() != 0 ? listing.getCapacity() : "N/A"));
-            dormPrice.setText(formatPrice(listing.getPrice() != 0 ? listing.getPrice() : 0));
-            dormStatus.setText("Status: " + (listing.getStatus() != null ? listing.getStatus() : "Unknown"));
+            dormName.setText(listing.getDormName());
+            dormCapacity.setText("Capacity: " + listing.getCapacity());
+            dormPrice.setText(formatPrice(listing.getPrice()));
+            dormStatus.setText("Status: " + listing.getStatus());
 
-            // Change text color based on the dorm status
-            if (listing.getStatus() != null) {
-                switch (listing.getStatus().toLowerCase()) {
-                    case "occupied":
-                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.red)); // Red color
-                        break;
-                    case "unoccupied":
-                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.green)); // Green color
-                        break;
-                    default:
-                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.black)); // Default color (black or any other color)
-                        break;
-                }
-            }
-
-            // Load dorm image using Glide
             loadDormImage(listing.getImageUrl());
-
-            // Set edit button click listener to navigate to listing2 activity
-            editButton.setOnClickListener(v -> {
-                Intent intent = new Intent(itemView.getContext(), listing2.class);
-                intent.putExtra("listingId", listing.getId()); // Pass the listing ID to listing2 activity
-                itemView.getContext().startActivity(intent);
-            });
+            
         }
 
-        // Helper method to format the price
+        // Helper method for price formatting
         private String formatPrice(double price) {
             return "₱" + String.format("%.2f", price) + "/month";
         }
 
-        // Helper method to load the dorm image using Glide
+        // Helper method to load image using Glide
         private void loadDormImage(String imageUrl) {
             Glide.with(itemView.getContext())
                     .load(imageUrl)
