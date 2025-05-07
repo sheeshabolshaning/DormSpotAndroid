@@ -4,4 +4,17 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#1A1B41</item>
     </style>
+
+    <style name="RatingBarCustom" parent="Theme.AppCompat">
+        <item name="colorControlActivated">#FFD700</item> <!-- Gold Stars -->
+        <item name="colorControlNormal">#C0C0C0</item>     <!-- Gray Border -->
+        <item name="android:progressTint">@color/black</item>
+    </style>
+
+    <style name="SmallRatingBar" parent="Widget.AppCompat.RatingBar.Indicator">
+        <item name="android:progressDrawable">@drawable/custom_small_stars</item>
+        <item name="android:minHeight">12dp</item>
+        <item name="android:maxHeight">12dp</item>
+    </style>
+
 </resources>
