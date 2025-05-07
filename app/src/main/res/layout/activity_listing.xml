@@ -103,7 +103,7 @@
 
     <!-- Add New Listing Button -->
     <Button
-        android:id="@+id/button_add_new_listing"
+        android:id="@+id/addlisting"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/rounded_button"

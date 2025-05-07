@@ -35,6 +35,7 @@ public class ListingMain extends AppCompatActivity {
         myListingsButton = findViewById(R.id.my_listings);
         statisticButton = findViewById(R.id.statistic);
         reviewsButton = findViewById(R.id.reviews);
+        addListingButton = findViewById(R.id.addlisting);
 
         addListingButton.setOnClickListener(v -> {
             Toast.makeText(this, "Add clicked", Toast.LENGTH_SHORT).show();

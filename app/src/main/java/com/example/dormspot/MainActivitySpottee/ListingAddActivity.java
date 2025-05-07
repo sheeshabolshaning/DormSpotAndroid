@@ -22,22 +22,21 @@ public class ListingAddActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish(); // Closes the current activity and goes back
-        return true;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_add);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Safely enable the ActionBar back button
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         ImageView backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
+        // Initialize fields
         dormNameField = findViewById(R.id.editText_dormName);
         capacityField = findViewById(R.id.editText_capacity);
         priceField = findViewById(R.id.editText_price);
@@ -51,6 +50,7 @@ public class ListingAddActivity extends AppCompatActivity {
 
         submitButton.setOnClickListener(v -> saveListing());
     }
+
 
     private void saveListing() {
         String dormName = dormNameField.getText().toString().trim();
