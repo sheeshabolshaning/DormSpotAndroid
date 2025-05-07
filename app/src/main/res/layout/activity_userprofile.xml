@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="12dp"
-                    android:text="Spotee’s Profile"
+                    android:text="Your Profile"
                     android:textColor="#2B2E66"
                     android:textSize="30sp"
                     android:textStyle="bold" />
@@ -84,7 +84,7 @@
                         android:contentDescription="profile_img"
                         android:padding="2dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/esther" /> <!-- Replace with actual photo -->
+                        android:src="@drawable/keeth" /> <!-- Replace with actual photo -->
 
 
                     <!-- Edit Icon -->
@@ -92,12 +92,12 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="end"
-                        android:contentDescription="edit"
-                        android:src="@drawable/editicon"
                         android:layout_marginTop="0dp"
+                        android:layout_marginEnd="8dp"
                         android:background="@drawable/rounded_button2"
                         android:backgroundTint="@color/light_blue"
-                        android:layout_marginEnd="8dp"/>
+                        android:contentDescription="edit"
+                        android:src="@drawable/editicon" />
 
 
                     <!-- Name -->
@@ -105,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Esther Sandy"
+                        android:text="Keeth Domingo"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -114,7 +114,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="esthersandy123@gmail.com"
+                        android:text="keeth.dmngo225@gmail.com"
                         android:textColor="#BBBBBB"
                         android:textSize="14sp" />
 
@@ -126,59 +126,104 @@
                         android:textColor="#BBBBBB"
                         android:textSize="14sp" />
 
-                    <!-- Verify Button -->
-                    <Button
-                        android:id="@+id/verify_button"
-                        android:layout_width="136dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/rounded_button2"
-                        android:backgroundTint="#618FC1"
-                        android:text="Verify Account"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-
-                    <!-- Subtext -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Get your account Verified to get all features unlocked!"
-                        android:textColor="#CCCCCC"
-                        android:textSize="12sp" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <!-- Listings -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="Listings Made"
-                            android:textColor="#E4E2E2"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-
-                    <TextView
+                        android:id="@+id/booking_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:background="@drawable/rounded_button2"
                         android:backgroundTint="@color/white"
-                        android:elevation="2dp"
-                        android:gravity="center"
-                        android:padding="12dp"
-                        android:text="Not Verified Yet"
-                        android:textColor="@color/dormspot_bg" />
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!-- Header -->
+                        <TextView
+                            android:id="@+id/bookings_header"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:text="BOOKINGS"
+                            android:textColor="#1C1B47"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <!-- Booking 1 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Two-Story Apartment in Ciudad Grande Phase I"
+                                android:textColor="#1C1B47"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ciudad Grande Phase I, Bakakeng Sur"
+                                android:textColor="#777777"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Booking 2 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Solo Room for Rent in Bakakeng Phase 3"
+                                android:textColor="#1C1B47"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Phase 3, Bakakeng Sur"
+                                android:textColor="#777777"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Booking 3 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Studio Type for Rent in Eagle Crest Phase 1"
+                                android:textColor="#1C1B47"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Eagle Crest Phase 1, Bakakeng Sur"
+                                android:textColor="#777777"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <!-- Menu Buttons -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="80dp"
                         android:background="@drawable/rounded_button2"
                         android:backgroundTint="#1C1B46"
                         android:orientation="vertical"
@@ -322,10 +367,8 @@
                                 android:contentDescription="Permission"
                                 android:src="@drawable/arrow_right" />
                         </LinearLayout>
+
                 </LinearLayout>
-
-
-
 
                 </LinearLayout>
             </LinearLayout>
@@ -367,7 +410,8 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/user" />
+                android:src="@drawable/user"
+                app:tint="@color/fb_button_bg" />
         </LinearLayout>
 
     </LinearLayout>
