@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dormspot.R;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 public class SplashActivity extends AppCompatActivity {
 =======
@@ -14,11 +15,17 @@ import com.example.dormspot.OnLaunch.LoginActivity;
 >>>>>>> Stashed changes
 
 public class SplashActivity extends AppCompatActivity {
+=======
+import com.example.dormspot.OnLaunch.LoginActivity;
+
+public class SplashActivity extends AppCompatActivity {
+>>>>>>> Stashed changes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         // Delay before starting the SignUpActivity
         new Handler().postDelayed(new Runnable() {
@@ -33,6 +40,8 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 3000); // 3 seconds delay (you can adjust the time)
 =======
+=======
+>>>>>>> Stashed changes
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);

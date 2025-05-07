@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 =======
 import com.example.dormspot.MainActivitySpottee.listing1;
 import com.example.dormspot.MainActivitySpottr.Home;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 import com.example.dormspot.R;
 
@@ -120,6 +123,33 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 >>>>>>> Stashed changes
+    }
+
+    private void redirectToUserHome(FirebaseUser user) {
+        String uid = user.getUid();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(uid).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String userMode = documentSnapshot.getString("userMode");
+                        Intent intent;
+                        if ("spottr".equals(userMode)) {
+                            intent = new Intent(LoginActivity.this, Home.class);
+                        } else if ("spotee".equals(userMode)) {
+                            intent = new Intent(LoginActivity.this, listing1.class);
+                        } else {
+                            intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                        }
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(this, "User data not found.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void redirectToUserHome(FirebaseUser user) {
