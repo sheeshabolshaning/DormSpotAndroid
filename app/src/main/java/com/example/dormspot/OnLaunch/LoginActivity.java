@@ -1,6 +1,7 @@
 package com.example.dormspot.OnLaunch;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -50,6 +51,17 @@ public class LoginActivity extends AppCompatActivity {
         textDontHaveAccount.setOnClickListener(v ->
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
+        // SharedPreferences for Remember Me
+        SharedPreferences preferences = getSharedPreferences("userPrefs", MODE_PRIVATE);
+        boolean rememberMe = preferences.getBoolean("rememberMe", false);
+        checkboxRememberMe.setChecked(rememberMe);
+
+        // If Remember Me is checked, auto-fill email (if available)
+        if (rememberMe) {
+            String savedEmail = preferences.getString("email", "");
+            editTextUsername.setText(savedEmail);
+        }
+
         // Sign In button logic
         btnSignIn.setOnClickListener(v -> {
             String email = editTextUsername.getText().toString().trim();
@@ -58,6 +70,18 @@ public class LoginActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(LoginActivity.this, "Please fill in both fields", Toast.LENGTH_SHORT).show();
                 return;
+            }
+
+            // Remember Me functionality
+            if (checkboxRememberMe.isChecked()) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("rememberMe", true);
+                editor.putString("email", email);
+                editor.apply();
+            } else {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("rememberMe", false);
+                editor.apply();
             }
 
             loginUser(email, password);
@@ -121,5 +145,4 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }
