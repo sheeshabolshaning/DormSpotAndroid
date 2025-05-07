@@ -18,10 +18,7 @@ import java.util.List;
 
 public class ListingMain extends AppCompatActivity {
 
-    private Button addListingButton;
-    private Button myListingsButton;
-    private Button statisticButton;
-    private Button reviewsButton;
+    private Button addListingButton, myListingsButton, statisticButton, reviewsButton;
     private RecyclerView recyclerView;
     private ListingAdapter listingAdapter;
     private List<Listing> listingList;
@@ -31,42 +28,48 @@ public class ListingMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing);
 
-        // Initialize buttons
+        // Initialize views
+        initViews();
+
+        // Set up RecyclerView
+        setupRecyclerView();
+
+        // Fetch Firestore listings
+        fetchListingsFromFirestore();
+
+        // Default selected tab
+        selectButton(myListingsButton);
+
+        // Tab button listeners
+        setupTabNavigation();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchListingsFromFirestore(); // Refresh list when returning
+    }
+
+    private void initViews() {
+        addListingButton = findViewById(R.id.addlisting);
         myListingsButton = findViewById(R.id.my_listings);
         statisticButton = findViewById(R.id.statistic);
         reviewsButton = findViewById(R.id.reviews);
         addListingButton = findViewById(R.id.addlisting);
 
+        recyclerView = findViewById(R.id.recyclerViewListings);
+
         addListingButton.setOnClickListener(v -> {
             Toast.makeText(this, "Add clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ListingMain.this, ListingAddActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, ListingAddActivity.class));
         });
+    }
 
-        // RecyclerView setup
-        recyclerView = findViewById(R.id.recyclerViewListings);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize the listing data
+    private void setupRecyclerView() {
         listingList = new ArrayList<>();
         listingAdapter = new ListingAdapter(listingList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(listingAdapter);
-
-        // Fetch listings from Firestore
-        fetchListingsFromFirestore();
-
-        // Set default button selection on launch
-        selectButton(myListingsButton);
-
-        // Button click listeners
-        myListingsButton.setOnClickListener(v -> {
-            selectButton(myListingsButton); // Set "My Listings" as selected
-            Intent intent = new Intent(ListingMain.this, ListingDetailsActivity.class);
-            startActivity(intent);
-        });
-
-        statisticButton.setOnClickListener(v -> selectButton(statisticButton));
-        reviewsButton.setOnClickListener(v -> selectButton(reviewsButton));
     }
 
     @Override
@@ -80,49 +83,54 @@ public class ListingMain extends AppCompatActivity {
         db.collection("listings")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (queryDocumentSnapshots.isEmpty()) {
-                        Toast.makeText(ListingMain.this, "No listings found", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Clear the list before adding new data
-                        listingList.clear();
+                    listingList.clear(); // Clear before repopulating
 
-                        // Loop through the documents in Firestore
-                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                            Listing listing = doc.toObject(Listing.class);
-                            listingList.add(listing);
-                        }
-                        listingAdapter.notifyDataSetChanged(); // Refresh RecyclerView
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        Listing listing = doc.toObject(Listing.class);
+                        listing.setId(doc.getId()); // Use document ID as unique ID
+                        listingList.add(listing);
                     }
+
+                    listingAdapter.notifyDataSetChanged(); // Refresh RecyclerView
                 })
                 .addOnFailureListener(e -> {
-                    // Handle the error (log it or show a toast)
-                    Toast.makeText(ListingMain.this, "Error fetching listings: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    e.printStackTrace(); // Log error
+                    Toast.makeText(this, "Error fetching listings: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 });
     }
 
+    private void setupTabNavigation() {
+        myListingsButton.setOnClickListener(v -> {
+            selectButton(myListingsButton);
+            // Already on listings, no need to navigate
+        });
+
+        statisticButton.setOnClickListener(v -> {
+            selectButton(statisticButton);
+            // Future: navigate to statistics screen
+        });
+
+        reviewsButton.setOnClickListener(v -> {
+            selectButton(reviewsButton);
+            // Future: navigate to reviews screen
+        });
+    }
+
     private void selectButton(Button selectedButton) {
-        // Reset all buttons to default
         resetButtons();
 
-        // Highlight the selected button
-        selectedButton.setSelected(true); // Set button as selected
-        selectedButton.setBackgroundResource(R.drawable.button_selector); // Update selector background
-        selectedButton.setTextColor(getResources().getColor(R.color.white)); // Set text color to white (or your preferred color)
+        selectedButton.setSelected(true);
+        selectedButton.setBackgroundResource(R.drawable.button_selector);
+        selectedButton.setTextColor(getResources().getColor(R.color.white));
     }
 
     private void resetButtons() {
-        // Reset the background and text color for all buttons
-        myListingsButton.setSelected(false);
-        statisticButton.setSelected(false);
-        reviewsButton.setSelected(false);
+        Button[] buttons = {myListingsButton, statisticButton, reviewsButton};
 
-        myListingsButton.setBackgroundResource(R.drawable.button_selector); // Ensure this is the default background
-        statisticButton.setBackgroundResource(R.drawable.button_selector);
-        reviewsButton.setBackgroundResource(R.drawable.button_selector);
-
-        myListingsButton.setTextColor(getResources().getColor(R.color.white)); // Reset text color
-        statisticButton.setTextColor(getResources().getColor(R.color.white));
-        reviewsButton.setTextColor(getResources().getColor(R.color.white));
+        for (Button btn : buttons) {
+            btn.setSelected(false);
+            btn.setBackgroundResource(R.drawable.button_selector);
+            btn.setTextColor(getResources().getColor(R.color.white));
+        }
     }
 }
