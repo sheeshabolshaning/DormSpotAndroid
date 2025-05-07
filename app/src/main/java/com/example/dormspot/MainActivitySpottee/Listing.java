@@ -6,7 +6,7 @@ public class Listing {
     private double price;
     private String status;
     private String imageUrl;
-    private int id;
+    private String id;
 
     // 🆕 Added fields for full listing details
     private String location;
@@ -18,7 +18,7 @@ public class Listing {
     }
 
     public Listing(String dormName, int capacity, double price, String status, String imageUrl,
-                   int id, String location, String inclusions, String description) {
+                   String id, String location, String inclusions, String description) {
         this.dormName = dormName;
         this.capacity = capacity;
         this.price = price;
@@ -51,7 +51,7 @@ public class Listing {
         return imageUrl;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -88,7 +88,7 @@ public class Listing {
         this.imageUrl = imageUrl;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
