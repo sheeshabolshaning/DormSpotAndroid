@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.dormspot.MainActivitySpottee.listing1;
 import com.example.dormspot.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -97,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                                             if ("spottr".equals(userMode)) {
                                                 startActivity(new Intent(LoginActivity.this, com.example.dormspot.MainActivitySpottr.Home.class));
                                             } else if ("spotee".equals(userMode)) {
-                                                startActivity(new Intent(LoginActivity.this, com.example.dormspot.MainActivitySpottee.listing.class));
+                                                startActivity(new Intent(LoginActivity.this, listing1.class));
                                             } else {
                                                 // No userMode set yet, fallback to WelcomeActivity
                                                 startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));

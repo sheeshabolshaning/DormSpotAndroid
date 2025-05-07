@@ -38,7 +38,7 @@ public class listing3 extends AppCompatActivity {
 
         Button postBtn = findViewById(R.id.button_post_listing);
         postBtn.setOnClickListener(v -> {
-            Intent backToMain = new Intent(listing3.this, listing.class);
+            Intent backToMain = new Intent(listing3.this, listing1.class);
             backToMain.putExtra("postedTitle", intent.getStringExtra("title"));
             // You can pass more fields if needed
             startActivity(backToMain);
@@ -51,7 +51,7 @@ public class listing3 extends AppCompatActivity {
                 // Optional: show a toast or go back to Listing 1
                 Toast.makeText(listing3.this, "Listing removed", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(listing3.this, listing.class);
+                Intent intent = new Intent(listing3.this, listing1.class);
                 startActivity(intent);
             }
         });

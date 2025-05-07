@@ -58,11 +58,9 @@
             android:orientation="horizontal">
 
             <Button
-                style="@style/TabButton"
-                android:layout_width="110dp"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button2"
-                android:backgroundTint="#3C396A"
+                android:background="@drawable/button_selector"
                 android:text="My listing"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -70,11 +68,9 @@
                 android:fontFamily="@font/neuebold"/>
 
             <Button
-                style="@style/TabButton"
-                android:layout_width="110dp"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button2"
-                android:backgroundTint="#618EC0"
+                android:background="@drawable/button_selector"
                 android:text="Statistic"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -82,11 +78,9 @@
                 android:fontFamily="@font/neuebold"/>
 
             <Button
-                style="@style/TabButton"
-                android:layout_width="110dp"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button2"
-                android:backgroundTint="#618EC0"
+                android:background="@drawable/button_selector"
                 android:text="Reviews"
                 android:textColor="@color/white"
                 android:textSize="14sp"
