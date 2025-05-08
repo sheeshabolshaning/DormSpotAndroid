@@ -39,14 +39,14 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull DormViewHolder holder, int position) {
-        DormItem item = dormList.get(position); // ✅ Moved to the top
+        DormItem item = dormList.get(position);
 
         holder.dormTitle.setText(item.getDormName());
         holder.capacity.setText("Capacity: " + item.getCapacity());
         holder.price.setText("₱" + item.getPrice() + "/month");
         holder.status.setText("Status: " + item.getStatus());
 
-        // ✅ Set dynamic text color for status
+        // ✅ Dynamic status color
         String status = item.getStatus() != null ? item.getStatus().trim().toLowerCase() : "";
         switch (status) {
             case "occupied":
@@ -63,19 +63,21 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
                 break;
         }
 
-        // ✅ Load image using Glide
+        // ✅ Load image with Glide
         Glide.with(context)
                 .load(item.getImageUrl())
                 .placeholder(R.drawable.imageholder)
                 .into(holder.imageBackground);
 
-        // ✅ View Dorm button
+        // ✅ View Dorm button click
         holder.viewDormBtn.setOnClickListener(v -> {
             Intent intent = new Intent(context, Booking.class);
+            intent.putExtra("listingId", item.getId()); // Firestore doc ID
             intent.putExtra("dormName", item.getDormName());
             intent.putExtra("capacity", item.getCapacity());
             intent.putExtra("price", item.getPrice());
             intent.putExtra("status", item.getStatus());
+            intent.putExtra("description", item.getDescription());
             intent.putExtra("imageUrl", item.getImageUrl());
             context.startActivity(intent);
         });
