@@ -70,7 +70,7 @@ public class ListingAddActivity extends AppCompatActivity {
         listing.put("dormName", dormName);
         listing.put("capacity", Integer.parseInt(capacity));
         listing.put("price", Double.parseDouble(price));
-        listing.put("status", status);
+        listing.put("status", "pending"); // Always set to pending when created
         listing.put("location", location);
         listing.put("inclusions", inclusions);
         listing.put("description", description);

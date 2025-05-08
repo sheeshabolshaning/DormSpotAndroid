@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -51,7 +52,6 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
         });
     }
 
-
     @Override
     public int getItemCount() {
         return listingList.size();
@@ -89,38 +89,40 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             dormPrice.setText(formatPrice(listing.getPrice()));
             dormStatus.setText("Status: " + (listing.getStatus() != null ? listing.getStatus() : "Unknown"));
 
-            // Status color
+            // Status color coding for pending, passed, rejected
             if (listing.getStatus() != null) {
                 switch (listing.getStatus().toLowerCase()) {
-                    case "occupied":
-                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.red));
+                    case "passed":
+                        dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.green));
                         break;
-                    case "unoccupied":
-                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.green));
+                    case "rejected":
+                        dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.red));
+                        break;
+                    case "pending":
+                        dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.star_yellow));
                         break;
                     default:
-                        dormStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.black));
+                        dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.black));
                         break;
                 }
             }
 
-            // Load thumbnail
+            // Load images
             loadDormImage(listing.getImageUrl(), dormImage);
+            loadDormImage(listing.getImageUrl(), imageView1);
+            imageView2.setImageResource(R.drawable.placeholder);
 
-            // Expanded content
+            // Set text for expandable fields
             location.setText("Location: " + listing.getLocation());
             inclusions.setText("Inclusions: " + listing.getInclusions());
             description.setText("Description: " + listing.getDescription());
 
-            loadDormImage(listing.getImageUrl(), imageView1);
-            imageView2.setImageResource(R.drawable.placeholder); // Optional: replace if dynamic
-
-            // Submit button (currently just a placeholder)
+            // Submit button placeholder
             submitButton.setOnClickListener(v -> {
-                // Future feature: booking or contact action
+                // Booking or approval logic (future)
             });
 
-            // Edit button action
+            // Edit button (currently opens detail activity)
             editButton.setOnClickListener(v -> {
                 Intent intent = new Intent(itemView.getContext(), ListingDetailsActivity.class);
                 intent.putExtra("listingId", listing.getId());
