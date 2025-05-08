@@ -47,51 +47,54 @@
             app:tint="#FFFFFF" />
     </LinearLayout>
 
-    <!-- Tabs -->
+    <!-- Tab Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginBottom="1dp"
-        android:gravity="center_horizontal"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/my_listings"
-            android:layout_width="118dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginEnd="4dp"
             android:background="@drawable/button_selector"
             android:text="My listings"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/statistic"
-            android:layout_width="118dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginEnd="4dp"
             android:background="@drawable/button_selector"
             android:text="Statistic"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/reviews"
-            android:layout_width="118dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/button_selector"
             android:text="Reviews"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
     </LinearLayout>
 
-    <!-- RecyclerView for Listings -->
+    <!-- RecyclerView Content -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewListings"
         android:layout_width="match_parent"
@@ -99,13 +102,15 @@
         android:layout_weight="1"
         android:padding="8dp"
         android:clipToPadding="false"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_listing" />
 
-    <!-- Add New Listing Button -->
+    <!-- Add Listing Button -->
     <Button
         android:id="@+id/addlisting"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_button"
         android:backgroundTint="@color/light_blue"
         android:text="Add new listing"
@@ -114,48 +119,59 @@
         android:textStyle="italic"
         android:fontFamily="@font/neuebold" />
 
-    <!-- Bottom Navigation -->
+    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="72dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_topbar"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp">
 
         <ImageView
             android:id="@+id/nav_nearby"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
             android:src="@drawable/nearp" />
 
         <ImageView
             android:id="@+id/nav_chat"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginHorizontal="32dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
             android:src="@drawable/chat" />
 
         <ImageView
             android:id="@+id/nav_home"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="24dp"
             android:background="@drawable/circle_mask"
             android:backgroundTint="@color/white"
+            android:scaleType="centerInside"
             android:src="@drawable/nav_dorm" />
 
         <ImageView
             android:id="@+id/nav_notifications"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginHorizontal="32dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
             android:src="@drawable/bell" />
 
         <ImageView
             android:id="@+id/nav_profile"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
             android:src="@drawable/useradmin" />
     </LinearLayout>
 </LinearLayout>

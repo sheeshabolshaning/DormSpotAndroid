@@ -175,11 +175,8 @@ public class ListingMain extends AppCompatActivity {
     }
 
     private void highlightNavigation(ImageView selected) {
-        int activeColor = ContextCompat.getColor(this, R.color.nav_active);
-        int inactiveColor = ContextCompat.getColor(this, R.color.nav_inactive);
-
-        int white = ContextCompat.getColor(this, android.R.color.white);
-        int black = ContextCompat.getColor(this, android.R.color.black);
+        int activeTint = ContextCompat.getColor(this, R.color.black);
+        int inactiveTint = ContextCompat.getColor(this, R.color.white);
 
         ImageView[] icons = {
                 findViewById(R.id.nav_home),
@@ -190,11 +187,18 @@ public class ListingMain extends AppCompatActivity {
         };
 
         for (ImageView icon : icons) {
-            icon.setBackgroundColor(inactiveColor);
-            icon.setColorFilter(white);
+            icon.setBackgroundResource(0); // Remove background if any
+            icon.setColorFilter(inactiveTint);
         }
 
-        selected.setBackgroundColor(activeColor);
-        selected.setColorFilter(black);
+        // Only home gets circular background
+        if (selected.getId() == R.id.nav_home) {
+            selected.setBackgroundResource(R.drawable.circle_mask); // Keep your round mask
+            selected.setColorFilter(activeTint);
+        } else {
+            selected.setBackgroundResource(0); // Remove any conflicting backgrounds
+            selected.setColorFilter(activeTint);
+        }
     }
+
 }
