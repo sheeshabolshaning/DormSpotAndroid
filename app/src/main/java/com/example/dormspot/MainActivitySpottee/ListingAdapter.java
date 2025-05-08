@@ -81,8 +81,27 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             dormPrice.setText("₱" + listing.getPrice() + "/month");
             dormStatus.setText("Status: " + listing.getStatus());
 
-            dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(),
-                    "occupied".equalsIgnoreCase(listing.getStatus()) ? R.color.red : R.color.green));
+            switch (listing.getStatus().toLowerCase()) {
+                case "occupied":
+                    dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.red));
+                    break;
+                case "pending":
+                    dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.star_yellow)); // Make sure this color exists
+                    break;
+                case "unoccupied":
+                    dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.green));
+                    break;
+                default:
+                    dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.white));
+                    break;
+            }
+            if ("occupied".equalsIgnoreCase(listing.getStatus())) {
+                dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.red));
+            } else if ("pending".equalsIgnoreCase(listing.getStatus())) {
+                dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.star_yellow));
+            } else {
+                dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.green));
+            }
 
             Glide.with(itemView.getContext())
                     .load(listing.getImageUrl())

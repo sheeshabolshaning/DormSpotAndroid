@@ -91,13 +91,14 @@ public class ListingMain extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("listings")
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
-                    List<Listing> data = new ArrayList<>();
+                    List<Listing> listings = new ArrayList<>();
                     for (QueryDocumentSnapshot doc : querySnapshot) {
                         Listing listing = doc.toObject(Listing.class);
                         listing.setId(doc.getId());
-                        data.add(listing);
+                        listings.add(listing);
                     }
-                    recyclerView.setAdapter(new ListingAdapter(data));
+                    listings.sort((a, b) -> Integer.compare(getStatusRank(a.getStatus()), getStatusRank(b.getStatus())));
+                    recyclerView.setAdapter(new ListingAdapter(listings));
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Error loading listings", Toast.LENGTH_SHORT).show());
     }
@@ -112,6 +113,7 @@ public class ListingMain extends AppCompatActivity {
                         listing.setId(doc.getId());
                         stats.add(listing);
                     }
+                    stats.sort((a, b) -> Integer.compare(getStatusRank(a.getStatus()), getStatusRank(b.getStatus())));
                     recyclerView.setAdapter(new StatisticsAdapter(this, stats));
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Error loading statistics", Toast.LENGTH_SHORT).show());
@@ -129,6 +131,16 @@ public class ListingMain extends AppCompatActivity {
                     recyclerView.setAdapter(new ReviewAdapter(this, reviews));
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Failed to load reviews", Toast.LENGTH_SHORT).show());
+    }
+
+    private int getStatusRank(String status) {
+        if (status == null) return 3;
+        switch (status.toLowerCase()) {
+            case "occupied": return 0;
+            case "unoccupied": return 1;
+            case "pending": return 2;
+            default: return 3;
+        }
     }
 
     private void selectButton(Button selectedButton) {
@@ -154,7 +166,7 @@ public class ListingMain extends AppCompatActivity {
         ImageView navBell = findViewById(R.id.nav_notifications);
         ImageView navProfile = findViewById(R.id.nav_profile);
 
-        highlightNavigation(navHome); // Start in home
+        highlightNavigation(navHome);
 
         navHome.setOnClickListener(v -> highlightNavigation(navHome));
         navNearby.setOnClickListener(v -> {
@@ -192,12 +204,10 @@ public class ListingMain extends AppCompatActivity {
             if (icon.getId() == R.id.nav_home) {
                 icon.setBackgroundResource(R.drawable.circle_mask);
             } else {
-                icon.setBackgroundColor(Color.TRANSPARENT); // no white block
+                icon.setBackgroundColor(Color.TRANSPARENT);
             }
         }
 
         selected.setColorFilter(activeColor);
     }
-
-
 }
