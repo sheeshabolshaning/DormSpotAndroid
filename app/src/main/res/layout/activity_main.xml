@@ -2,149 +2,278 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#F1FFE7"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1FFE7"
     tools:context=".MainActivitySpottr.Home">
 
-
-    <View
+    <!-- Logo -->
+    <FrameLayout
         android:id="@+id/titlebar"
-        android:layout_width="397dp"
+        android:layout_width="0dp"
         android:layout_height="75dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:background="@drawable/rounded_titlebar"
-        android:padding="0dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_marginHorizontal="7dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/dorm_spot"
-        android:layout_width="229dp"
-        android:layout_height="46dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="90dp"
-        android:fontFamily="@font/wafflesoft"
-        android:gravity="center_horizontal|center_vertical"
-        android:lineSpacingExtra="-20sp"
-        android:text="@string/dorm_spot"
-        android:textAppearance="@style/dorm_spot"
-        app:layout_constraintBottom_toTopOf="@+id/recent"
-        app:layout_constraintTop_toBottomOf="@+id/titlebar"
-        app:layout_constraintVertical_bias="0.439"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="91dp" />
+        <!-- Logo -->
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="66dp"
+            android:layout_height="58dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="9dp"
+            android:src="@drawable/logo" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="66dp"
-        android:layout_height="58dp"
-        android:src="@drawable/logo"
-        android:visibility="visible"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="25dp" />
+        <!-- Title Text inside titlebar -->
+        <TextView
+            android:id="@+id/dorm_spot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/wafflesoft"
+            android:lineSpacingExtra="-20sp"
+            android:text="@string/dorm_spot"
+            android:textAppearance="@style/dorm_spot" />
+    </FrameLayout>
 
+    <!-- Recent Button -->
     <Button
         android:id="@+id/recent"
-        android:layout_width="128dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:background="@drawable/recent"
         android:text="Recent"
         android:textColor="@android:color/white"
         android:textAllCaps="false"
         android:fontFamily="@font/neuebold"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="94dp" />
+        app:layout_constraintTop_toBottomOf="@id/titlebar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toStartOf="@id/rectangle_3"
+        android:layout_marginEnd="0dp" />
 
+    <!-- Near Me Button -->
     <Button
         android:id="@+id/rectangle_3"
-        android:layout_width="128dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/nearp"
+        android:background="@drawable/near"
         android:text="Near Me"
-        android:textAllCaps="false"
         android:textColor="#F1FFE7"
+        android:textAllCaps="false"
         android:fontFamily="@font/neuebold"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="94dp" />
+        app:layout_constraintTop_toTopOf="@id/recent"
+        app:layout_constraintStart_toEndOf="@id/recent"
+        app:layout_constraintEnd_toStartOf="@id/rectangle_4"
+        android:layout_marginHorizontal="6dp" />
 
+    <!-- Highly Rated Button -->
     <Button
         android:id="@+id/rectangle_4"
-        android:layout_width="128dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:background="@drawable/recent"
         android:text="@string/highly_rated"
-        android:textAllCaps="false"
         android:textColor="@android:color/white"
+        android:textAllCaps="false"
         android:fontFamily="@font/neuebold"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="276dp"
-        tools:layout_editor_absoluteY="94dp" />
+        app:layout_constraintTop_toTopOf="@id/recent"
+        app:layout_constraintStart_toEndOf="@id/rectangle_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="7dp" />
 
+    <!-- ScrollView with cards -->
     <ScrollView
-        android:layout_width="410dp"
-        android:layout_height="655dp"
-        tools:ignore="ExtraText,MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="150dp">
+        android:id="@+id/card_scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/recent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">  <!-- This centers the child horizontally -->
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-            <ImageView
+            <!-- First Card -->
+            <FrameLayout
                 android:layout_width="350dp"
                 android:layout_height="370dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/ciudad"
-                android:clipToOutline="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/house" />
+                android:layout_marginTop="5dp">
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/imageholder"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/house"
+                    android:alpha="0.7" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/imageoverlay"/>
+
+                <TextView
+                    android:id="@+id/title1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="5dp"
+                    android:padding="16dp"
+                    android:text="Two-Story Apartment in Ciudad Grande Phase I"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/neuebold" />
+
+                <Button
+                    android:id="@+id/viewDorm1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="70dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/viewdorm"
+                    android:fontFamily="@font/neuebold"
+                    android:text="View Dorm"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white" />
+
+                <ImageButton
+                    android:id="@+id/bookmarkButton1"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@drawable/viewdorm"
+                    android:contentDescription="Bookmark"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/bookmark" />
+            </FrameLayout>
+
+            <!-- Second Card -->
+            <FrameLayout
                 android:layout_width="350dp"
                 android:layout_height="370dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/phase3"
-                android:clipToOutline="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/phase3h" />
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/imageholder"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/phase3h"
+                    android:alpha="0.7" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/imageoverlay" />
+
+                <TextView
+                    android:id="@+id/title2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:padding="16dp"
+                    android:text="Solo Room for Rent in Bakakeng Phase 3"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/neuebold" />
+
+                <!-- View Dorm Button -->
+                <Button
+                    android:id="@+id/viewDorm2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="70dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/viewdorm"
+                    android:text="View Dorm"
+                    android:textColor="@android:color/white"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/neuebold"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp" />
+
+                <!-- Bookmark Button beside View Dorm -->
+                <ImageButton
+                    android:id="@+id/bookmarkButton2"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@drawable/viewdorm"
+                    android:contentDescription="Bookmark"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/bookmark" />
+            </FrameLayout>
 
         </LinearLayout>
     </ScrollView>
 
-    <View
-        android:id="@+id/botbar"
-        android:layout_width="362dp"
-        android:layout_height="47dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="1600dp"
-        android:background="@drawable/botbar"
-        app:layout_constraintBottom_toTopOf="@+id/titlebar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottom_nav_bar"
+        android:layout_width="390dp"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_topbar"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/nearp" />
 
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginHorizontal="32dp"
+            android:src="@drawable/chat" />
 
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/circle_mask"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/nav_dorm" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginHorizontal="32dp"
+            android:src="@drawable/bell" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/user" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
