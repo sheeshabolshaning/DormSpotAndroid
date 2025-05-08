@@ -39,7 +39,7 @@
     <!-- First Name Input Box -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputFirstNameLayout"
-        android:layout_width="172dp"
+        android:layout_width="175dp"
         android:layout_height="48dp"
         android:background="@drawable/textfields_register"
         android:layout_marginTop="52dp"

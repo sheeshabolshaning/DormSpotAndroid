@@ -39,6 +39,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/wafflesoft"
                 tools:ignore="RtlSymmetry" />
 
             <ImageView
@@ -57,37 +58,34 @@
             android:orientation="horizontal">
 
             <Button
-                style="@style/TabButton"
-                android:layout_width="110dp"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button2"
-                android:backgroundTint="#3C396A"
+                android:background="@drawable/button_selector"
                 android:text="My listing"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/neuebold"/>
 
             <Button
-                style="@style/TabButton"
-                android:layout_width="110dp"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button2"
-                android:backgroundTint="#618EC0"
+                android:background="@drawable/button_selector"
                 android:text="Statistic"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/neuebold"/>
 
             <Button
-                style="@style/TabButton"
-                android:layout_width="110dp"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button2"
-                android:backgroundTint="#618EC0"
+                android:background="@drawable/button_selector"
                 android:text="Reviews"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/neuebold"/>
         </LinearLayout>
 
         <ScrollView
@@ -117,7 +115,8 @@
                         android:text="Eagle Crest Phase 1 Bedspacer"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/neuebold"/>
 
                     <LinearLayout
                         android:layout_width="355dp"
@@ -130,7 +129,8 @@
                             android:layout_height="wrap_content"
                             android:text="Capacity: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView4"
@@ -138,7 +138,8 @@
                             android:layout_height="wrap_content"
                             android:text="4"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -152,7 +153,8 @@
                             android:layout_height="wrap_content"
                             android:text="Price: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <TextView
                             android:id="@+id/textView6"
@@ -160,7 +162,8 @@
                             android:layout_height="wrap_content"
                             android:text="₱5,000"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -176,7 +179,8 @@
                             android:layout_marginEnd="130dp"
                             android:text="Occupied"
                             android:textColor="#52FD15"
-                            android:textStyle="bold|italic" />
+                            android:textStyle="bold|italic"
+                            android:fontFamily="@font/roboto"/>
 
 
                         <Button
@@ -185,7 +189,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_button2"
                             android:text="View listing"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:textAllCaps="false"
+                            android:fontFamily="@font/neuebold"/>
 
                         <ImageView
                             android:layout_width="30dp"
@@ -220,7 +226,8 @@
                             android:layout_height="wrap_content"
                             android:text="Listing Title: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <EditText
                             android:id="@+id/editTextTitle"
@@ -243,7 +250,8 @@
                             android:layout_height="wrap_content"
                             android:text="Location: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <EditText
                             android:id="@+id/editTextLocation"
@@ -267,7 +275,8 @@
                             android:layout_height="wrap_content"
                             android:text="Capacity: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <EditText
                             android:id="@+id/editTextCapacity"
@@ -290,7 +299,8 @@
                             android:layout_height="wrap_content"
                             android:text="Price: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <EditText
                             android:id="@+id/editTextPrice"
@@ -314,7 +324,8 @@
                             android:layout_height="wrap_content"
                             android:text="Inclusion: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <EditText
                             android:id="@+id/editTextInclusion"
@@ -338,7 +349,8 @@
                             android:layout_height="wrap_content"
                             android:text="Description: "
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/neuebold"/>
 
                         <EditText
                             android:id="@+id/editTextDescription"
@@ -360,7 +372,8 @@
                         android:text="Include Images"
                         android:textColor="#FFFFFF"
                         android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/neuebold"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -398,7 +411,8 @@
                             android:layout_marginTop="3dp"
                             android:background="@drawable/rounded_button2"
                             android:text="submit"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:fontFamily="@font/neuebold"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -441,7 +455,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/user" />
+                android:src="@drawable/useradmin" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

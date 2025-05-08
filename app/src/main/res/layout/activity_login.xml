@@ -84,14 +84,11 @@
     <!-- Remember Me & Forgot Password -->
     <LinearLayout
         android:id="@+id/rememberForgotLayout"
-        android:layout_width="0dp"
+        android:layout_width="343dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:weightSum="1"
         app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -100,9 +97,8 @@
             android:id="@+id/checkboxRememberMe"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:minHeight="48dp"
-            android:minWidth="48dp"
             android:text="@string/remember_me"
             android:textColor="#FFFFFF"
             android:buttonTint="#FFFFFF"
@@ -111,15 +107,18 @@
         <TextView
             android:id="@+id/textForgotPassword"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="end"
-            android:minHeight="48dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:text="@string/forgot_password"
             android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/neuebold"
+            android:clickable="true"
+            android:focusable="true" />
+
     </LinearLayout>
 
     <!-- Sign In Button -->

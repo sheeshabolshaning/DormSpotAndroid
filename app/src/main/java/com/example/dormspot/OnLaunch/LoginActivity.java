@@ -1,30 +1,31 @@
 package com.example.dormspot.OnLaunch;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.content.Intent;
-import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.dormspot.MainActivitySpottee.listing1;
 import com.example.dormspot.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText editTextUsername, editTextPassword;
-    private Button btnSignIn, btnFacebook, btnGoogle;
+    private Button btnSignIn;
     private TextView textDontHaveAccount, textForgotPassword;
     private CheckBox checkboxRememberMe;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        // Get references for the UI elements
+        // Initialize UI elements
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
@@ -42,17 +43,26 @@ public class LoginActivity extends AppCompatActivity {
         textForgotPassword = findViewById(R.id.textForgotPassword);
         checkboxRememberMe = findViewById(R.id.checkboxRememberMe);
 
-
-
-        // Back button to close LoginActivity
+        // Back button
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
-        // Navigate to RegisterActivity when the "Don't have an account?" text is clicked
-        textDontHaveAccount.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
+        // Navigate to RegisterActivity
+        textDontHaveAccount.setOnClickListener(v ->
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
+        // SharedPreferences for Remember Me
+        SharedPreferences preferences = getSharedPreferences("userPrefs", MODE_PRIVATE);
+        boolean rememberMe = preferences.getBoolean("rememberMe", false);
+        checkboxRememberMe.setChecked(rememberMe);
 
-        // Sign in button logic
+        // If Remember Me is checked, auto-fill email (if available)
+        if (rememberMe) {
+            String savedEmail = preferences.getString("email", "");
+            editTextUsername.setText(savedEmail);
+        }
+
+        // Sign In button logic
         btnSignIn.setOnClickListener(v -> {
             String email = editTextUsername.getText().toString().trim();
             String password = editTextPassword.getText().toString().trim();
@@ -62,9 +72,22 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
+            // Remember Me functionality
+            if (checkboxRememberMe.isChecked()) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("rememberMe", true);
+                editor.putString("email", email);
+                editor.apply();
+            } else {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("rememberMe", false);
+                editor.apply();
+            }
+
             loginUser(email, password);
         });
-        // Forgot password functionality
+
+        // Forgot password logic
         textForgotPassword.setOnClickListener(v -> {
             String email = editTextUsername.getText().toString().trim();
             if (TextUtils.isEmpty(email)) {
@@ -81,22 +104,43 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     private void loginUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Login success
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        if (user != null && user.isEmailVerified()) {
+                            String uid = user.getUid();
 
-                        // Redirect to the main activity or home screen
-                        Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-                        startActivity(intent);
-                        finish();
+                            // Fetch userMode from Firestore
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            db.collection("users").document(uid).get()
+                                    .addOnSuccessListener(documentSnapshot -> {
+                                        if (documentSnapshot.exists()) {
+                                            String userMode = documentSnapshot.getString("userMode");
+                                            if ("spottr".equals(userMode)) {
+                                                startActivity(new Intent(LoginActivity.this, com.example.dormspot.MainActivitySpottr.Home.class));
+                                            } else if ("spotee".equals(userMode)) {
+                                                startActivity(new Intent(LoginActivity.this, listing1.class));
+                                            } else {
+                                                // No userMode set yet, fallback to WelcomeActivity
+                                                startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+                                            }
+                                            finish();
+                                        } else {
+                                            Toast.makeText(this, "User data not found.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
+                                    });
+
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Please verify your email first.", Toast.LENGTH_LONG).show();
+                            mAuth.signOut(); // Sign out unverified user
+                        }
                     } else {
-                        Exception e = task.getException();
-                        e.printStackTrace();
-                        // Login failed
                         Toast.makeText(LoginActivity.this, "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show();
                     }
                 });
