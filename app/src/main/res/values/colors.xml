@@ -10,6 +10,10 @@
     <color name="green">#53FF15</color>
     <color name="nav_active">#6290C3</color>
     <color name="nav_inactive">#FFFFFF</color>
+    <color name="occupied_red">#E53935</color>
+    <color name="pending_yellow">#FFD700</color>
+    <color name="unoccupied_green">#4CAF50</color>
+
 
     <!-- 🔹 Add these based on logo design and UI -->
     <color name="logo_primary_text">#EBF291</color> <!-- "DORM SPOT" text -->
