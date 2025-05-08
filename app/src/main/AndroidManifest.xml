@@ -49,8 +49,11 @@
         <activity android:name=".OnLaunch.WelcomeActivity" />
         <activity android:name=".OnLaunch.UserModeActivity" />
         <activity android:name=".MainActivitySpottr.Home" />
+        <activity android:name=".MainActivitySpottee.ListingMain" />
+        <activity android:name=".MainActivitySpottee.ListingDetailsActivity"/>
+        <activity android:name=".MainActivitySpottee.ListingAddActivity" />
+        <activity android:name=".MainActivitySpottee.StatisticActivity" />
         <activity android:name=".MainActivitySpottr.Booking" />
-        <activity android:name=".MainActivitySpottee.listing1" />
 
 
     </application>
