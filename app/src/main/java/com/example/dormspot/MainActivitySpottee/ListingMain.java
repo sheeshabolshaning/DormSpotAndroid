@@ -3,9 +3,11 @@ package com.example.dormspot.MainActivitySpottee;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,10 +22,6 @@ public class ListingMain extends AppCompatActivity {
 
     private Button addListingButton, myListingsButton, statisticButton, reviewsButton;
     private RecyclerView recyclerView;
-    private ListingAdapter listingAdapter;
-    private List<Listing> listingList;
-
-    // ✅ Fixed: Added REVIEWS here
     private enum ViewMode { LISTINGS, STATISTICS, REVIEWS }
     private ViewMode currentMode = ViewMode.LISTINGS;
 
@@ -34,20 +32,20 @@ public class ListingMain extends AppCompatActivity {
 
         initViews();
         setupRecyclerView();
-        fetchListingsFromFirestore();
-        selectButton(myListingsButton);
+        setupNavigationBar();
         setupTabNavigation();
+
+        selectButton(myListingsButton);
+        fetchListingsFromFirestore();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (currentMode == ViewMode.LISTINGS) {
-            fetchListingsFromFirestore();
-        } else if (currentMode == ViewMode.STATISTICS) {
-            fetchStatisticsFromFirestore();
-        } else {
-            fetchReviewsFromFirestore();
+        switch (currentMode) {
+            case LISTINGS: fetchListingsFromFirestore(); break;
+            case STATISTICS: fetchStatisticsFromFirestore(); break;
+            case REVIEWS: fetchReviewsFromFirestore(); break;
         }
     }
 
@@ -65,10 +63,7 @@ public class ListingMain extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        listingList = new ArrayList<>();
-        listingAdapter = new ListingAdapter(listingList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(listingAdapter);
     }
 
     private void setupTabNavigation() {
@@ -101,15 +96,9 @@ public class ListingMain extends AppCompatActivity {
                         listing.setId(doc.getId());
                         data.add(listing);
                     }
-
-                    if (currentMode == ViewMode.LISTINGS) {
-                        listingAdapter = new ListingAdapter(data);
-                        recyclerView.setAdapter(listingAdapter);
-                    }
+                    recyclerView.setAdapter(new ListingAdapter(data));
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error loading listings", Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e -> Toast.makeText(this, "Error loading listings", Toast.LENGTH_SHORT).show());
     }
 
     private void fetchStatisticsFromFirestore() {
@@ -122,15 +111,9 @@ public class ListingMain extends AppCompatActivity {
                         listing.setId(doc.getId());
                         stats.add(listing);
                     }
-
-                    if (currentMode == ViewMode.STATISTICS) {
-                        StatisticsAdapter statAdapter = new StatisticsAdapter(this, stats);
-                        recyclerView.setAdapter(statAdapter);
-                    }
+                    recyclerView.setAdapter(new StatisticsAdapter(this, stats));
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error loading statistics", Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e -> Toast.makeText(this, "Error loading statistics", Toast.LENGTH_SHORT).show());
     }
 
     private void fetchReviewsFromFirestore() {
@@ -142,22 +125,16 @@ public class ListingMain extends AppCompatActivity {
                         Review review = doc.toObject(Review.class);
                         reviews.add(review);
                     }
-
-                    if (currentMode == ViewMode.REVIEWS) {
-                        ReviewAdapter reviewAdapter = new ReviewAdapter(this, reviews);
-                        recyclerView.setAdapter(reviewAdapter);
-                    }
+                    recyclerView.setAdapter(new ReviewAdapter(this, reviews));
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to load reviews", Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e -> Toast.makeText(this, "Failed to load reviews", Toast.LENGTH_SHORT).show());
     }
 
     private void selectButton(Button selectedButton) {
         resetButtons();
         selectedButton.setSelected(true);
         selectedButton.setBackgroundResource(R.drawable.button_selector);
-        selectedButton.setTextColor(getResources().getColor(R.color.white));
+        selectedButton.setTextColor(ContextCompat.getColor(this, R.color.white));
     }
 
     private void resetButtons() {
@@ -165,7 +142,59 @@ public class ListingMain extends AppCompatActivity {
         for (Button btn : buttons) {
             btn.setSelected(false);
             btn.setBackgroundResource(R.drawable.button_selector);
-            btn.setTextColor(getResources().getColor(R.color.white));
+            btn.setTextColor(ContextCompat.getColor(this, R.color.white));
         }
+    }
+
+    private void setupNavigationBar() {
+        ImageView navHome = findViewById(R.id.nav_home);
+        ImageView navNearby = findViewById(R.id.nav_nearby);
+        ImageView navChat = findViewById(R.id.nav_chat);
+        ImageView navBell = findViewById(R.id.nav_notifications);
+        ImageView navProfile = findViewById(R.id.nav_profile);
+
+        highlightNavigation(navHome); // Start in home
+
+        navHome.setOnClickListener(v -> highlightNavigation(navHome));
+        navNearby.setOnClickListener(v -> {
+            highlightNavigation(navNearby);
+            startActivity(new Intent(this, NearbyActivity.class));
+        });
+        navChat.setOnClickListener(v -> {
+            highlightNavigation(navChat);
+            startActivity(new Intent(this, ChatActivity.class));
+        });
+        navBell.setOnClickListener(v -> {
+            highlightNavigation(navBell);
+            startActivity(new Intent(this, NotificationsActivity.class));
+        });
+        navProfile.setOnClickListener(v -> {
+            highlightNavigation(navProfile);
+            startActivity(new Intent(this, ProfileActivity.class));
+        });
+    }
+
+    private void highlightNavigation(ImageView selected) {
+        int activeColor = ContextCompat.getColor(this, R.color.nav_active);
+        int inactiveColor = ContextCompat.getColor(this, R.color.nav_inactive);
+
+        int white = ContextCompat.getColor(this, android.R.color.white);
+        int black = ContextCompat.getColor(this, android.R.color.black);
+
+        ImageView[] icons = {
+                findViewById(R.id.nav_home),
+                findViewById(R.id.nav_nearby),
+                findViewById(R.id.nav_chat),
+                findViewById(R.id.nav_notifications),
+                findViewById(R.id.nav_profile)
+        };
+
+        for (ImageView icon : icons) {
+            icon.setBackgroundColor(inactiveColor);
+            icon.setColorFilter(white);
+        }
+
+        selected.setBackgroundColor(activeColor);
+        selected.setColorFilter(black);
     }
 }
