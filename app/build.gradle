@@ -47,6 +47,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.10.0'
     implementation 'com.google.firebase:firebase-auth:22.3.0'
     apply plugin: 'com.google.gms.google-services'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
 
 
 }
