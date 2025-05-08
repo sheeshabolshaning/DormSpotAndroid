@@ -53,6 +53,7 @@
         <activity android:name=".MainActivitySpottee.ListingDetailsActivity"/>
         <activity android:name=".MainActivitySpottee.ListingAddActivity" />
         <activity android:name=".MainActivitySpottee.StatisticActivity" />
+        <activity android:name=".MainActivitySpottr.Booking" />
 
 
     </application>

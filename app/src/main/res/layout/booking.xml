@@ -69,15 +69,19 @@
             android:elevation="4dp"
             android:padding="20dp">
 
+            <!-- 🏠 Dorm Title (Dynamic) -->
             <TextView
+                android:id="@+id/dormTitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Two-Story Apartment in Ciudad Grande Phase I"
+                android:text="Dorm Title"
                 android:textColor="#1A1B40"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <!-- 📍 Location (can remain static or dynamic later) -->
             <TextView
+                android:id="@+id/locationText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -85,6 +89,7 @@
                 android:textColor="#555555"
                 android:textSize="14sp" />
 
+            <!-- 👤 Landlord Name -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,6 +103,7 @@
                     android:src="@drawable/esther" />
 
                 <TextView
+                    android:id="@+id/landlordNameText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="  Esther Sandy"
@@ -105,11 +111,13 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- 📝 Description (Dynamic) -->
             <TextView
+                android:id="@+id/descriptionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="This 4 bedroom, two-story apartment comes with a parking space, 2 restrooms, pet-friendly."
+                android:text="Description goes here."
                 android:textColor="#333333"
                 android:textSize="14sp" />
 
@@ -161,7 +169,7 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <!-- Price + Book Now Row -->
+            <!-- 💵 Price + Book Now -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -176,10 +184,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <!-- 💰 Price (Dynamic) -->
                     <TextView
+                        android:id="@+id/priceText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₱25k/month"
+                        android:text="₱0/month"
                         android:textColor="#000000"
                         android:textSize="18sp"
                         android:textStyle="bold" />

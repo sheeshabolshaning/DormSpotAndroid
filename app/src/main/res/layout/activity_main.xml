@@ -95,146 +95,21 @@
             android:fontFamily="@font/neuebold" />
     </LinearLayout>
 
-    <!-- ScrollView Content -->
-    <ScrollView
-        android:id="@+id/card_scroll"
+    <!-- RecyclerView replacing ScrollView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewDorms"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="8dp"
+        android:paddingHorizontal="16dp"
+        android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@id/tab_buttons"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_dorm_listing" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-
-            <!-- Card 1 -->
-            <FrameLayout
-                android:layout_width="350dp"
-                android:layout_height="370dp"
-                android:layout_marginTop="5dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/imageholder"
-                    android:clipToOutline="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/house"
-                    android:alpha="0.7" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/imageoverlay" />
-
-                <TextView
-                    android:id="@+id/title1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="5dp"
-                    android:padding="16dp"
-                    android:text="Two-Story Apartment in Ciudad Grande Phase I"
-                    android:textColor="@android:color/white"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/neuebold" />
-
-                <Button
-                    android:id="@+id/viewDorm1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginEnd="70dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/viewdorm"
-                    android:text="View Dorm"
-                    android:textColor="@android:color/white"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/neuebold" />
-
-                <ImageButton
-                    android:id="@+id/bookmarkButton1"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="18dp"
-                    android:background="@drawable/viewdorm"
-                    android:contentDescription="Bookmark"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/bookmark" />
-            </FrameLayout>
-
-            <!-- Card 2 -->
-            <FrameLayout
-                android:layout_width="350dp"
-                android:layout_height="370dp"
-                android:layout_marginTop="30dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/imageholder"
-                    android:clipToOutline="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/phase3h"
-                    android:alpha="0.7" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/imageoverlay" />
-
-                <TextView
-                    android:id="@+id/title2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:padding="16dp"
-                    android:text="Solo Room for Rent in Bakakeng Phase 3"
-                    android:textColor="@android:color/white"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/neuebold" />
-
-                <Button
-                    android:id="@+id/viewDorm2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginEnd="70dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/viewdorm"
-                    android:text="View Dorm"
-                    android:textColor="@android:color/white"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/neuebold"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="8dp" />
-
-                <ImageButton
-                    android:id="@+id/bookmarkButton2"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="18dp"
-                    android:background="@drawable/viewdorm"
-                    android:contentDescription="Bookmark"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/bookmark" />
-            </FrameLayout>
-        </LinearLayout>
-    </ScrollView>
-
-    <!-- Updated Bottom Navigation Bar -->
+    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:id="@+id/bottom_nav_bar"
         android:layout_width="390dp"
