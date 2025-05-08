@@ -1,6 +1,7 @@
 package com.example.dormspot.MainActivitySpottee;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -175,8 +176,8 @@ public class ListingMain extends AppCompatActivity {
     }
 
     private void highlightNavigation(ImageView selected) {
-        int activeTint = ContextCompat.getColor(this, R.color.black);
-        int inactiveTint = ContextCompat.getColor(this, R.color.white);
+        int activeColor = ContextCompat.getColor(this, R.color.black);
+        int inactiveColor = ContextCompat.getColor(this, R.color.white);
 
         ImageView[] icons = {
                 findViewById(R.id.nav_home),
@@ -187,18 +188,16 @@ public class ListingMain extends AppCompatActivity {
         };
 
         for (ImageView icon : icons) {
-            icon.setBackgroundResource(0); // Remove background if any
-            icon.setColorFilter(inactiveTint);
+            icon.setColorFilter(inactiveColor);
+            if (icon.getId() == R.id.nav_home) {
+                icon.setBackgroundResource(R.drawable.circle_mask);
+            } else {
+                icon.setBackgroundColor(Color.TRANSPARENT); // no white block
+            }
         }
 
-        // Only home gets circular background
-        if (selected.getId() == R.id.nav_home) {
-            selected.setBackgroundResource(R.drawable.circle_mask); // Keep your round mask
-            selected.setColorFilter(activeTint);
-        } else {
-            selected.setBackgroundResource(0); // Remove any conflicting backgrounds
-            selected.setColorFilter(activeTint);
-        }
+        selected.setColorFilter(activeColor);
     }
+
 
 }
