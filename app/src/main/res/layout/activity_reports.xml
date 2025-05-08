@@ -431,8 +431,6 @@
                     android:layout_marginEnd="24dp" />
 
                 <!-- Center Icon (was FAB) -->
-                <
-
                 <ImageView
                     android:id="@+id/icon_center"
                     android:layout_width="64dp"
