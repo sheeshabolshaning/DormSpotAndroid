@@ -34,4 +34,8 @@
         <string name="highly_rated">Highly Rated</string>
         <string name="dorm_spot"> DORM SPOT </string>
 
+    <string name="button_description">Description of button action</string>
+    <!-- Example for specific buttons: -->
+    <string name="profile_button">User profile</string>
+    <string name="settings_button">Settings</string>
 </resources>
