@@ -1,0 +1,84 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F1FFE7">
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="#1C1B46"
+        android:contentDescription="back"
+        android:src="@drawable/back" />
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Righour Tanggol"
+            android:textStyle="bold"
+            android:textSize="40sp"
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Online"
+            android:textSize="15sp"
+            android:textColor="#888888"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- RecyclerView for chat -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"/>
+
+    <!-- Message input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/filesend"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/rounded_button2"
+            android:contentDescription="filesend"
+            android:src="@drawable/sendfile" />
+
+        <EditText
+            android:id="@+id/messageEditText"
+            android:contentDescription="MessageText"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button2"
+            android:hint="Message..."
+            android:padding="10dp"/>
+
+        <ImageButton
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="6dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="sendbutton"
+            android:src="@drawable/send" />
+    </LinearLayout>
+</LinearLayout>
