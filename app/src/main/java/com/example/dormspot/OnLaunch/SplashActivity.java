@@ -4,32 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import com.example.dormspot.R;
-import com.example.dormspot.MainActivitySpottr.Home;
-import com.example.dormspot.OnLaunch.LoginActivity;
+
 public class SplashActivity extends AppCompatActivity {
-    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        new Handler().postDelayed(() -> {
-            FirebaseUser currentUser = auth.getCurrentUser();
-
-            if (currentUser != null && currentUser.isEmailVerified()) {
-                Intent intent = new Intent(SplashActivity.this, Home.class); // Correct target
-                startActivity(intent);
-            } else {
+        // Delay before starting the SignUpActivity
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Create an Intent to start the SignUpActivity
                 Intent intent = new Intent(SplashActivity.this, SignUpActivity.class);
                 startActivity(intent);
-            }
 
-            finish();
-        }, 3000);
+                // Close SplashActivity so that it doesn't remain in the stack
+                finish();
+            }
+        }, 3000); // 3 seconds delay (you can adjust the time)
     }
 }
