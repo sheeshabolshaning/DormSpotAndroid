@@ -22,32 +22,26 @@ public class ListingMain extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListingAdapter listingAdapter;
     private List<Listing> listingList;
+    private enum ViewMode { LISTINGS, STATISTICS }
+    private ViewMode currentMode = ViewMode.LISTINGS;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing);
 
-        // Initialize views
         initViews();
-
-        // Set up RecyclerView
         setupRecyclerView();
-
-        // Fetch Firestore listings
         fetchListingsFromFirestore();
-
-        // Default selected tab
-        selectButton(myListingsButton);
-
-        // Tab button listeners
+        selectButton(myListingsButton); // Default tab
         setupTabNavigation();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        fetchListingsFromFirestore(); // Refresh list when returning
+        fetchListingsFromFirestore();
     }
 
     private void initViews() {
@@ -55,7 +49,6 @@ public class ListingMain extends AppCompatActivity {
         myListingsButton = findViewById(R.id.my_listings);
         statisticButton = findViewById(R.id.statistic);
         reviewsButton = findViewById(R.id.reviews);
-
         recyclerView = findViewById(R.id.recyclerViewListings);
 
         addListingButton.setOnClickListener(v -> {
@@ -72,46 +65,49 @@ public class ListingMain extends AppCompatActivity {
     }
 
     private void fetchListingsFromFirestore() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("listings")
+        FirebaseFirestore.getInstance().collection("listings")
                 .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    listingList.clear(); // Clear before repopulating
-
-                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                .addOnSuccessListener(querySnapshot -> {
+                    List<Listing> data = new ArrayList<>();
+                    for (QueryDocumentSnapshot doc : querySnapshot) {
                         Listing listing = doc.toObject(Listing.class);
-                        listing.setId(doc.getId()); // Use document ID as unique ID
-                        listingList.add(listing);
+                        listing.setId(doc.getId());
+                        data.add(listing);
                     }
 
-                    listingAdapter.notifyDataSetChanged(); // Refresh RecyclerView
+                    if (currentMode == ViewMode.LISTINGS) {
+                        listingAdapter = new ListingAdapter(data);
+                        recyclerView.setAdapter(listingAdapter);
+                    }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error fetching listings: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
+                    Toast.makeText(this, "Error loading listings", Toast.LENGTH_SHORT).show();
                 });
     }
+
 
     private void setupTabNavigation() {
         myListingsButton.setOnClickListener(v -> {
             selectButton(myListingsButton);
-            // Already on listings, no need to navigate
+            currentMode = ViewMode.LISTINGS;
+            fetchListingsFromFirestore(); // refresh with listing cards
         });
 
         statisticButton.setOnClickListener(v -> {
             selectButton(statisticButton);
-            // Future: navigate to statistics screen
+            currentMode = ViewMode.STATISTICS;
+            fetchStatisticsFromFirestore(); // switch to stat cards
         });
 
         reviewsButton.setOnClickListener(v -> {
             selectButton(reviewsButton);
-            // Future: navigate to reviews screen
+            // TODO: handle reviews later
         });
     }
 
+
     private void selectButton(Button selectedButton) {
         resetButtons();
-
         selectedButton.setSelected(true);
         selectedButton.setBackgroundResource(R.drawable.button_selector);
         selectedButton.setTextColor(getResources().getColor(R.color.white));
@@ -119,11 +115,31 @@ public class ListingMain extends AppCompatActivity {
 
     private void resetButtons() {
         Button[] buttons = {myListingsButton, statisticButton, reviewsButton};
-
         for (Button btn : buttons) {
             btn.setSelected(false);
             btn.setBackgroundResource(R.drawable.button_selector);
             btn.setTextColor(getResources().getColor(R.color.white));
         }
     }
+    private void fetchStatisticsFromFirestore() {
+        FirebaseFirestore.getInstance().collection("listings")
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    List<Listing> stats = new ArrayList<>();
+                    for (QueryDocumentSnapshot doc : querySnapshot) {
+                        Listing listing = doc.toObject(Listing.class);
+                        listing.setId(doc.getId());
+                        stats.add(listing);
+                    }
+
+                    if (currentMode == ViewMode.STATISTICS) {
+                        StatisticsAdapter statAdapter = new StatisticsAdapter(this, stats);
+                        recyclerView.setAdapter(statAdapter);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error loading statistics", Toast.LENGTH_SHORT).show();
+                });
+    }
+
 }

@@ -1,0 +1,130 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    card_view:cardCornerRadius="16dp"
+    card_view:cardElevation="4dp"
+    card_view:cardBackgroundColor="#424470">
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/stat_dorm_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dorm Title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/neuebold" />
+
+        <!-- Metrics: Views, Saves, Inquiries -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/stat_views"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👁 12"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:id="@+id/stat_saves"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💾 5"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:id="@+id/stat_inquiries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="❗ 3"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- Rental info -->
+        <TextView
+            android:id="@+id/stat_rented_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rented: Jan 12, 2024 - Mar 12, 2024"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/roboto" />
+
+        <!-- Occupancy -->
+        <TextView
+            android:id="@+id/stat_occupancy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Occupant: 2/4"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:fontFamily="@font/roboto" />
+
+        <!-- Revenue -->
+        <TextView
+            android:id="@+id/stat_revenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Revenue: ₱50,000"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:fontFamily="@font/roboto" />
+
+        <!-- Status + Actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/stat_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unoccupied"
+                android:textColor="#FF4B4B"
+                android:textStyle="italic|bold"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/roboto" />
+
+            <Button
+                android:id="@+id/button_view_listing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Listing"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/rounded_button2"
+                android:fontFamily="@font/neuebold" />
+
+            <ImageView
+                android:id="@+id/button_edit_listing"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/editicon"
+                android:background="@drawable/rounded_button2"
+                app:tint="#FFFFFF" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
