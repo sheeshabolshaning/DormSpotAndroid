@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MainActivityModerator"
+    tools:context="package com.example.dormspot.MainActivityModerator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2FBEF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="12dp"
+                android:background="@drawable/bg_circle"
+                android:backgroundTint="#1C1B46"
+                android:contentDescription="back"
+                android:src="@drawable/back" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="380dp"
+            android:layout_height="575dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <!-- Profile Card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/rounded_button2"
+                    android:backgroundTint="#1C1B47"
+                    android:backgroundTintMode="src_in"
+                    android:clipToPadding="false"
+                    android:elevation="4dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Profile Image -->
+                    <ImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/circle_mask"
+                        android:contentDescription="profile_img"
+                        android:padding="2dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/esther" />
+
+
+                    <!-- Edit Icon -->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="end"
+                        android:contentDescription="edit"
+                        android:src="@drawable/editicon"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/rounded_button2"
+                        android:backgroundTint="@color/light_blue"
+                        android:layout_marginEnd="8dp"/>
+
+
+                    <!-- Name -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Esther Sandy"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Email -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="esthersandy123@gmail.com"
+                        android:textColor="#BBBBBB"
+                        android:textSize="14sp" />
+
+                    <!-- Phone -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(+63) 901 254 7654"
+                        android:textColor="#BBBBBB"
+                        android:textSize="14sp" />
+
+                    <!-- Verify Button -->
+                    <Button
+                        android:id="@+id/verify_button"
+                        android:layout_width="136dp"
+                        android:layout_height="21dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/rounded_button2"
+                        android:backgroundTint="#618FC1"
+                        android:text="Verify Account"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <!-- Contact Button -->
+                    <Button
+                        android:id="@+id/contact_button"
+                        android:layout_width="136dp"
+                        android:layout_height="21dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/rounded_button2"
+                        android:backgroundTint="#618FC1"
+                        android:text="Contact"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <!-- Subtext -->
+                    <TextView
+                        android:layout_width="369dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/rounded_button2"
+                        android:backgroundTint="#4C6C9B"
+                        android:textAlignment="center"
+                        android:text="Bakakeng Area Moderator"
+                        android:textColor="#F2EEEE"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start">
+
+                        <!-- general -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="GENERAL"
+                            android:textColor="#E4E2E2"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <!-- Menu Buttons -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_button2"
+                        android:backgroundTint="#1C1B46"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/rounded_button2"
+                            android:backgroundTint="#42436F"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingVertical="1dp">
+
+                            <Button
+                                android:id="@+id/profileSettings"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/buttonsquare"
+                                android:backgroundTint="#42436F"
+                                android:paddingStart="14dp"
+                                android:textAlignment="textStart"
+                                android:text="Profile Settings"
+                                android:textAllCaps="false"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:layout_width="0dp"/>
+
+                            <ImageButton
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="16dp"
+                                android:contentDescription="Profile setting"
+                                android:src="@drawable/arrow_right" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/rounded_button2"
+                            android:backgroundTint="#42436F"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingVertical="1dp">
+
+                            <Button
+                                android:id="@+id/changeprofile"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/buttonsquare"
+                                android:backgroundTint="#42436F"
+                                android:paddingStart="14dp"
+                                android:textAlignment="textStart"
+                                android:text=" Change Profile"
+                                android:textAllCaps="false"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:layout_width="0dp"/>
+
+                            <ImageButton
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="16dp"
+                                android:contentDescription="change profile"
+                                android:src="@drawable/arrow_right" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/rounded_button2"
+                            android:backgroundTint="#42436F"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingVertical="1dp">
+
+                            <Button
+                                android:id="@+id/Notification_moderate"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/buttonsquare"
+                                android:backgroundTint="#42436F"
+                                android:paddingStart="14dp"
+                                android:textAlignment="textStart"
+                                android:text="Notification"
+                                android:textAllCaps="false"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:layout_width="0dp"/>
+
+                            <ImageButton
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="16dp"
+                                android:contentDescription="nofit"
+                                android:src="@drawable/arrow_right" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/rounded_button2"
+                            android:backgroundTint="#42436F"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingVertical="1dp">
+
+                            <Button
+                                android:id="@+id/Trans_history_Moderator"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/buttonsquare"
+                                android:backgroundTint="#42436F"
+                                android:paddingStart="14dp"
+                                android:textAlignment="textStart"
+                                android:text="Transaction History"
+                                android:textAllCaps="false"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:layout_width="0dp"/>
+
+                            <ImageButton
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="16dp"
+                                android:contentDescription="transHis"
+                                android:src="@drawable/arrow_right" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/rounded_button2"
+                            android:backgroundTint="#42436F"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingVertical="1dp">
+
+                            <Button
+                                android:id="@+id/AppPermission_moderate"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/buttonsquare"
+                                android:backgroundTint="#42436F"
+                                android:paddingStart="14dp"
+                                android:textAlignment="textStart"
+                                android:text="App Permission"
+                                android:textAllCaps="false"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:layout_width="0dp"/>
+
+                            <ImageButton
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="16dp"
+                                android:contentDescription="AppPermis"
+                                android:src="@drawable/arrow_right" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_topbar"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/nearp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginHorizontal="32dp"
+                android:src="@drawable/chat" />
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/circle_mask"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/nav_dorm" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginHorizontal="32dp"
+                android:src="@drawable/bell" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/user" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
+
