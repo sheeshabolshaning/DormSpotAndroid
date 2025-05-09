@@ -93,6 +93,5 @@
         android:layout_marginBottom="18dp"
         android:background="@drawable/viewdorm"
         android:contentDescription="Bookmark"
-        android:scaleType="centerInside"
         android:src="@drawable/bookmark" />
 </FrameLayout>
