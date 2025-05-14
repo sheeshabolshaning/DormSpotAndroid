@@ -94,6 +94,19 @@
             android:fontFamily="@font/neuemedium"/>
 
         <EditText
+            android:id="@+id/editText_landmark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Landmark"
+            android:background="@drawable/rounded_input_bg"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/neuemedium"/>
+
+
+        <EditText
             android:id="@+id/editText_inclusions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

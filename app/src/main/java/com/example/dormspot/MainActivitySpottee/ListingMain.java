@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dormspot.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -88,7 +89,11 @@ public class ListingMain extends AppCompatActivity {
     }
 
     private void fetchListingsFromFirestore() {
-        FirebaseFirestore.getInstance().collection("listings")
+        String landlordId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance()
+                .collection("listings")
+                .whereEqualTo("landlordId", landlordId)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Listing> listings = new ArrayList<>();
@@ -97,14 +102,19 @@ public class ListingMain extends AppCompatActivity {
                         listing.setId(doc.getId());
                         listings.add(listing);
                     }
-                    listings.sort((a, b) -> Integer.compare(getStatusRank(a.getStatus()), getStatusRank(b.getStatus())));
                     recyclerView.setAdapter(new ListingAdapter(listings));
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Error loading listings", Toast.LENGTH_SHORT).show());
     }
 
+
+
     private void fetchStatisticsFromFirestore() {
-        FirebaseFirestore.getInstance().collection("listings")
+        String landlordId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance()
+                .collection("listings")
+                .whereEqualTo("landlordId", landlordId) // 🔒 Filter listings for this landlord
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Listing> stats = new ArrayList<>();
@@ -119,8 +129,13 @@ public class ListingMain extends AppCompatActivity {
                 .addOnFailureListener(e -> Toast.makeText(this, "Error loading statistics", Toast.LENGTH_SHORT).show());
     }
 
+
     private void fetchReviewsFromFirestore() {
-        FirebaseFirestore.getInstance().collection("reviews")
+        String landlordId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance()
+                .collection("reviews")
+                .whereEqualTo("landlordId", landlordId) // 🔒 Only fetch reviews for this landlord
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Review> reviews = new ArrayList<>();
@@ -132,6 +147,7 @@ public class ListingMain extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Failed to load reviews", Toast.LENGTH_SHORT).show());
     }
+
 
     private int getStatusRank(String status) {
         if (status == null) return 3;

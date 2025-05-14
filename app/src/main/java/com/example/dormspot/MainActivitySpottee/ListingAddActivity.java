@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class ListingAddActivity extends AppCompatActivity {
 
-    private EditText dormNameField, capacityField, priceField, statusField, locationField, inclusionsField, descriptionField;
+    private EditText dormNameField, capacityField, priceField, statusField, locationField, landmarkField, inclusionsField, descriptionField;
     private Button submitButton;
 
     private FirebaseFirestore db;
@@ -37,6 +37,7 @@ public class ListingAddActivity extends AppCompatActivity {
         backButton.setOnClickListener(v -> finish());
 
         // Initialize fields
+        landmarkField = findViewById(R.id.editText_landmark);
         dormNameField = findViewById(R.id.editText_dormName);
         capacityField = findViewById(R.id.editText_capacity);
         priceField = findViewById(R.id.editText_price);
@@ -60,21 +61,25 @@ public class ListingAddActivity extends AppCompatActivity {
         String location = locationField.getText().toString().trim();
         String inclusions = inclusionsField.getText().toString().trim();
         String description = descriptionField.getText().toString().trim();
+        String landmark = landmarkField.getText().toString().trim();
 
         if (TextUtils.isEmpty(dormName) || TextUtils.isEmpty(capacity) || TextUtils.isEmpty(price)) {
             Toast.makeText(this, "Please fill in required fields.", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        String landlordId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         Map<String, Object> listing = new HashMap<>();
+        listing.put("landmark", landmark);
         listing.put("dormName", dormName);
         listing.put("capacity", Integer.parseInt(capacity));
         listing.put("price", Double.parseDouble(price));
-        listing.put("status", "pending"); // Always set to pending when created
+        listing.put("status", "pending");
         listing.put("location", location);
         listing.put("inclusions", inclusions);
         listing.put("description", description);
-        listing.put("imageUrl", ""); // Placeholder, image upload can be added later
+        listing.put("landlordId", landlordId);
 
         db.collection("listings")
                 .add(listing)
@@ -84,4 +89,5 @@ public class ListingAddActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
+
 }

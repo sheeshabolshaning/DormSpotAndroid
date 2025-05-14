@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-import com.bumptech.glide.Glide;
 import com.example.dormspot.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
@@ -45,9 +44,9 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
 
     public class ListingViewHolder extends RecyclerView.ViewHolder {
         TextView dormName, dormCapacity, dormPrice, dormStatus;
-        TextView viewLocation, viewInclusion, viewDescription;
-        EditText editLocation, editInclusion, editDescription;
-        ImageView dormImage, imageView1, imageView2, editButton;
+        TextView viewLocation, viewLandmark, viewInclusion, viewDescription;
+        EditText editLocation, editInclusion, editDescription, editLandmark;
+        ImageView editButton;
         LinearLayout expandableLayout;
         Button submitButton;
 
@@ -59,16 +58,14 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             dormStatus = itemView.findViewById(R.id.textView_dormStatus);
 
             viewLocation = itemView.findViewById(R.id.textView_location);
+            viewLandmark = itemView.findViewById(R.id.textView_landmark);
             viewInclusion = itemView.findViewById(R.id.textView_inclusions);
             viewDescription = itemView.findViewById(R.id.textView_description);
 
+            editLandmark = itemView.findViewById(R.id.edit_landmark);
             editLocation = itemView.findViewById(R.id.edit_location);
             editInclusion = itemView.findViewById(R.id.edit_inclusions);
             editDescription = itemView.findViewById(R.id.edit_description);
-
-            dormImage = itemView.findViewById(R.id.imageView_dorm);
-            imageView1 = itemView.findViewById(R.id.imageView_room1);
-            imageView2 = itemView.findViewById(R.id.imageView_room2);
 
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
             editButton = itemView.findViewById(R.id.button_edit_listing);
@@ -86,7 +83,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
                     dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.red));
                     break;
                 case "pending":
-                    dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.star_yellow)); // Make sure this color exists
+                    dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.star_yellow));
                     break;
                 case "unoccupied":
                     dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.green));
@@ -95,32 +92,15 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
                     dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.white));
                     break;
             }
-            if ("occupied".equalsIgnoreCase(listing.getStatus())) {
-                dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.red));
-            } else if ("pending".equalsIgnoreCase(listing.getStatus())) {
-                dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.star_yellow));
-            } else {
-                dormStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.green));
-            }
-
-            Glide.with(itemView.getContext())
-                    .load(listing.getImageUrl())
-                    .placeholder(R.drawable.placeholder)
-                    .into(dormImage);
-
-            Glide.with(itemView.getContext())
-                    .load(listing.getImageUrl())
-                    .placeholder(R.drawable.placeholder)
-                    .into(imageView1);
-
-            imageView2.setImageResource(R.drawable.placeholder);
 
             // Expand/Collapse
             expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
             viewLocation.setVisibility(View.VISIBLE);
+            viewLandmark.setVisibility(View.VISIBLE);
             viewInclusion.setVisibility(View.VISIBLE);
             viewDescription.setVisibility(View.VISIBLE);
 
+            editLandmark.setText(listing.getLandmark());
             editLocation.setVisibility(View.GONE);
             editInclusion.setVisibility(View.GONE);
             editDescription.setVisibility(View.GONE);
@@ -128,6 +108,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
 
             // Set values
             viewLocation.setText("Location: " + listing.getLocation());
+            viewLandmark.setText("Landmark: " + listing.getLandmark());
             viewInclusion.setText("Inclusions: " + listing.getInclusions());
             viewDescription.setText("Description: " + listing.getDescription());
 
@@ -136,11 +117,12 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             editDescription.setText(listing.getDescription());
 
             editButton.setOnClickListener(v -> {
-                // Toggle to edit mode
                 viewLocation.setVisibility(View.GONE);
+                viewLandmark.setVisibility(View.GONE);
                 viewInclusion.setVisibility(View.GONE);
                 viewDescription.setVisibility(View.GONE);
 
+                editLandmark.setVisibility(View.VISIBLE);
                 editLocation.setVisibility(View.VISIBLE);
                 editInclusion.setVisibility(View.VISIBLE);
                 editDescription.setVisibility(View.VISIBLE);
@@ -148,6 +130,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             });
 
             submitButton.setOnClickListener(v -> {
+                String newLandmark = editLandmark.getText().toString().trim();
                 String newLocation = editLocation.getText().toString().trim();
                 String newInclusion = editInclusion.getText().toString().trim();
                 String newDescription = editDescription.getText().toString().trim();
@@ -162,12 +145,14 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
                         .document(listing.getId())
                         .update("location", newLocation,
                                 "inclusions", newInclusion,
-                                "description", newDescription)
+                                "description", newDescription,"landmark", newLandmark
+                        )
                         .addOnSuccessListener(aVoid -> {
                             Toast.makeText(itemView.getContext(), "Updated successfully", Toast.LENGTH_SHORT).show();
                             listing.setLocation(newLocation);
                             listing.setInclusions(newInclusion);
                             listing.setDescription(newDescription);
+                            listing.setLandmark(newLandmark);
 
                             notifyItemChanged(getAdapterPosition());
                         })

@@ -5,11 +5,11 @@ public class Listing {
     private int capacity;
     private double price;
     private String status;
-    private String imageUrl;
     private String id;
     private String location;
     private String inclusions;
     private String description;
+    private String landmark;
 
     // ✅ New fields for statistics
     private Integer views;
@@ -23,7 +23,7 @@ public class Listing {
         // Required empty constructor
     }
 
-    public Listing(String dormName, int capacity, double price, String status, String imageUrl, String id,
+    public Listing(String dormName, int capacity, double price, String status,  String id,
                    String location, String inclusions, String description,
                    Integer views, Integer saves, Integer inquiries,
                    String rentedPeriod, String occupancy, Integer revenue) {
@@ -32,7 +32,6 @@ public class Listing {
         this.capacity = capacity;
         this.price = price;
         this.status = status;
-        this.imageUrl = imageUrl;
         this.id = id;
         this.location = location;
         this.inclusions = inclusions;
@@ -48,10 +47,13 @@ public class Listing {
 
     // Standard Getters
     public String getDormName() { return dormName; }
+
+    public String getLandmark() {
+        return landmark;
+    }
     public int getCapacity() { return capacity; }
     public double getPrice() { return price; }
     public String getStatus() { return status; }
-    public String getImageUrl() { return imageUrl; }
     public String getId() { return id; }
     public String getLocation() { return location; }
     public String getInclusions() { return inclusions; }
@@ -66,10 +68,12 @@ public class Listing {
 
     // Setters
     public void setDormName(String dormName) { this.dormName = dormName; }
+    public void setLandmark(String landmark) {
+        this.landmark = landmark;
+    }
     public void setCapacity(int capacity) { this.capacity = capacity; }
     public void setPrice(double price) { this.price = price; }
     public void setStatus(String status) { this.status = status; }
-    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
     public void setId(String id) { this.id = id; }
     public void setLocation(String location) { this.location = location; }
     public void setInclusions(String inclusions) { this.inclusions = inclusions; }
