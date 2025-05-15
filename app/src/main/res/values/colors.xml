@@ -19,6 +19,7 @@
     <color name="logo_primary_text">#EBF291</color> <!-- "DORM SPOT" text -->
     <color name="logo_secondary_text">#D4E157</color> <!-- "BIROK TAN DORM JO" -->
     <color name="logo_outline_blue">#63A4FF</color> <!-- Outline & icon lines -->
+    <color name="ngreen">#008631</color>
 
     <color name="verify_button_bg">#1A1B41</color>
     <color name="verify_button_text">#F1FFE7</color>
