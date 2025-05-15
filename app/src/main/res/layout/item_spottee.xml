@@ -84,16 +84,6 @@
 
         </LinearLayout>
 
-        <!-- Star rating & reviews -->
-        <TextView
-            android:id="@+id/textReviews"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="★★★★★ (8)"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:layout_marginTop="4dp" />
-
         <LinearLayout
             android:layout_width="355dp"
             android:layout_height="wrap_content"
