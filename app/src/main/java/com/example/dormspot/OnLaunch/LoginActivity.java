@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.dormspot.AdminActivity.AdminHomeActivity;
+import com.example.dormspot.MainActivitySpottr.Home;
 import com.example.dormspot.MainActivitySpottee.ListingMain;
 import com.example.dormspot.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,10 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        // Initialize UI elements
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
@@ -43,26 +44,21 @@ public class LoginActivity extends AppCompatActivity {
         textForgotPassword = findViewById(R.id.textForgotPassword);
         checkboxRememberMe = findViewById(R.id.checkboxRememberMe);
 
-        // Back button
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
-        // Navigate to RegisterActivity
         textDontHaveAccount.setOnClickListener(v ->
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
-        // SharedPreferences for Remember Me
         SharedPreferences preferences = getSharedPreferences("userPrefs", MODE_PRIVATE);
         boolean rememberMe = preferences.getBoolean("rememberMe", false);
         checkboxRememberMe.setChecked(rememberMe);
 
-        // If Remember Me is checked, auto-fill email (if available)
         if (rememberMe) {
             String savedEmail = preferences.getString("email", "");
             editTextUsername.setText(savedEmail);
         }
 
-        // Sign In button logic
         btnSignIn.setOnClickListener(v -> {
             String email = editTextUsername.getText().toString().trim();
             String password = editTextPassword.getText().toString().trim();
@@ -72,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            // Remember Me functionality
             if (checkboxRememberMe.isChecked()) {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("rememberMe", true);
@@ -87,7 +82,6 @@ public class LoginActivity extends AppCompatActivity {
             loginUser(email, password);
         });
 
-        // Forgot password logic
         textForgotPassword.setOnClickListener(v -> {
             String email = editTextUsername.getText().toString().trim();
             if (TextUtils.isEmpty(email)) {
@@ -114,18 +108,19 @@ public class LoginActivity extends AppCompatActivity {
                         if (user != null && user.isEmailVerified()) {
                             String uid = user.getUid();
 
-                            // Fetch userMode from Firestore
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("users").document(uid).get()
                                     .addOnSuccessListener(documentSnapshot -> {
                                         if (documentSnapshot.exists()) {
                                             String userMode = documentSnapshot.getString("userMode");
-                                            if ("spottr".equals(userMode)) {
-                                                startActivity(new Intent(LoginActivity.this, com.example.dormspot.MainActivitySpottr.Home.class));
+
+                                            if ("admin".equals(userMode)) {
+                                                startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
+                                            } else if ("spottr".equals(userMode)) {
+                                                startActivity(new Intent(LoginActivity.this, Home.class));
                                             } else if ("spotee".equals(userMode)) {
                                                 startActivity(new Intent(LoginActivity.this, ListingMain.class));
                                             } else {
-                                                // No userMode set yet, fallback to WelcomeActivity
                                                 startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
                                             }
                                             finish();
@@ -139,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         } else {
                             Toast.makeText(LoginActivity.this, "Please verify your email first.", Toast.LENGTH_LONG).show();
-                            mAuth.signOut(); // Sign out unverified user
+                            mAuth.signOut();
                         }
                     } else {
                         Toast.makeText(LoginActivity.this, "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show();
