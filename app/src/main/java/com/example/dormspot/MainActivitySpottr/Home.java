@@ -1,5 +1,6 @@
 package com.example.dormspot.MainActivitySpottr;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements DormAdapter.OnDormClickListener {
 
     private RecyclerView recyclerView;
     private DormAdapter adapter;
@@ -45,28 +46,27 @@ public class Home extends AppCompatActivity {
             return insets;
         });
 
-        // 🔧 Firestore & FirebaseAuth setup
+        // Firebase
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        // 📦 RecyclerView setup
+        // Check if user is logged in
+        if (auth.getCurrentUser() == null) {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            finish(); // Optional: prevent using Home if not logged in
+            return;
+        }
+
+        // RecyclerView setup
         recyclerView = findViewById(R.id.recyclerViewDorms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new DormAdapter(this, dormList);
+        adapter = new DormAdapter(this, dormList, this); // pass 'this' as click listener
         recyclerView.setAdapter(adapter);
 
-        // 🔁 Load and listen to Firestore updates
         loadListings();
     }
 
     private void loadListings() {
-        String currentUserId = auth.getCurrentUser() != null ? auth.getCurrentUser().getUid() : null;
-
-        if (currentUserId == null) {
-            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         db.collection("listings")
                 .addSnapshotListener((querySnapshots, error) -> {
                     if (error != null) {
@@ -79,6 +79,7 @@ public class Home extends AppCompatActivity {
                         for (DocumentSnapshot doc : querySnapshots) {
                             DormItem item = doc.toObject(DormItem.class);
                             if (item != null) {
+                                item.setId(doc.getId()); // 🔑 save Firestore document ID
                                 dormList.add(item);
                             }
                         }
@@ -88,7 +89,14 @@ public class Home extends AppCompatActivity {
                 });
     }
 
-    // 🔖 Optional legacy function - no longer needed but kept for reference
+    @Override
+    public void onDormClick(String listingId) {
+        Intent intent = new Intent(Home.this, Booking.class);
+        intent.putExtra("listingId", listingId);
+        startActivity(intent);
+    }
+
+    // Optional legacy function
     private void applyBookmarkToggleToAll(View parent) {
         if (parent instanceof ImageButton) {
             ImageButton button = (ImageButton) parent;

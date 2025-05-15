@@ -1,8 +1,6 @@
 package com.example.dormspot.MainActivitySpottr;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +8,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.content.Intent;
+import android.graphics.Color;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -22,12 +22,18 @@ import java.util.List;
 
 public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder> {
 
+    public interface OnDormClickListener {
+        void onDormClick(String listingId);
+    }
+
     private List<DormItem> dormList;
     private Context context;
+    private OnDormClickListener listener;
 
-    public DormAdapter(Context context, List<DormItem> dormList) {
+    public DormAdapter(Context context, List<DormItem> dormList, OnDormClickListener listener) {
         this.context = context;
         this.dormList = dormList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -71,15 +77,9 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
 
         // ✅ View Dorm button click
         holder.viewDormBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(context, Booking.class);
-            intent.putExtra("listingId", item.getId());
-            intent.putExtra("dormName", item.getDormName());
-            intent.putExtra("capacity", item.getCapacity());
-            intent.putExtra("price", item.getPrice());
-            intent.putExtra("status", item.getStatus());
-            intent.putExtra("description", item.getDescription());
-            intent.putExtra("imageUrl", item.getImageUrl());
-            context.startActivity(intent);
+            if (listener != null) {
+                listener.onDormClick(item.getId());
+            }
         });
 
         // ✅ Bookmark toggle
