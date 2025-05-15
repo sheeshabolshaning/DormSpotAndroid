@@ -10,8 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.util.Log;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -115,7 +113,6 @@ public class LoginActivity extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null && user.isEmailVerified()) {
                             String uid = user.getUid();
-                            Log.d("AuthDebug", "✅ User logged in. UID: " + uid); // ✅ Logging UID after login
 
                             // Fetch userMode from Firestore
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -123,13 +120,12 @@ public class LoginActivity extends AppCompatActivity {
                                     .addOnSuccessListener(documentSnapshot -> {
                                         if (documentSnapshot.exists()) {
                                             String userMode = documentSnapshot.getString("userMode");
-                                            Log.d("AuthDebug", "User mode: " + userMode); // ✅ Logging userMode
-
                                             if ("spottr".equals(userMode)) {
                                                 startActivity(new Intent(LoginActivity.this, com.example.dormspot.MainActivitySpottr.Home.class));
                                             } else if ("spotee".equals(userMode)) {
                                                 startActivity(new Intent(LoginActivity.this, ListingMain.class));
                                             } else {
+                                                // No userMode set yet, fallback to WelcomeActivity
                                                 startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
                                             }
                                             finish();
@@ -150,5 +146,4 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }

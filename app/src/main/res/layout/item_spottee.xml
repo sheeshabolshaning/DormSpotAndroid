@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        card_view:cardCornerRadius="20dp"
+        card_view:cardElevation="4dp"
+        android:background="@drawable/rounded_card"
+        card_view:cardBackgroundColor="#424470">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@drawable/rounded_card">
+
+            <!-- Profile row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView_dormName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Esther Sandy's Dorm"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/neuebold" />
+
+                    <TextView
+                        android:id="@+id/textView_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Location: Bakakeng Norte-Sur"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/neuemedium" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Admin + Occupancy Status -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/textView_textAdminStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status: Pending"
+                    android:textColor="#FFEB3B"
+                    android:textSize="12sp"
+                    android:textStyle="italic|bold"
+                    android:fontFamily="@font/neuemedium"
+                    android:layout_marginEnd="16dp" />
+
+                <TextView
+                    android:id="@+id/textOccupancyStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Occupancy: Unoccupied"
+                    android:textColor="#CDEB8C"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/neuemedium" />
+            </LinearLayout>
+
+            <!-- Active Properties -->
+            <TextView
+                android:id="@+id/textView_activeProperties"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active Properties: 3"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/neuemedium" />
+
+            <!-- Post Label -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Post: "
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/neuemedium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Solo Bedroom"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/neuemedium"/>
+            </LinearLayout>
+
+            <!-- Bottom row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/button_reject"
+                    android:layout_width="100dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/rounded_button2"
+                    android:backgroundTint="#F64235"
+                    android:text="Reject"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/neuebold"/>
+
+                <Button
+                    android:id="@+id/button_approve"
+                    android:layout_width="100dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/rounded_button2"
+                    android:backgroundTint="@color/ngreen"
+                    android:text="Approve"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/neuebold"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
