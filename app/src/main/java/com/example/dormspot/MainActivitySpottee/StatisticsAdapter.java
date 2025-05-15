@@ -80,9 +80,9 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.St
             rentedPeriod.setText("Rented: " + listing.getRentedPeriod());
             occupancy.setText("Occupant: " + listing.getOccupancy());
             revenue.setText("Revenue: ₱" + listing.getRevenue());
-            status.setText(listing.getStatus());
+            status.setText(listing.getOccupancyStatus());
 
-            if ("Occupied".equalsIgnoreCase(listing.getStatus())) {
+            if ("Occupied".equalsIgnoreCase(listing.getOccupancyStatus())) {
                 status.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.green));
             } else {
                 status.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.red));

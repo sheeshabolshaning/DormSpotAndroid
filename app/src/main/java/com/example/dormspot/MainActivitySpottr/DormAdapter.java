@@ -72,7 +72,7 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
         // ✅ View Dorm button click
         holder.viewDormBtn.setOnClickListener(v -> {
             Intent intent = new Intent(context, Booking.class);
-            intent.putExtra("listingId", item.getId()); // Firestore doc ID
+            intent.putExtra("listingId", item.getId());
             intent.putExtra("dormName", item.getDormName());
             intent.putExtra("capacity", item.getCapacity());
             intent.putExtra("price", item.getPrice());

@@ -57,7 +57,6 @@ public class ListingAddActivity extends AppCompatActivity {
         String dormName = dormNameField.getText().toString().trim();
         String capacity = capacityField.getText().toString().trim();
         String price = priceField.getText().toString().trim();
-        String status = statusField.getText().toString().trim();
         String location = locationField.getText().toString().trim();
         String inclusions = inclusionsField.getText().toString().trim();
         String description = descriptionField.getText().toString().trim();
@@ -71,15 +70,20 @@ public class ListingAddActivity extends AppCompatActivity {
         String landlordId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         Map<String, Object> listing = new HashMap<>();
-        listing.put("landmark", landmark);
         listing.put("dormName", dormName);
         listing.put("capacity", Integer.parseInt(capacity));
         listing.put("price", Double.parseDouble(price));
-        listing.put("status", "pending");
         listing.put("location", location);
         listing.put("inclusions", inclusions);
         listing.put("description", description);
+        listing.put("landmark", landmark);
         listing.put("landlordId", landlordId);
+
+        // ✅ Add initial statuses
+        listing.put("adminStatus", "Pending");
+        listing.put("occupancyStatus", "Unoccupied");
+
+        // (Optional) listing.put("userRole", "landlord");
 
         db.collection("listings")
                 .add(listing)
@@ -87,7 +91,8 @@ public class ListingAddActivity extends AppCompatActivity {
                     Toast.makeText(this, "Listing added!", Toast.LENGTH_SHORT).show();
                     finish();
                 })
-                .addOnFailureListener(e -> Toast.makeText(this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
 }

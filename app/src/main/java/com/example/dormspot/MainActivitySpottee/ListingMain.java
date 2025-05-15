@@ -89,22 +89,38 @@ public class ListingMain extends AppCompatActivity {
     }
 
     private void fetchListingsFromFirestore() {
-        String landlordId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        FirebaseFirestore.getInstance()
-                .collection("listings")
-                .whereEqualTo("landlordId", landlordId)
-                .get()
-                .addOnSuccessListener(querySnapshot -> {
-                    List<Listing> listings = new ArrayList<>();
-                    for (QueryDocumentSnapshot doc : querySnapshot) {
-                        Listing listing = doc.toObject(Listing.class);
-                        listing.setId(doc.getId());
-                        listings.add(listing);
-                    }
-                    recyclerView.setAdapter(new ListingAdapter(listings));
-                })
-                .addOnFailureListener(e -> Toast.makeText(this, "Error loading listings", Toast.LENGTH_SHORT).show());
+        // Step 1: Get userMode from users collection
+        db.collection("users").document(userId).get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                String userMode = documentSnapshot.getString("userMode");
+
+                // Step 2: Fetch listings belonging to the user
+                db.collection("listings")
+                        .whereEqualTo("landlordId", userId)
+                        .get()
+                        .addOnSuccessListener(querySnapshot -> {
+                            List<Listing> listings = new ArrayList<>();
+                            for (QueryDocumentSnapshot doc : querySnapshot) {
+                                Listing listing = doc.toObject(Listing.class);
+                                listing.setId(doc.getId());
+                                listings.add(listing);
+                            }
+
+                            // Step 3: Pass the role to the adapter
+                            recyclerView.setAdapter(new ListingAdapter(listings, userMode));
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(this, "Error loading listings", Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                Toast.makeText(this, "User profile not found", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Failed to get user role", Toast.LENGTH_SHORT).show();
+        });
     }
 
 
@@ -123,7 +139,7 @@ public class ListingMain extends AppCompatActivity {
                         listing.setId(doc.getId());
                         stats.add(listing);
                     }
-                    stats.sort((a, b) -> Integer.compare(getStatusRank(a.getStatus()), getStatusRank(b.getStatus())));
+                    stats.sort((a, b) -> Integer.compare(getStatusRank(a.getAdminStatus()), getStatusRank(b.getAdminStatus())));
                     recyclerView.setAdapter(new StatisticsAdapter(this, stats));
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Error loading statistics", Toast.LENGTH_SHORT).show());
