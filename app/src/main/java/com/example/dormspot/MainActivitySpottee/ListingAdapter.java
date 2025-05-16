@@ -83,7 +83,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             dormCapacity.setText("Capacity: " + listing.getCapacity());
             dormPrice.setText("₱" + listing.getPrice() + "/month");
 
-            String adminStatus = listing.getAdminStatus();
+            String adminStatus = listing.getStatus();
             adminStatusText.setText("Status: " + adminStatus);
             adminStatusText.setVisibility(("admin".equals(userRole) || "landlord".equals(userRole)) ? View.VISIBLE : View.GONE);
 

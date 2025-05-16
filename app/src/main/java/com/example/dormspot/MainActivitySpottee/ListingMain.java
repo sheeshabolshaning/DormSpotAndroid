@@ -130,7 +130,7 @@ public class ListingMain extends AppCompatActivity {
 
         FirebaseFirestore.getInstance()
                 .collection("listings")
-                .whereEqualTo("landlordId", landlordId) // 🔒 Filter listings for this landlord
+                .whereEqualTo("landlordId", landlordId) //
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Listing> stats = new ArrayList<>();
@@ -139,7 +139,7 @@ public class ListingMain extends AppCompatActivity {
                         listing.setId(doc.getId());
                         stats.add(listing);
                     }
-                    stats.sort((a, b) -> Integer.compare(getStatusRank(a.getAdminStatus()), getStatusRank(b.getAdminStatus())));
+                    stats.sort((a, b) -> Integer.compare(getStatusRank(a.getStatus()), getStatusRank(b.getStatus())));
                     recyclerView.setAdapter(new StatisticsAdapter(this, stats));
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Error loading statistics", Toast.LENGTH_SHORT).show());

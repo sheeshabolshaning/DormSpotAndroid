@@ -1,6 +1,7 @@
 package com.example.dormspot.MainActivitySpottr;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.content.Intent;
-import android.graphics.Color;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.dormspot.MainActivitySpottee.Listing;
 import com.example.dormspot.R;
 
 import java.util.List;
@@ -26,11 +26,11 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
         void onDormClick(String listingId);
     }
 
-    private List<DormItem> dormList;
-    private Context context;
-    private OnDormClickListener listener;
+    private final List<Listing> dormList;
+    private final Context context;
+    private final OnDormClickListener listener;
 
-    public DormAdapter(Context context, List<DormItem> dormList, OnDormClickListener listener) {
+    public DormAdapter(Context context, List<Listing> dormList, OnDormClickListener listener) {
         this.context = context;
         this.dormList = dormList;
         this.listener = listener;
@@ -45,14 +45,13 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull DormViewHolder holder, int position) {
-        DormItem item = dormList.get(position);
+        Listing item = dormList.get(position);
 
-        holder.dormTitle.setText(item.getDormName());
+        holder.dormTitle.setText(item.getDormName() != null ? item.getDormName() : "No Name");
         holder.capacity.setText("Capacity: " + item.getCapacity());
         holder.price.setText("₱" + item.getPrice() + "/month");
         holder.status.setText("Status: " + item.getStatus());
 
-        // ✅ Dynamic status color
         String status = item.getStatus() != null ? item.getStatus().trim().toLowerCase() : "";
         switch (status) {
             case "occupied":
@@ -69,20 +68,12 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
                 break;
         }
 
-        // ✅ Load image with Glide
-        Glide.with(context)
-                .load(item.getImageUrl())
-                .placeholder(R.drawable.imageholder)
-                .into(holder.imageBackground);
-
-        // ✅ View Dorm button click
         holder.viewDormBtn.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onDormClick(item.getId());
             }
         });
 
-        // ✅ Bookmark toggle
         holder.bookmarkBtn.setOnClickListener(v -> {
             v.setSelected(!v.isSelected());
             ((ImageButton) v).setImageResource(
@@ -97,7 +88,7 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
     }
 
     static class DormViewHolder extends RecyclerView.ViewHolder {
-        TextView dormTitle, capacity, price, status;
+        TextView dormTitle, capacity, price, status, location, description;
         ImageView imageBackground;
         Button viewDormBtn;
         ImageButton bookmarkBtn;
@@ -108,6 +99,8 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
             capacity = itemView.findViewById(R.id.capacity);
             price = itemView.findViewById(R.id.price);
             status = itemView.findViewById(R.id.status);
+            location = itemView.findViewById(R.id.location);
+            description = itemView.findViewById(R.id.description);
             imageBackground = itemView.findViewById(R.id.imageBackground);
             viewDormBtn = itemView.findViewById(R.id.viewDormBtn);
             bookmarkBtn = itemView.findViewById(R.id.bookmarkBtn);

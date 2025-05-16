@@ -4,7 +4,7 @@ public class Listing {
     private String dormName;
     private int capacity;
     private double price;
-    private String adminStatus;
+    private String Status;
     private String id;
     private String location;
     private String inclusions;
@@ -26,7 +26,7 @@ public class Listing {
         // Required empty constructor
     }
 
-    public Listing(String dormName, int capacity, double price, String adminStatus,  String id,
+    public Listing(String dormName, int capacity, double price, String Status,  String id,
                    String location, String inclusions, String description,
                    Integer views, Integer saves, Integer inquiries,
                    String rentedPeriod, String occupancy, Integer revenue, String occupancyStatus, String userRole) {
@@ -34,7 +34,7 @@ public class Listing {
         this.dormName = dormName;
         this.capacity = capacity;
         this.price = price;
-        this.adminStatus = adminStatus;
+        this.Status = Status;
         this.id = id;
         this.location = location;
         this.inclusions = inclusions;
@@ -65,7 +65,7 @@ public class Listing {
     }
     public int getCapacity() { return capacity; }
     public double getPrice() { return price; }
-    public String getAdminStatus() { return adminStatus; }
+    public String getStatus() { return Status; }
     public String getId() { return id; }
     public String getLocation() { return location; }
     public String getInclusions() { return inclusions; }
@@ -88,7 +88,7 @@ public class Listing {
     }
     public void setCapacity(int capacity) { this.capacity = capacity; }
     public void setPrice(double price) { this.price = price; }
-    public void setStatus(String status) { this.adminStatus = status; }
+    public void setStatus(String status) { this.Status = status; }
     public void setId(String id) { this.id = id; }
     public void setLocation(String location) { this.location = location; }
     public void setInclusions(String inclusions) { this.inclusions = inclusions; }

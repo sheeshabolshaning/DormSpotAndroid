@@ -120,17 +120,22 @@ public class LoginActivity extends AppCompatActivity {
                                     .addOnSuccessListener(documentSnapshot -> {
                                         if (documentSnapshot.exists()) {
                                             String userMode = documentSnapshot.getString("userMode");
-                                            if ("spottr".equals(userMode)) {
+
+                                            Toast.makeText(this, "User mode: " + userMode, Toast.LENGTH_SHORT).show(); // Debug
+
+                                            if ("spottr".equalsIgnoreCase(userMode)) {
                                                 startActivity(new Intent(LoginActivity.this, com.example.dormspot.MainActivitySpottr.Home.class));
-                                            } else if ("spotee".equals(userMode)) {
+                                                finish();
+                                            } else if ("spotee".equalsIgnoreCase(userMode)) {
                                                 startActivity(new Intent(LoginActivity.this, ListingMain.class));
+                                                finish();
+                                            } else if ("admin".equalsIgnoreCase(userMode)) {
+                                                startActivity(new Intent(LoginActivity.this, com.example.dormspot.AdminActivity.AdminHomeActivity.class));
+                                                finish();
                                             } else {
-                                                // No userMode set yet, fallback to WelcomeActivity
                                                 startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+                                                finish();
                                             }
-                                            finish();
-                                        } else {
-                                            Toast.makeText(this, "User data not found.", Toast.LENGTH_SHORT).show();
                                         }
                                     })
                                     .addOnFailureListener(e -> {

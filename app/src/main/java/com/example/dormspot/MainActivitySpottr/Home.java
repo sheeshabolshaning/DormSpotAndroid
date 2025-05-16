@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dormspot.MainActivitySpottee.Listing;
 import com.example.dormspot.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,7 +29,7 @@ public class Home extends AppCompatActivity implements DormAdapter.OnDormClickLi
 
     private RecyclerView recyclerView;
     private DormAdapter adapter;
-    private final List<DormItem> dormList = new ArrayList<>();
+    private List<Listing> dormList = new ArrayList<>();
 
     private FirebaseFirestore db;
     private FirebaseAuth auth;
@@ -68,6 +69,7 @@ public class Home extends AppCompatActivity implements DormAdapter.OnDormClickLi
 
     private void loadListings() {
         db.collection("listings")
+                .whereEqualTo("status", "approved")
                 .addSnapshotListener((querySnapshots, error) -> {
                     if (error != null) {
                         Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -77,9 +79,9 @@ public class Home extends AppCompatActivity implements DormAdapter.OnDormClickLi
                     dormList.clear();
                     if (querySnapshots != null) {
                         for (DocumentSnapshot doc : querySnapshots) {
-                            DormItem item = doc.toObject(DormItem.class);
+                            Listing item = doc.toObject(Listing.class);
                             if (item != null) {
-                                item.setId(doc.getId()); // 🔑 save Firestore document ID
+                                item.setId(doc.getId());
                                 dormList.add(item);
                             }
                         }
@@ -88,6 +90,7 @@ public class Home extends AppCompatActivity implements DormAdapter.OnDormClickLi
                     adapter.notifyDataSetChanged();
                 });
     }
+
 
     @Override
     public void onDormClick(String listingId) {
