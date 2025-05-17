@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -39,6 +40,12 @@ public class ListingMain extends AppCompatActivity {
 
         selectButton(myListingsButton);
         fetchListingsFromFirestore();
+
+        ImageButton bellButton = findViewById(R.id.nav_notifications);
+        bellButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ListingMain.this, BookingRequest.class);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -211,8 +218,9 @@ public class ListingMain extends AppCompatActivity {
         });
         navBell.setOnClickListener(v -> {
             highlightNavigation(navBell);
-            startActivity(new Intent(this, NotificationsActivity.class));
+            startActivity(new Intent(this, NotificationsActivity.class)); // 🔄 Spottee notification screen
         });
+
         navProfile.setOnClickListener(v -> {
             highlightNavigation(navProfile);
             startActivity(new Intent(this, ProfileActivity.class));

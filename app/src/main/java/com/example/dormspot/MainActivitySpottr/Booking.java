@@ -138,17 +138,29 @@ public class Booking extends AppCompatActivity {
         }
 
         String userId = currentUser.getUid();
+        String userName = currentUser.getDisplayName(); // Optional: Pull from Firestore users collection
+        String dormName = getIntent().getStringExtra("dormName");
+        int price = getIntent().getIntExtra("price", 0);
+        String landlordId = getIntent().getStringExtra("landlordId"); // You need to pass this via Intent when opening Booking.java
+
+        // Generate booking document ID
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String bookingId = db.collection("booking_requests").document().getId();
 
         Map<String, Object> booking = new HashMap<>();
+        booking.put("bookingId", bookingId);
         booking.put("userId", userId);
+        booking.put("userName", userName != null ? userName : "Unknown User");
+        booking.put("dormName", dormName != null ? dormName : "N/A");
+        booking.put("totalPrice", "₱" + price);
+        booking.put("landlordId", landlordId != null ? landlordId : "N/A");
+        booking.put("status", "pending");
         booking.put("listingId", listingId);
-        booking.put("status", "Pending");
+        booking.put("bookingDates", "2025-05-20 - 2025-06-20"); // Static for now; replace with DatePicker input if needed
         booking.put("timestamp", FieldValue.serverTimestamp());
-        booking.put("checkInDate", "2025-05-20");
-        booking.put("checkOutDate", "2025-06-20");
 
-        FirebaseFirestore.getInstance().collection("booking_requests")
-                .add(booking)
+        db.collection("booking_requests").document(bookingId)
+                .set(booking)
                 .addOnSuccessListener(doc -> {
                     Toast.makeText(this, "Booking request sent!", Toast.LENGTH_SHORT).show();
                     bookNowBtn.setEnabled(false);
@@ -159,6 +171,5 @@ public class Booking extends AppCompatActivity {
                     Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
-
 
 }

@@ -157,14 +157,17 @@
             android:padding="5dp"
             android:src="@drawable/nav_dorm" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/nav_notifications"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="32dp"
             android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:contentDescription="Notifications"
             android:scaleType="centerInside"
             android:src="@drawable/bell" />
+
 
         <ImageView
             android:id="@+id/nav_profile"

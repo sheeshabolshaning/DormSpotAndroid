@@ -55,6 +55,8 @@
         <activity android:name=".MainActivitySpottee.StatisticActivity" />
         <activity android:name=".MainActivitySpottr.Booking" />
         <activity android:name=".AdminActivity.AdminHomeActivity" />
+        <activity android:name=".MainActivitySpottee.BookingRequest" />
+
 
     </application>
 </manifest>

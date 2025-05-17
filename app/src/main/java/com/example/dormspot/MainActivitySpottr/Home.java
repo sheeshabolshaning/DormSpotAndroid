@@ -91,11 +91,32 @@ public class Home extends AppCompatActivity implements DormAdapter.OnDormClickLi
                 });
     }
 
-
     @Override
     public void onDormClick(String listingId) {
+        // Find the clicked listing by ID
+        Listing clickedListing = null;
+        for (Listing l : dormList) {
+            if (l.getId().equals(listingId)) {
+                clickedListing = l;
+                break;
+            }
+        }
+
+        if (clickedListing == null) {
+            Toast.makeText(this, "Listing not found", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Pass full dorm data to Booking activity
         Intent intent = new Intent(Home.this, Booking.class);
-        intent.putExtra("listingId", listingId);
+        intent.putExtra("listingId", clickedListing.getId());
+        intent.putExtra("dormName", clickedListing.getDormName());
+        intent.putExtra("price", clickedListing.getPrice());
+        intent.putExtra("capacity", clickedListing.getCapacity());
+        intent.putExtra("status", clickedListing.getStatus());
+        intent.putExtra("description", clickedListing.getDescription());
+        intent.putExtra("imageUrl", clickedListing.getImageUrl());
+        intent.putExtra("landlordId", clickedListing.getLandlordId()); // ✅ important
         startActivity(intent);
     }
 

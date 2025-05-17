@@ -12,6 +12,8 @@ public class Listing {
     private String landmark;
     private String occupancyStatus;
     private String userMode;
+    private String imageUrl;
+    private String landlordId;
 
 
     // ✅ New fields for statistics
@@ -70,6 +72,13 @@ public class Listing {
     public String getLocation() { return location; }
     public String getInclusions() { return inclusions; }
     public String getDescription() { return description; }
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getLandlordId() {
+        return landlordId;
+    }
 
     public Integer getViews() { return views; }
     public Integer getSaves() { return saves; }
@@ -96,7 +105,14 @@ public class Listing {
     public void setOccupancyStatus(String occupancyStatus) {
         this.occupancyStatus = occupancyStatus;
     }
+    // Optional: Add setters too if needed
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
+    public void setLandlordId(String landlordId) {
+        this.landlordId = landlordId;
+    }
     public void setViews(Integer views) { this.views = views; }
     public void setSaves(Integer saves) { this.saves = saves; }
     public void setInquiries(Integer inquiries) { this.inquiries = inquiries; }
