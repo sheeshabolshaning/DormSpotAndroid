@@ -2,6 +2,7 @@ package com.example.dormspot.MainActivitySpottr;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -79,9 +80,19 @@ public class Home extends AppCompatActivity implements DormAdapter.OnDormClickLi
                     dormList.clear();
                     if (querySnapshots != null) {
                         for (DocumentSnapshot doc : querySnapshots) {
+
+                            // 🔍 Step 1: Check direct mapping
                             Listing item = doc.toObject(Listing.class);
                             if (item != null) {
                                 item.setId(doc.getId());
+
+                                // 🔍 Step 2: FORCE SET the price manually to prove mapping fails
+                                if (doc.contains("price")) {
+                                    Double price = doc.getDouble("price");
+                                    item.setPrice(price);  // manually override
+                                    android.util.Log.d("PRICE_DEBUG", "price from doc = " + price);
+                                }
+
                                 dormList.add(item);
                             }
                         }
@@ -90,6 +101,8 @@ public class Home extends AppCompatActivity implements DormAdapter.OnDormClickLi
                     adapter.notifyDataSetChanged();
                 });
     }
+
+
 
     @Override
     public void onDormClick(String listingId) {

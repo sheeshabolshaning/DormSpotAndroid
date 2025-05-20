@@ -2,6 +2,7 @@ package com.example.dormspot.MainActivitySpottr;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -11,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.example.dormspot.R;
@@ -20,18 +20,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Arrays;
+import java.text.NumberFormat;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import android.util.Log;
-import android.widget.Toast;
 
 public class Booking extends AppCompatActivity {
 
-    private ViewPager2 viewPager2;
-    public ImagePagerAdapter adapter;
     private Button bookNowBtn;
+    private long priceValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +39,22 @@ public class Booking extends AppCompatActivity {
         Intent intent = getIntent();
         String dormName = intent.getStringExtra("dormName");
         int capacity = intent.getIntExtra("capacity", 0);
-        int price = intent.getIntExtra("price", 0);
+        priceValue = getIntent().hasExtra("price")
+                ? Math.round(getIntent().getDoubleExtra("price", 0.0))
+                : 0;
         String status = intent.getStringExtra("status");
         String description = intent.getStringExtra("description");
         String listingId = intent.getStringExtra("listingId");
         String imageUrl = intent.getStringExtra("imageUrl");
 
-        // ✅ Check for listing ID
         if (listingId == null || listingId.isEmpty()) {
             Toast.makeText(this, "Missing listing ID.", Toast.LENGTH_SHORT).show();
-            finish(); // Optional: exit if ID is critical
+            finish();
             return;
         }
 
-        // ✅ Log the listing ID for debugging
-        android.util.Log.d("BookingDebug", "Received listingId: " + listingId);
+        Log.d("BookingDebug", "Received listingId: " + listingId);
+        Log.d("BookingDebug", "Received price: " + priceValue);
 
         // ✅ Bind views
         TextView title = findViewById(R.id.dormTitleText);
@@ -64,28 +62,32 @@ public class Booking extends AppCompatActivity {
         TextView descriptionText = findViewById(R.id.descriptionText);
         bookNowBtn = findViewById(R.id.bookNowBtn);
 
-        // ✅ Set values
+        // ✅ Format and set values
         title.setText(dormName != null ? dormName : "No Name");
-        priceText.setText("₱" + price + "/month");
+
+        String formattedPrice = "₱" + NumberFormat.getNumberInstance(Locale.US).format(priceValue) + ".00/month";
+        priceText.setText(formattedPrice);
+
         descriptionText.setText(description != null ? description : "No description");
 
-        // ✅ Load image (replace with ViewPager if needed)
-        Glide.with(this)
-                .load(imageUrl)
-                .placeholder(R.drawable.imageholder)
-                .into(new ImageView(this)); // Not displayed but avoids crash
+        // ✅ Image loading (optional fallback)
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(this)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.imageholder)
+                    .into(new ImageView(this)); // Load silently; not displayed
+        }
 
-        // ✅ Disable Book button if already occupied
+        // ✅ Book button logic
         if ("occupied".equalsIgnoreCase(status)) {
             bookNowBtn.setEnabled(false);
             bookNowBtn.setText("Already Occupied");
             bookNowBtn.setAlpha(0.6f);
         } else {
-            // ✅ Enable booking with dialog using listingId
             bookNowBtn.setOnClickListener(v -> showCustomConfirmationDialog(listingId));
         }
 
-        // ✅ Back button behavior
+        // ✅ Back button
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> {
             Intent backIntent = new Intent(Booking.this, Home.class);
@@ -93,19 +95,8 @@ public class Booking extends AppCompatActivity {
             startActivity(backIntent);
             finish();
         });
-
-        // ✅ ViewPager2 image setup
-        viewPager2 = findViewById(R.id.propertyImagePager);
-        List<Integer> imageResources = Arrays.asList(
-                R.drawable.house,
-                R.drawable.house,
-                R.drawable.house
-        );
-        adapter = new ImagePagerAdapter(imageResources);
-        viewPager2.setAdapter(adapter);
     }
 
-    // ✅ Custom Confirmation Dialog Method
     private void showCustomConfirmationDialog(String listingId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_confirm_booking, null);
@@ -132,31 +123,31 @@ public class Booking extends AppCompatActivity {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser == null || listingId == null || listingId.isEmpty()) {
-            Toast.makeText(Booking.this, "Missing user or listing ID.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Missing user or listing ID.", Toast.LENGTH_SHORT).show();
             Log.d("BookingDebug", "user: " + currentUser + " | listingId: " + listingId);
             return;
         }
 
         String userId = currentUser.getUid();
-        String userName = currentUser.getDisplayName(); // Optional: Pull from Firestore users collection
+        String userName = currentUser.getDisplayName();
         String dormName = getIntent().getStringExtra("dormName");
-        int price = getIntent().getIntExtra("price", 0);
-        String landlordId = getIntent().getStringExtra("landlordId"); // You need to pass this via Intent when opening Booking.java
+        String landlordId = getIntent().getStringExtra("landlordId");
 
-        // Generate booking document ID
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String bookingId = db.collection("booking_requests").document().getId();
+
+        String formattedPrice = "₱" + NumberFormat.getNumberInstance(Locale.US).format(priceValue) + ".00";
 
         Map<String, Object> booking = new HashMap<>();
         booking.put("bookingId", bookingId);
         booking.put("userId", userId);
         booking.put("userName", userName != null ? userName : "Unknown User");
         booking.put("dormName", dormName != null ? dormName : "N/A");
-        booking.put("totalPrice", "₱" + price);
+        booking.put("totalPrice", formattedPrice);
         booking.put("landlordId", landlordId != null ? landlordId : "N/A");
         booking.put("status", "pending");
         booking.put("listingId", listingId);
-        booking.put("bookingDates", "2025-05-20 - 2025-06-20"); // Static for now; replace with DatePicker input if needed
+        booking.put("bookingDates", "2025-05-20 - 2025-06-20");
         booking.put("timestamp", FieldValue.serverTimestamp());
 
         db.collection("booking_requests").document(bookingId)
@@ -171,5 +162,4 @@ public class Booking extends AppCompatActivity {
                     Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
-
 }

@@ -2,6 +2,7 @@ package com.example.dormspot.MainActivitySpottr;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,9 @@ import com.bumptech.glide.Glide;
 import com.example.dormspot.MainActivitySpottee.Listing;
 import com.example.dormspot.R;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder> {
 
@@ -47,13 +50,30 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
     public void onBindViewHolder(@NonNull DormViewHolder holder, int position) {
         Listing item = dormList.get(position);
 
+        // ✅ Set dorm title and capacity
         holder.dormTitle.setText(item.getDormName() != null ? item.getDormName() : "No Name");
         holder.capacity.setText("Capacity: " + item.getCapacity());
-        holder.price.setText("₱" + item.getPrice() + "/month");
-        holder.status.setText("Status: " + item.getStatus());
 
-        String status = item.getStatus() != null ? item.getStatus().trim().toLowerCase() : "";
-        switch (status) {
+        // ✅ Handle price formatting
+        Double price = item.getPrice();
+        if (price == null) price = 0.0;
+
+        // Log for debug (optional)
+        Log.d("ADAPTER_PRICE", "price = " + price);
+
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
+        currencyFormat.setMinimumFractionDigits(2);
+        currencyFormat.setMaximumFractionDigits(2);
+
+        String formattedPrice = currencyFormat.format(price) + "/month";
+        holder.price.setText(formattedPrice);
+
+        // ✅ Display occupancy status
+        String occupancyStatus = item.getOccupancyStatus() != null ? item.getOccupancyStatus() : "N/A";
+        holder.status.setText("Occupancy: " + occupancyStatus);
+
+        // ✅ Apply color coding
+        switch (occupancyStatus.trim().toLowerCase()) {
             case "occupied":
                 holder.status.setTextColor(ContextCompat.getColor(context, R.color.occupied_red));
                 break;
@@ -68,12 +88,14 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
                 break;
         }
 
+        // ✅ View Dorm Button
         holder.viewDormBtn.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onDormClick(item.getId());
             }
         });
 
+        // ✅ Bookmark toggle
         holder.bookmarkBtn.setOnClickListener(v -> {
             v.setSelected(!v.isSelected());
             ((ImageButton) v).setImageResource(
@@ -81,6 +103,7 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
             );
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -101,7 +124,6 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
             status = itemView.findViewById(R.id.status);
             location = itemView.findViewById(R.id.location);
             description = itemView.findViewById(R.id.description);
-            imageBackground = itemView.findViewById(R.id.imageBackground);
             viewDormBtn = itemView.findViewById(R.id.viewDormBtn);
             bookmarkBtn = itemView.findViewById(R.id.bookmarkBtn);
         }

@@ -1,31 +1,31 @@
 package com.example.dormspot.MainActivitySpottr;
 
-public class DormItem {
+public class Listing {
     private String id; // Firestore document ID
     private String dormName;
-    private String imageUrl;
     private String status;
-    private int price;
+    private Double price;
     private int capacity;
     private String location;
     private String description;
+    private String occupancyStatus;
 
-    public DormItem() {
+    public Listing() {
         // Required empty constructor for Firestore
     }
 
-    public DormItem(String id, String dormName, String imageUrl, String status, int price, int capacity, String location, String description) {
+    public Listing(String id, String dormName, String status, Double price, int capacity, String location, String description, String occupancyStatus) {
         this.id = id;
         this.dormName = dormName;
-        this.imageUrl = imageUrl;
         this.status = status;
         this.price = price;
         this.capacity = capacity;
         this.location = location;
         this.description = description;
+        this.occupancyStatus = occupancyStatus;
     }
 
-    // 🔽 Getters
+    // Getters
     public String getId() {
         return id;
     }
@@ -34,15 +34,11 @@ public class DormItem {
         return dormName;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
     public String getStatus() {
         return status;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -58,7 +54,11 @@ public class DormItem {
         return description;
     }
 
-    // 🔽 Setters (needed for Firestore mapping)
+    public String getOccupancyStatus() {
+        return occupancyStatus;
+    }
+
+    // Setters
     public void setId(String id) {
         this.id = id;
     }
@@ -67,15 +67,11 @@ public class DormItem {
         this.dormName = dormName;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -89,5 +85,9 @@ public class DormItem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setOccupancyStatus(String occupancyStatus) {
+        this.occupancyStatus = occupancyStatus;
     }
 }

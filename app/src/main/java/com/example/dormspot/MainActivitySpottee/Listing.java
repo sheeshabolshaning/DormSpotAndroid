@@ -3,7 +3,7 @@ package com.example.dormspot.MainActivitySpottee;
 public class Listing {
     private String dormName;
     private int capacity;
-    private double price;
+    private Double price;
     private String Status;
     private String id;
     private String location;
@@ -28,7 +28,7 @@ public class Listing {
         // Required empty constructor
     }
 
-    public Listing(String dormName, int capacity, double price, String Status,  String id,
+    public Listing(String dormName, int capacity, Double price, String Status,  String id,
                    String location, String inclusions, String description,
                    Integer views, Integer saves, Integer inquiries,
                    String rentedPeriod, String occupancy, Integer revenue, String occupancyStatus, String userRole) {
@@ -66,7 +66,7 @@ public class Listing {
         return landmark;
     }
     public int getCapacity() { return capacity; }
-    public double getPrice() { return price; }
+    public Double getPrice() { return price; }
     public String getStatus() { return Status; }
     public String getId() { return id; }
     public String getLocation() { return location; }
@@ -96,7 +96,7 @@ public class Listing {
         this.userMode = userRole;
     }
     public void setCapacity(int capacity) { this.capacity = capacity; }
-    public void setPrice(double price) { this.price = price; }
+    public void setPrice(Double price) { this.price = price; }
     public void setStatus(String status) { this.Status = status; }
     public void setId(String id) { this.id = id; }
     public void setLocation(String location) { this.location = location; }

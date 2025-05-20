@@ -1,98 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
-    android:layout_marginBottom="24dp">
+    card_view:cardCornerRadius="16dp"
+    card_view:cardElevation="4dp"
+    card_view:cardBackgroundColor="#424470">
 
-    <ImageView
-        android:id="@+id/imageBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:alpha="0.7"
-        android:background="@drawable/imageholder"
-        android:src="@drawable/house" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/imageoverlay" />
-
-    <!-- Title -->
-    <TextView
-        android:id="@+id/dormTitle"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:padding="16dp"
-        android:text="Dorm Name Here"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/neuebold" />
+        android:padding="16dp">
 
-    <!-- Capacity -->
-    <TextView
-        android:id="@+id/capacity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="65dp"
-        android:text="Capacity: 0"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        android:fontFamily="@font/neuebold" />
+        <!-- Title -->
+        <TextView
+            android:id="@+id/dormTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Dorm Name Here"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/neuebold" />
 
-    <!-- Price -->
-    <TextView
-        android:id="@+id/price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="90dp"
-        android:text="₱0/month"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/neuebold" />
+        <!-- Capacity -->
+        <TextView
+            android:id="@+id/capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Capacity: 0"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/neuebold" />
 
-    <!-- Status -->
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="115dp"
-        android:text="Status: N/A"
-        android:textColor="#FFD700"
-        android:textStyle="italic"
-        android:textSize="14sp"
-        android:fontFamily="@font/neuebold" />
+        <!-- Price -->
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:text="₱0/month"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/neuebold" />
 
-    <!-- View Dorm Button -->
-    <Button
-        android:id="@+id/viewDormBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/viewdorm"
-        android:text="View Dorm"
-        android:textColor="@android:color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/neuebold" />
+        <!-- Occupancy Status -->
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Occupancy: Unoccupied"
+            android:textColor="#FFD700"
+            android:textStyle="italic"
+            android:textSize="14sp"
+            android:fontFamily="@font/neuebold" />
 
-    <!-- Bookmark Button -->
-    <ImageButton
-        android:id="@+id/bookmarkBtn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="18dp"
-        android:background="@drawable/viewdorm"
-        android:contentDescription="Bookmark"
-        android:src="@drawable/bookmark" />
-</FrameLayout>
+        <!-- View Dorm Button -->
+        <Button
+            android:id="@+id/viewDormBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="70dp"
+            android:layout_marginTop="140dp"
+            android:background="@drawable/viewdorm"
+            android:text="View Dorm"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:fontFamily="@font/neuebold" />
+
+        <!-- Bookmark Button -->
+        <ImageButton
+            android:id="@+id/bookmarkBtn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="140dp"
+            android:background="@drawable/viewdorm"
+            android:contentDescription="Bookmark"
+            android:src="@drawable/bookmark" />
+    </FrameLayout>
+</androidx.cardview.widget.CardView>
