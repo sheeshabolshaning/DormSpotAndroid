@@ -47,12 +47,12 @@ public class AdminListingAdapter extends RecyclerView.Adapter<AdminListingAdapte
         holder.postLabel.setText("Post: " + listing.getDormName());
         holder.description.setText(listing.getDescription());
 
-        // Get status and occupancy
-        String status = listing.getStatus() != null ? listing.getStatus().toLowerCase() : "";
+        // Get normalized status
+        String status = listing.getStatus() != null ? listing.getStatus().trim() : "";
         String occupancy = listing.getOccupancyStatus() != null ? listing.getOccupancyStatus().toLowerCase() : "";
 
-        // Status color
-        switch (status) {
+        // Status color logic (case-insensitive)
+        switch (status.toLowerCase()) {
             case "approved":
                 holder.adminStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.green));
                 break;
@@ -80,22 +80,22 @@ public class AdminListingAdapter extends RecyclerView.Adapter<AdminListingAdapte
                 break;
         }
 
-        // Hide buttons if not pending
-        boolean isPending = status.equals("pending");
+        // Show buttons only if status is exactly "Pending"
+        boolean isPending = status.equals("Pending"); // Match Firestore exactly
         holder.approveButton.setVisibility(isPending ? View.VISIBLE : View.GONE);
         holder.rejectButton.setVisibility(isPending ? View.VISIBLE : View.GONE);
 
-        // Approve button logic
+        // Approve logic
         holder.approveButton.setOnClickListener(v -> {
             FirebaseFirestore.getInstance()
                     .collection("listings")
                     .document(listing.getId())
-                    .update("status", "approved")
+                    .update("status", "Approved")
                     .addOnSuccessListener(aVoid -> {
-                        listing.setStatus("approved");
+                        listing.setStatus("Approved");
                         animateStatusChange(holder);
 
-                        holder.adminStatus.setText("Status: approved");
+                        holder.adminStatus.setText("Status: Approved");
                         holder.adminStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.green));
                         holder.approveButton.setVisibility(View.GONE);
                         holder.rejectButton.setVisibility(View.GONE);
@@ -108,17 +108,17 @@ public class AdminListingAdapter extends RecyclerView.Adapter<AdminListingAdapte
                     });
         });
 
-        // Reject button logic
+        // Reject logic
         holder.rejectButton.setOnClickListener(v -> {
             FirebaseFirestore.getInstance()
                     .collection("listings")
                     .document(listing.getId())
-                    .update("status", "rejected")
+                    .update("status", "Rejected")
                     .addOnSuccessListener(aVoid -> {
-                        listing.setStatus("rejected");
+                        listing.setStatus("Rejected");
                         animateStatusChange(holder);
 
-                        holder.adminStatus.setText("Status: rejected");
+                        holder.adminStatus.setText("Status: Rejected");
                         holder.adminStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.red));
                         holder.approveButton.setVisibility(View.GONE);
                         holder.rejectButton.setVisibility(View.GONE);
@@ -131,6 +131,7 @@ public class AdminListingAdapter extends RecyclerView.Adapter<AdminListingAdapte
                     });
         });
     }
+
 
     private void animateStatusChange(ListingViewHolder holder) {
         holder.adminStatus.setAlpha(0f);

@@ -33,7 +33,7 @@ public class BookingRequest extends AppCompatActivity {
 
     private void loadBookings() {
         db.collection("booking_requests")
-                .whereEqualTo("status", "pending")
+                .whereEqualTo("status", "Pending")
                 .addSnapshotListener((value, error) -> {
                     if (error != null || value == null) return;
 

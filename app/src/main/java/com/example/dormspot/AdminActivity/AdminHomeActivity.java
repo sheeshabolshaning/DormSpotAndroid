@@ -1,6 +1,7 @@
 package com.example.dormspot.AdminActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -24,7 +25,7 @@ public class AdminHomeActivity extends AppCompatActivity {
     private View indicator;
     private RecyclerView listingRecyclerView;
     private AdminListingAdapter adapter;
-    private List<Listing> listingList;
+    private final List<Listing> listingList = new ArrayList<>();
 
     private Button buttonPending, buttonApproved, buttonRejected;
 
@@ -33,62 +34,86 @@ public class AdminHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_activity_home_spottee);
 
-        // Buttons and indicator
+        // Initialize views
         buttonPending = findViewById(R.id.button_pending);
         buttonApproved = findViewById(R.id.button_approved);
         buttonRejected = findViewById(R.id.button_rejected);
-        indicator = findViewById(R.id.indicator); // View for animated tab underline
+        indicator = findViewById(R.id.indicator);
 
-        // RecyclerView setup
+        // Setup RecyclerView
         listingRecyclerView = findViewById(R.id.listingRecyclerView);
         listingRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        listingList = new ArrayList<>();
         adapter = new AdminListingAdapter(listingList);
         listingRecyclerView.setAdapter(adapter);
 
-        // Button listeners
+        // Tab filter buttons
         buttonPending.setOnClickListener(v -> {
-            loadListingsByStatus("pending");
+            loadListingsByStatus("Pending");
             highlightButton(buttonPending);
         });
 
         buttonApproved.setOnClickListener(v -> {
-            loadListingsByStatus("approved");
+            loadListingsByStatus("Approved");
             highlightButton(buttonApproved);
         });
 
         buttonRejected.setOnClickListener(v -> {
-            loadListingsByStatus("rejected");
+            loadListingsByStatus("Rejected");
             highlightButton(buttonRejected);
         });
 
-        // Load default tab
+        // Default load
         buttonPending.post(() -> {
-            loadListingsByStatus("pending");
+            loadListingsByStatus("Pending");
             highlightButton(buttonPending);
         });
     }
 
-    private void loadListingsByStatus(String status) {
+    private void loadListingsByStatus(String rawStatus) {
+        String targetStatus = rawStatus.trim().toLowerCase(); // Normalize input
+
         FirebaseFirestore.getInstance()
                 .collection("listings")
-                .whereEqualTo("status", status)
-                .get()
+                .get() // Fetch all listings
                 .addOnSuccessListener(snapshots -> {
                     listingList.clear();
                     for (DocumentSnapshot doc : snapshots) {
                         Listing listing = doc.toObject(Listing.class);
-                        if (listing != null) {
+                        if (listing != null && listing.getStatus() != null &&
+                                listing.getStatus().trim().equalsIgnoreCase(targetStatus)) {
+
                             listing.setId(doc.getId());
                             listingList.add(listing);
+                            Log.d("AdminHome", "Loaded: " + listing.getDormName() + " (" + listing.getStatus() + ")");
                         }
                     }
+
                     adapter.notifyDataSetChanged();
+
+                    if (listingList.isEmpty()) {
+                        Toast.makeText(this, "No " + capitalizeStatus(rawStatus) + " listings found.", Toast.LENGTH_SHORT).show();
+                    }
                 })
-                .addOnFailureListener(e ->
-                        Toast.makeText(this, "Failed to fetch " + status + " listings.", Toast.LENGTH_SHORT).show()
-                );
+                .addOnFailureListener(e -> {
+                    Log.e("AdminHome", "Error fetching listings", e);
+                    Toast.makeText(this, "Failed to fetch listings.", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+
+    private String capitalizeStatus(String text) {
+        if (text == null || text.isEmpty()) return text;
+        text = text.trim().toLowerCase();
+        switch (text) {
+            case "pending":
+                return "Pending";
+            case "approved":
+                return "Approved";
+            case "rejected":
+                return "Rejected";
+            default:
+                return text;
+        }
     }
 
     private void highlightButton(Button selectedButton) {
@@ -115,6 +140,5 @@ public class AdminHomeActivity extends AppCompatActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) indicator.getLayoutParams();
         params.width = width;
         indicator.setLayoutParams(params);
-
     }
 }
