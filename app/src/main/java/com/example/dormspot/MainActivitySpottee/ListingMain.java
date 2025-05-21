@@ -3,6 +3,7 @@ package com.example.dormspot.MainActivitySpottee;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -40,6 +41,22 @@ public class ListingMain extends AppCompatActivity {
 
         selectButton(myListingsButton);
         fetchListingsFromFirestore();
+
+        // 🔍 DEBUG: Log all booking_requests documents to check field names
+        FirebaseFirestore.getInstance()
+                .collection("booking_requests")
+                .get()
+                .addOnSuccessListener(snapshots -> {
+                    if (snapshots.isEmpty()) {
+                        Log.d("ALL_BOOKINGS", "No booking_requests documents found.");
+                    } else {
+                        for (QueryDocumentSnapshot doc : snapshots) {
+                            Log.d("ALL_BOOKINGS", doc.getId() + " → " + doc.getData());
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> Log.e("ALL_BOOKINGS", "Failed to fetch booking_requests", e));
+
 
         ImageButton bellButton = findViewById(R.id.nav_notifications);
         bellButton.setOnClickListener(v -> {
