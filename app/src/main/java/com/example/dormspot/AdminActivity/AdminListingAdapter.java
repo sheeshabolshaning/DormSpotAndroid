@@ -1,5 +1,6 @@
 package com.example.dormspot.AdminActivity;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dormspot.MainActivitySpottee.Listing;
@@ -36,46 +38,106 @@ public class AdminListingAdapter extends RecyclerView.Adapter<AdminListingAdapte
     public void onBindViewHolder(@NonNull ListingViewHolder holder, int position) {
         Listing listing = listingList.get(position);
 
+        // Set basic info
         holder.dormName.setText(listing.getDormName());
         holder.location.setText("Location: " + listing.getLocation());
         holder.adminStatus.setText("Status: " + listing.getStatus());
         holder.occupancyStatus.setText("Occupancy: " + listing.getOccupancyStatus());
-        holder.activeProperties.setText("Active Properties: 3"); // Optional: replace with real count
-        holder.postLabel.setText(listing.getDormName()); // Updated to show dorm name
-        holder.description.setText(listing.getDescription()); // Shows description instead of placeholder
+        holder.activeProperties.setText("Active Properties: 3");
+        holder.postLabel.setText("Post: " + listing.getDormName());
+        holder.description.setText(listing.getDescription());
 
-        // Approve button
+        // Get status and occupancy
+        String status = listing.getStatus() != null ? listing.getStatus().toLowerCase() : "";
+        String occupancy = listing.getOccupancyStatus() != null ? listing.getOccupancyStatus().toLowerCase() : "";
+
+        // Status color
+        switch (status) {
+            case "approved":
+                holder.adminStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.green));
+                break;
+            case "pending":
+                holder.adminStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.pending_yellow));
+                break;
+            case "rejected":
+                holder.adminStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.red));
+                break;
+            default:
+                holder.adminStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.white));
+                break;
+        }
+
+        // Occupancy color
+        switch (occupancy) {
+            case "occupied":
+                holder.occupancyStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.occupied_red));
+                break;
+            case "unoccupied":
+                holder.occupancyStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.unoccupied_green));
+                break;
+            default:
+                holder.occupancyStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.white));
+                break;
+        }
+
+        // Hide buttons if not pending
+        boolean isPending = status.equals("pending");
+        holder.approveButton.setVisibility(isPending ? View.VISIBLE : View.GONE);
+        holder.rejectButton.setVisibility(isPending ? View.VISIBLE : View.GONE);
+
+        // Approve button logic
         holder.approveButton.setOnClickListener(v -> {
             FirebaseFirestore.getInstance()
                     .collection("listings")
                     .document(listing.getId())
                     .update("status", "approved")
                     .addOnSuccessListener(aVoid -> {
+                        listing.setStatus("approved");
+                        animateStatusChange(holder);
+
+                        holder.adminStatus.setText("Status: approved");
+                        holder.adminStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.green));
+                        holder.approveButton.setVisibility(View.GONE);
+                        holder.rejectButton.setVisibility(View.GONE);
+
                         Toast.makeText(holder.itemView.getContext(), "Listing approved!", Toast.LENGTH_SHORT).show();
-                        listingList.remove(position);
-                        notifyItemRemoved(position);
                     })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(holder.itemView.getContext(), "Failed to approve listing.", Toast.LENGTH_SHORT).show()
-                    );
+                    .addOnFailureListener(e -> {
+                        Log.e("AdminListingAdapter", "Approval failed", e);
+                        Toast.makeText(holder.itemView.getContext(), "Failed to approve listing.", Toast.LENGTH_SHORT).show();
+                    });
         });
 
-// Reject button
+        // Reject button logic
         holder.rejectButton.setOnClickListener(v -> {
             FirebaseFirestore.getInstance()
                     .collection("listings")
                     .document(listing.getId())
                     .update("status", "rejected")
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(holder.itemView.getContext(), "Listing rejected.", Toast.LENGTH_SHORT).show();
-                        listingList.remove(position);
-                        notifyItemRemoved(position);
-                    })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(holder.itemView.getContext(), "Failed to reject listing.", Toast.LENGTH_SHORT).show()
-                    );
-        });
+                        listing.setStatus("rejected");
+                        animateStatusChange(holder);
 
+                        holder.adminStatus.setText("Status: rejected");
+                        holder.adminStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.red));
+                        holder.approveButton.setVisibility(View.GONE);
+                        holder.rejectButton.setVisibility(View.GONE);
+
+                        Toast.makeText(holder.itemView.getContext(), "Listing rejected.", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("AdminListingAdapter", "Rejection failed", e);
+                        Toast.makeText(holder.itemView.getContext(), "Failed to reject listing.", Toast.LENGTH_SHORT).show();
+                    });
+        });
+    }
+
+    private void animateStatusChange(ListingViewHolder holder) {
+        holder.adminStatus.setAlpha(0f);
+        holder.adminStatus.animate()
+                .alpha(1f)
+                .setDuration(400)
+                .start();
     }
 
     @Override
@@ -94,8 +156,8 @@ public class AdminListingAdapter extends RecyclerView.Adapter<AdminListingAdapte
             adminStatus = itemView.findViewById(R.id.textView_textAdminStatus);
             occupancyStatus = itemView.findViewById(R.id.textOccupancyStatus);
             activeProperties = itemView.findViewById(R.id.textView_activeProperties);
-            postLabel = itemView.findViewById(R.id.textView_postLabel); // should be a dedicated TextView for post
-            description = itemView.findViewById(R.id.textView_description); // should exist in your layout
+            postLabel = itemView.findViewById(R.id.textView_postLabel);
+            description = itemView.findViewById(R.id.textView_description);
             approveButton = itemView.findViewById(R.id.button_approve);
             rejectButton = itemView.findViewById(R.id.button_reject);
         }

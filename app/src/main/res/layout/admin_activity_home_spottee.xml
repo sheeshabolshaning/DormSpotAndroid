@@ -47,51 +47,65 @@
             app:tint="#FFFFFF" />
     </LinearLayout>
 
-    <!-- Tab Buttons -->
+    <!-- Listing Status Tabs -->
     <LinearLayout
+        android:id="@+id/tabContainer"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="12dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/my_listings"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="4dp"
-            android:background="@drawable/button_selector"
-            android:text="My listings"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textAllCaps="false" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="4dp">
 
-        <Button
-            android:id="@+id/statistic"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="4dp"
-            android:background="@drawable/button_selector"
-            android:text="Statistic"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textAllCaps="false" />
+            <Button
+                android:id="@+id/button_pending"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tab_button_selector"
+                android:text="Pending"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
 
-        <Button
-            android:id="@+id/reviews"
+            <Button
+                android:id="@+id/button_approved"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tab_button_selector"
+                android:text="Approved"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/button_rejected"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tab_button_selector"
+                android:text="Rejected"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <!-- Animated underline indicator -->
+        <View
+            android:id="@+id/indicator"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button_selector"
-            android:text="Reviews"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textAllCaps="false" />
+            android:layout_height="4dp"
+            android:layout_gravity="start"
+            android:background="@color/nav_active" />
     </LinearLayout>
 
     <!-- Dynamic RecyclerView for Listings -->

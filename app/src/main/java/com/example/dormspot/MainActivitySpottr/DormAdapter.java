@@ -69,8 +69,8 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
         holder.price.setText(formattedPrice);
 
         // ✅ Display occupancy status
-        String occupancyStatus = item.getOccupancyStatus() != null ? item.getOccupancyStatus() : "N/A";
-        holder.status.setText("Occupancy: " + occupancyStatus);
+        String occupancyStatus = item.getStatus() != null ? item.getStatus() : "N/A";
+        holder.status.setText("Status: " + occupancyStatus);
 
         // ✅ Apply color coding
         switch (occupancyStatus.trim().toLowerCase()) {
@@ -111,8 +111,7 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
     }
 
     static class DormViewHolder extends RecyclerView.ViewHolder {
-        TextView dormTitle, capacity, price, status, location, description;
-        ImageView imageBackground;
+        TextView dormTitle, capacity, price, status;
         Button viewDormBtn;
         ImageButton bookmarkBtn;
 
@@ -122,8 +121,6 @@ public class DormAdapter extends RecyclerView.Adapter<DormAdapter.DormViewHolder
             capacity = itemView.findViewById(R.id.capacity);
             price = itemView.findViewById(R.id.price);
             status = itemView.findViewById(R.id.status);
-            location = itemView.findViewById(R.id.location);
-            description = itemView.findViewById(R.id.description);
             viewDormBtn = itemView.findViewById(R.id.viewDormBtn);
             bookmarkBtn = itemView.findViewById(R.id.bookmarkBtn);
         }

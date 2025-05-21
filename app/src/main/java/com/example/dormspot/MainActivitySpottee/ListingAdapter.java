@@ -47,9 +47,9 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
 
     public class ListingViewHolder extends RecyclerView.ViewHolder {
         TextView dormName, dormCapacity, dormPrice;
-        TextView adminStatusText, occupancyStatusText;
+        TextView adminStatusText;
         TextView viewLocation, viewLandmark, viewInclusion, viewDescription;
-        EditText editLocation, editInclusion, editDescription, editLandmark, editOccupancy;
+        EditText editLocation, editInclusion, editDescription, editLandmark;
         ImageView editButton;
         LinearLayout expandableLayout;
         Button submitButton;
@@ -60,7 +60,6 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             dormCapacity = itemView.findViewById(R.id.textView_dormCapacity);
             dormPrice = itemView.findViewById(R.id.textView_dormPrice);
             adminStatusText = itemView.findViewById(R.id.textView_textAdminStatus);
-            occupancyStatusText = itemView.findViewById(R.id.textOccupancyStatus);
 
             viewLocation = itemView.findViewById(R.id.textView_location);
             viewLandmark = itemView.findViewById(R.id.textView_landmark);
@@ -71,7 +70,6 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             editLocation = itemView.findViewById(R.id.edit_location);
             editInclusion = itemView.findViewById(R.id.edit_inclusions);
             editDescription = itemView.findViewById(R.id.edit_description);
-            editOccupancy = itemView.findViewById(R.id.edit_occupancy); // newly added
 
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
             editButton = itemView.findViewById(R.id.button_edit_listing);
@@ -85,26 +83,26 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
 
             String adminStatus = listing.getStatus();
             adminStatusText.setText("Status: " + adminStatus);
-            adminStatusText.setVisibility(("admin".equals(userRole) || "landlord".equals(userRole)) ? View.VISIBLE : View.GONE);
+            adminStatusText.setVisibility(View.VISIBLE);
+
 
             switch (adminStatus != null ? adminStatus.toLowerCase() : "") {
-                case "approved": adminStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.green)); break;
-                case "pending": adminStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.star_yellow)); break;
-                case "rejected": adminStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.red)); break;
-                default: adminStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.white)); break;
-            }
-
-            String occupancyStatus = listing.getOccupancyStatus();
-            occupancyStatusText.setText("Occupancy: " + occupancyStatus);
-            switch (occupancyStatus != null ? occupancyStatus.toLowerCase() : "") {
-                case "occupied": occupancyStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.red)); break;
-                case "unoccupied": occupancyStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.green)); break;
-                default: occupancyStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.white)); break;
+                case "approved":
+                    adminStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.green));
+                    break;
+                case "pending":
+                    adminStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.star_yellow));
+                    break;
+                case "rejected":
+                    adminStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.red));
+                    break;
+                default:
+                    adminStatusText.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.white));
+                    break;
             }
 
             expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
 
-            // Static Display
             viewLocation.setText("Location: " + listing.getLocation());
             viewLandmark.setText("Landmark: " + listing.getLandmark());
             viewInclusion.setText("Inclusions: " + listing.getInclusions());
@@ -119,13 +117,11 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
             editInclusion.setText(listing.getInclusions());
             editDescription.setText(listing.getDescription());
             editLandmark.setText(listing.getLandmark());
-            editOccupancy.setText(listing.getOccupancyStatus());
 
             editLocation.setVisibility(View.GONE);
             editInclusion.setVisibility(View.GONE);
             editDescription.setVisibility(View.GONE);
             editLandmark.setVisibility(View.GONE);
-            editOccupancy.setVisibility(View.GONE);
             submitButton.setVisibility(View.GONE);
 
             editButton.setOnClickListener(v -> {
@@ -138,7 +134,6 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
                 editInclusion.setVisibility(View.VISIBLE);
                 editDescription.setVisibility(View.VISIBLE);
                 editLandmark.setVisibility(View.VISIBLE);
-                editOccupancy.setVisibility(View.VISIBLE);
                 submitButton.setVisibility(View.VISIBLE);
             });
 
@@ -147,9 +142,8 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
                 String newInclusion = editInclusion.getText().toString().trim();
                 String newDescription = editDescription.getText().toString().trim();
                 String newLandmark = editLandmark.getText().toString().trim();
-                String newOccupancy = editOccupancy.getText().toString().trim();
 
-                if (TextUtils.isEmpty(newLocation) || TextUtils.isEmpty(newInclusion) || TextUtils.isEmpty(newDescription) || TextUtils.isEmpty(newOccupancy)) {
+                if (TextUtils.isEmpty(newLocation) || TextUtils.isEmpty(newInclusion) || TextUtils.isEmpty(newDescription)) {
                     Toast.makeText(itemView.getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -163,15 +157,13 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
                                 "location", newLocation,
                                 "inclusions", newInclusion,
                                 "description", newDescription,
-                                "landmark", newLandmark,
-                                "occupancyStatus", newOccupancy
+                                "landmark", newLandmark
                         )
                         .addOnSuccessListener(aVoid -> {
                             listing.setLocation(newLocation);
                             listing.setInclusions(newInclusion);
                             listing.setDescription(newDescription);
                             listing.setLandmark(newLandmark);
-                            listing.setOccupancyStatus(newOccupancy);
 
                             Toast.makeText(itemView.getContext(), "Updated successfully", Toast.LENGTH_SHORT).show();
 
